@@ -4,7 +4,7 @@
 
 $(document).ready(
 	function() {
-		// console.log('tipoproduto/pesquisa.js');
+		// console.log('filtroregistro/pesquisa.js');
 		var filtroSelecionado = '*[id="formulario:listarRegistros:filtroSelecionado"]';
 		var nome = '*[id="formulario:listarRegistros:nome"]';
 		var descricao = '*[id="formulario:listarRegistros:descricao"]';

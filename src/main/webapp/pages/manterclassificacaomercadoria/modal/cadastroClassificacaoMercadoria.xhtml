@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+<h:head>
+	<title>#{msg.classificacaoMercadoriaCadastro}</title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+<h:body>
+	<f:metadata>
+		<o:viewParam name="objetoId"
+			value="#{manterClassificacaoMercadoriaBean.objeto}"
+			converter="ClassificacaoMercadoriaConverter"></o:viewParam>
+	</f:metadata>
+	<header>
+	<div style="float: left">
+		<h:graphicImage library="images" name="logo-medianeira.jpg" height="75" />
+	</div>
+	</header>
+	<br />
+	<h:form id="formulario"
+		style="margin-right: 10px; margin-left:10px;">
+		<ui:param name="controlador" value="#{manterClassificacaoMercadoriaBean}" />
+		<p:messages autoUpdate="true" />
+		<h4 style="text-align: center">
+			<h:outputText id="title"
+				value="#{empty controlador.objeto.id ? msg.classificacaoMercadoriaNovo : msg.classificacaoMercadoriaEditar}" />
+		</h4>
+		<p:panelGrid columns="2" id="dados"
+			style="width:100%; margin-top:20px;">
+			<h:panelGroup>
+				<p:focus context="dados" />
+				<p:outputLabel id="lblnome" for="nome"
+					value="#{msg.nome}" />
+			</h:panelGroup>
+
+			<p:inputText id="nome"
+				value="#{controlador.objeto.nome}" maxlength="150"
+				style="width: 420px;" autocomplete="off"
+				required="true" />
+			<p:column>
+				<p:outputLabel id="lblDescricao"
+					value="#{msg.descricao}" for="descricao" />
+			</p:column>
+			<p:column>
+				<p:inputText id="descricao"
+					value="#{controlador.objeto.descricao}" maxlength="150"
+					style="width: 420px;" autocomplete="off" 
+					required="true" />
+			</p:column>
+			
+			<f:facet name="footer">
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="#{msg.btnLimpar}" process="@this"
+							icon="fa fa-eraser" update="@form" resetValues="true"
+							action="#{controlador.limpar}" />
+						<p:defaultCommand target="ButaoSalvar" />
+					</f:facet>
+					<f:facet name="right">
+						<p:commandButton id="ButaoSalvar" icon="ui-icon-disk"
+							value="#{msg.btnSalvar}" process="@form" update="@form"
+							action="#{controlador.salvarObjeto}" />
+						<p:defaultCommand target="ButaoSalvar" />
+					</f:facet>
+				</p:toolbar>
+			</f:facet>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>

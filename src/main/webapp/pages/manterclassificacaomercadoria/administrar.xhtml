@@ -11,15 +11,15 @@
 	</ui:define>
 	<ui:define name="titulo">#{msg.titleSistema}</ui:define>
 	<ui:define name="corpo">
-		<h3>#{msg.tipoDeProduto}</h3>
+		<h3>#{msg.classificacaoDeMercadoria}</h3>
 		<h:form id="formulario">
 			<p:growl autoUpdate="true" />
-			<ui:param name="controlador" value="#{manterTipoProdutoBean}" />
+			<ui:param name="controlador" value="#{manterClassificacaoMercadoriaBean}" />
 			
 			<p:toolbar>
 				<f:facet name="left">
 					<p:commandButton icon="ui-icon-plus"
-						value="#{msg.novoTipoProduto}" process="@form"
+						value="#{msg.novaClassificacaoMercadoria}" process="@form"
 						action="#{controlador.abrirModalCrud(null)}">
 						<p:ajax event="dialogReturn" update="listarRegistros"
 							listener="#{controlador.mostrarMensagemSucesso(false)}" />
@@ -41,7 +41,7 @@
 					<p:outputPanel id="painelPesquisa"
 						style="text-align: right" autoUpdate="true" layout="block">
 						
-						<h:outputText id="aep" value="#{msg.tipoProdutoPesquisa}:"
+						<h:outputText id="aep" value="#{msg.classificacaoMercadoriaPesquisa}:"
 							styleClass="fonteNormal" rendered="false" />
 
 						<h:selectOneMenu id="filtroSelecionado"

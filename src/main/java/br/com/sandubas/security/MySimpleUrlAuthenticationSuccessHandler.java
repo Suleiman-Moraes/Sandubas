@@ -61,9 +61,9 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 			if (usuario.getUsuario().getStatusUsuarioEnum().equals(StatusUsuarioEnum.NOVA_SENHA)) {
 				return "/pages/manterusuario/minhasInformacoes.xhtml";
 			} else if (usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.MANIFESTANTE)) {
-				return "/pages/manifestacao/manifestante/listarmanifestacoes.xhtml";
+				return "/pages/principal.xhtml";
 			} else {
-				return "/pages/manifestacao/listarmanifestacoes.xhtml";
+				return "/pages/principal.xhtml";
 			}
 		}
 	}

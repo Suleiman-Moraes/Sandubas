@@ -30,6 +30,8 @@
 	<http pattern="/pages/principal.xhtml" security="none" />
 	<http pattern="/pages/mantertipoproduto/administrar.xhtml" security="none" />
 	<http pattern="/pages/mantertipoproduto/modal/cadastroTipoProduto.xhtml" security="none" />
+	<http pattern="/pages/manterclassificacaomercadoria/administrar.xhtml" security="none" />
+	<http pattern="/pages/manterclassificacaomercadoria/modal/cadastroClassificacaoMercadoria.xhtml" security="none" />
 
 	<http pattern="/javax.faces.resource/**" security="none" />
 	<http pattern="/resources/**" security="none" />
