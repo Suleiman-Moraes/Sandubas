@@ -53,7 +53,7 @@ public class ClassificacaoMercadoria implements Serializable, IEntidadeRelaciona
 	}
 	@Override
 	public String getNomeTabela() {
-		return "tipo_produto";
+		return "classificacao_mercadoria";
 	}
 	
 	//Getters And Setters

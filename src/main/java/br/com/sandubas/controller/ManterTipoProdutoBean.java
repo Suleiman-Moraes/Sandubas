@@ -104,9 +104,9 @@ public class ManterTipoProdutoBean extends TemplatePaginacao<TipoProduto> implem
 	@Override
 	public void init() {
 		filtrosPesquisa.add(new FiltroPesquisa("Todos", ""));
-		filtrosPesquisa.add(new FiltroPesquisa("CÃ³digo", "id"));
+		filtrosPesquisa.add(new FiltroPesquisa("Código", "id"));
 		filtrosPesquisa.add(new FiltroPesquisa("Nome", "nome"));
-		filtrosPesquisa.add(new FiltroPesquisa("DescriÃ§Ã£o", "descricao"));
+		filtrosPesquisa.add(new FiltroPesquisa("Descrição", "descricao"));
 	}
 	
 	@Override
