@@ -19,7 +19,7 @@
 			<p:toolbar>
 				<f:facet name="left">
 					<p:commandButton icon="ui-icon-plus"
-						value="#{msg.novoTipoProduto}" process="@form"
+						value="#{msg.tipoProdutoNovo}" process="@form"
 						action="#{controlador.abrirModalCrud(null)}">
 						<p:ajax event="dialogReturn" update="listarRegistros"
 							listener="#{controlador.mostrarMensagemSucesso(false)}" />

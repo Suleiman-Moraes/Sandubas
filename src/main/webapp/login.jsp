@@ -64,7 +64,7 @@
 								<div class="panel-title text-bold">Autenticação</div>
 								<div
 									style="float: right; position: relative; top: -10px">
-									<a href="${context}/pages/externo/encaminhamentoParaEsqueceuSenha.xhtml" class="text-bold">Esqueceu a senha</a>
+									<a href="${context}/pages/principal.xhtml" class="text-bold">Esqueceu a senha</a>
 								</div>
 							</div>
 							<div style="padding-top: 30px;background: #02364c;" class="panel-body">
