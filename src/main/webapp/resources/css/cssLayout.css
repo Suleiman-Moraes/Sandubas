@@ -1,0 +1,130 @@
+fontbody, html{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#top {
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+}
+
+#bottom {
+ 	color: #AEAEAE;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+}
+
+#bottom .rodape2 a{
+	text-decoration: none;
+	color: #9eab87;
+}
+
+#left {
+    float: left;
+    height: 660px;
+    margin-bottom: 30px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0 0 0 1px;
+    position: fixed;
+    margin-top: 0;
+    width: 216px;
+    clear: both;
+ }
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    background-color: #dddddd;
+    padding: 5px;
+}
+
+.left_content {
+    padding: 10px;
+    position: relative;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+
+/* tema template */
+
+#barraGoverno {
+    background-color:#02364c !important;
+    width: 100%;
+    min-width: 1000px;
+    height: 30px;
+    position: relative;
+}
+
+#esqGov {
+    /*background: url('../../img/lineGov.png');*/
+    background-repeat: repeat-x;
+    height: 30px;
+    position: absolute;
+    width: 50%;
+}
+
+#internaGov {
+    width: 900px;
+    height: 30px;
+    margin: 0 auto;
+   /* background: url('../../img/lineGov.png'); */
+}
+
+#esqGovEx {
+    background: url('../../img/lineGov.png');
+    background-repeat: repeat-x;
+    height: 30px;
+    position: absolute;
+    width: 50%;
+}
+
+#internaGovEx {
+    width: 900px;
+    height: 30px;
+    margin: 0 auto;
+    background: url('../../img/lineGov.png');
+}
+
+#brasilGov {
+    width: 108px;
+    height: auto;
+    float: right;
+    margin: 6px 0 0 20px;
+    position: relative;
+    float: right;
+}
+
+#acessoInformacaoGov {
+    width: 161px;
+    height: auto;
+    float: right;
+    margin-top: 6px;
+    position: relative;
+}
+
+.logoLocal{
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+ .ui-editor {
+        width: 99.5% !important;
+    }
+

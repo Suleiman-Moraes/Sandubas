@@ -1,0 +1,110 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="head_js">
+		<h:outputScript library="js" name="/tipoproduto/pesquisa.js" />
+	</ui:define>
+	<ui:define name="titulo">#{msg.titleSistema}</ui:define>
+	<ui:define name="corpo">
+		<h3>#{msg.tipoDeProduto}</h3>
+		<h:form id="formulario">
+			<p:growl autoUpdate="true" />
+			<ui:param name="controlador" value="#{manterTipoProdutoBean}" />
+			
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton icon="ui-icon-plus"
+						value="#{msg.novoTipoProduto}" process="@form"
+						action="#{controlador.abrirModalCrud(null)}">
+						<p:ajax event="dialogReturn" update="listarRegistros"
+							listener="#{controlador.mostrarMensagemSucesso(false)}" />
+					</p:commandButton>
+				</f:facet>
+			</p:toolbar>
+			<p:spacer height="20" />
+			
+			<p:dataTable id="listarRegistros"
+				value="#{controlador.registros}" var="registro"
+				paginator="true" rows="5" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				lazy="true" towsPerPageTemplate="5, 10" widgetVar="registroWV"
+				reflow="true" emptyMessage="#{msg.nenhumRegistro}">
+
+				<f:facet name="header">
+					
+					<p:outputPanel id="painelPesquisa"
+						style="text-align: right" autoUpdate="true" layout="block">
+						
+						<h:outputText id="aep" value="#{msg.tipoProdutoPesquisa}:"
+							styleClass="fonteNormal" rendered="false" />
+
+						<h:selectOneMenu id="filtroSelecionado"
+							value="#{controlador.filtroSelecionado}">
+							<p:ajax event="change"
+								listener="#{controlador.selecionarFiltroPesquisa}" />
+							<f:selectItem itemValue="#{null}"
+								itemLabel="#{msg.selecioneOCampo}"
+								noSelectionOption="true" itemDisabled="true" />
+							<f:selectItems value="#{controlador.filtrosPesquisa}"
+								var="filtroPesquisa" itemLabel="#{filtroPesquisa.label}"
+								itemValue="#{filtroPesquisa.value}" />
+						</h:selectOneMenu>
+
+						<p:spacer id="espaco" width="10px" />
+
+						<h:inputText id="id" value="#{controlador.filtroValor}"
+							onkeypress="return somenteNumero(event);" maxlength="200"
+							style="display: none" />
+						
+						<h:inputText id="descricao" value="#{controlador.filtroValor}"
+							onkeypress="return naoAceitaEnter(event);" maxlength="200"
+							style="display: none" />
+						
+						<h:inputText id="nome"
+							value="#{controlador.filtroValor}" maxlength="200"
+							onkeypress="return naoAceitaEnter(event);"
+							style="display: none" />
+						
+						<h:inputHidden id="globalFilter" />
+					</p:outputPanel>
+				</f:facet>
+				
+				<p:column headerText="#{msg.codigo}" styleClass="tableCodigo"
+					width="5%">
+					<h:outputText value="#{registro.id}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.nome}"
+					width="20%">
+					<h:outputText value="#{registro.nome}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.descricao}">
+					<h:outputText value="#{registro.descricao}" />
+				</p:column>
+				<p:column headerText="#{msg.acoes}" width="10%"
+					style="text-align: center;">
+					<p:commandButton icon="ui-icon-pencil" process="@this"
+						title="#{msg.editar}"
+						action="#{controlador.abrirModalCrud(registro)}">
+						<p:ajax event="dialogReturn" update="listarRegistros"
+							listener="#{controlador.mostrarMensagemSucesso(true)}" />
+					</p:commandButton>
+					<p:commandButton icon="fa fa-remove" title="#{msg.excluir}"
+						process="@this" update="@form"
+						action="#{controlador.deletarObjeto}">
+						<f:setPropertyActionListener value="#{registro}"
+							target="#{controlador.objeto}" />
+						<p:confirm header="#{msg.registroDeletar}"
+							message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+				
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

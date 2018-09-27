@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">#{msg.titleSistema}</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+	<h:outputScript library="js" name="script.js" />
+	<h:outputScript library="js" name="locales.js" />
+	<ui:insert name="head_css" />
+	<ui:insert name="head_js" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{request.contextPath}/resources/images/favicon.ico" />
+	<f:metadata>
+		<o:enableRestorableView />
+	</f:metadata>
+</h:head>
+<h:body style="background-color: #f2f5f7;">
+	<style type="text/css">
+.ui-widget-overlay {
+	background: silver !important;
+	opacity: .40;
+	filter: Alpha(Opacity = 40);
+}
+</style>
+	<div id="wrapper">
+
+		<p:ajaxStatus style="display:block;">
+			<f:facet name="start">
+				<h:outputText value="" />
+			</f:facet>
+
+			<f:facet name="complete">
+				<h:outputText value="" />
+			</f:facet>
+		</p:ajaxStatus>
+
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" oncomplete="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<h:graphicImage library="images" name="ajaxloadingbar.gif" />
+		</p:dialog>
+
+		<div id="headerLogin" />
+		<br />
+		<h:form id="layout">
+			<p:remoteCommand name="invalidarPaginacao" process="@this"
+				update="@form" />
+			<h:panelGrid columns="2" style="width: 100%">
+				<h:panelGroup style="margin-left: 10%;">
+					<p:link id="inicio" onclick="invalidarPaginacao();"
+						outcome="#{url.linkPrincipal}">
+						<h:graphicImage library="images" name="logo-medianeira.jpg"
+							height="90" />
+					</p:link>
+				</h:panelGroup>
+				<h:panelGroup>
+					<div
+						style="background-color: #FFFFFF; float: right; margin-right: 145px; padding: 4px 10px; background-color: #f2f5f7;">
+						<h:graphicImage library="images" name="userSistema.png" />
+						<div style="float: right; margin-top: 7px;">
+							<h:outputText id="lblNomeUsuario"
+								value="#{seguranca.usuario.nome}"
+								style="font-size: 17px; color: black;" />
+						</div>
+					</div>
+				</h:panelGroup>
+			</h:panelGrid>
+			<!-- <h:panelGrid columns="1">
+				<h:outputText value="Tipo funcao: #{seguranca.usuario.funcaoUsuarioEnum}"/>
+				<h:outputText value="Tipo Perfis: "/>
+				<h:panelGroup>
+					<ul>
+						<ui:repeat var="perfil" value="#{seguranca.usuario.perfis}">
+							<li><h:outputText value="#{perfil.nome}"/> | <h:outputText value="#{perfil.id}"/></li>
+						</ui:repeat>
+					</ul>
+				<h:outputText value="Tipo funcao Ouvidor: #{seguranca.usuario.funcaoUsuarioEnum eq 'OUVIDOR'}"/><br/>
+				<h:outputText value="Tipo funcao Ouvidor perfilAdm: #{seguranca.usuario.perfilAdm}"/><br/>
+				<h:outputText value="Tipo funcao Ouvidor perfilOuvidor: #{seguranca.usuario.perfilOuvidor}"/><br/>
+				<h:outputText value="Tipo funcao Ouvidor perfilInterlocutor: #{seguranca.usuario.perfilInterlocutor}"/><br/>
+				<h:outputText value="Tipo funcao Ouvidor perfilOperador: #{seguranca.usuario.perfilOperador}"/>
+				</h:panelGroup>
+			</h:panelGrid> -->
+			<h:panelGrid columns="1" style="width:100%;">
+				<p:menubar>
+					<p:submenu label="Cadastro">
+						<p:menuitem value="Cadastrar Tipo de Produto"
+							action="/pages/mantertipoproduto/administrar.xhtml?faces-redirect=true"/>
+					</p:submenu>
+				</p:menubar>
+			</h:panelGrid>
+		</h:form>
+		<div style="clear: both"></div>
+		<div id="conteudo">
+			<ui:insert name="corpo" />
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="#{msg.sim}" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="#{msg.nao}" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</div>
+	</div>
+</h:body>
+</html>

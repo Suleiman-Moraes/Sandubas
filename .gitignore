@@ -1,0 +1,9 @@
+/build/
+/target/
+/.settings/
+/.classpath
+/.project
+/.tern-project
+/bin/
+/.gradle/
+/rebel.xml

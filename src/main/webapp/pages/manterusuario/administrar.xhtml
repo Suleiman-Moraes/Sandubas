@@ -1,0 +1,277 @@
+<ui:composition
+   template="/WEB-INF/template/LayoutPadrao.xhtml"
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:o="http://omnifaces.org/ui"
+   xmlns:c="http://java.sun.com/jsp/jstl/core">
+   <ui:define name="head_js">
+        <h:outputScript library="js" name="/usuario/pesquisa.js" />
+   </ui:define>     
+   <ui:define name="titulo">#{msg.titleSistema}</ui:define>
+   <ui:define name="corpo">
+		<script type="text/javascript">
+			<!--
+			$(document).ready(function () {
+			    $(document).on('click', '.ui-paginator-pages .ui-corner-all', function() {
+			    	document.getElementById('fo-usuario:hiddenlimitOffset').value = "limitOffset";
+			    	document.getElementById('fo-usuario:btnLimitOffset').click();
+			    });
+			    $(document).on('click', '.ui-paginator-pages .ui-corner-all', function() {
+			    	document.getElementById('fo-usuario:hiddenlimitOffset').value = "limitOffset";
+			    	document.getElementById('fo-usuario:btnLimitOffset').click();
+			    });	
+			    $(document).on('click', '.ui-paginator-next .ui-icon-seek-next', function() {
+			    	document.getElementById('fo-usuario:hiddenlimitOffset').value = "limitOffset";
+			    	document.getElementById('fo-usuario:btnLimitOffset').click();
+			    });	
+			    $(document).on('click', '.ui-paginator-last .ui-icon-seek-end', function() {
+			    	document.getElementById('fo-usuario:hiddenlimitOffset').value = "limitOffset";
+			    	document.getElementById('fo-usuario:btnLimitOffset').click();
+			    });		
+			    $(document).on('click', '.ui-paginator-prev .ui-icon-seek-prev', function() {
+			    	document.getElementById('fo-usuario:hiddenlimitOffset').value = "limitOffset";
+			    	document.getElementById('fo-usuario:btnLimitOffset').click();
+			    });
+			    $(document).on('click', '.ui-paginator-first .ui-icon-seek-first', function() {
+			    	document.getElementById('fo-usuario:hiddenlimitOffset').value = "limitOffset";
+			    	document.getElementById('fo-usuario:btnLimitOffset').click();
+			    });	
+			    $(document).on('change', '.ui-paginator-rpp-options', function() {
+			    	document.getElementById('fo-usuario:hiddenlimitOffset').value = "limitOffset";
+			    	document.getElementById('fo-usuario:btnLimitOffset').click();
+			    });				    				    				    		    				    		    
+			});		
+			-->
+		</script>   
+      <h3>#{msg.usuarioTitulo}</h3>
+      <h:form id="fo-usuario">
+      	 <p:remoteCommand name="atualizarRegistros" process="@this" update="totalRegistros"/>
+      	 <p:remoteCommand name="mostrarMensagemSucesso" process="@this" update="growl, usuarios" action="#{manterUsuarioBean.mostrarMensagemSucesso}"/>
+      	 <p:remoteCommand name="mostrarMensagemAtualizarRegistros" process="@this" update="@none" 
+      	 	oncomplete="document.getElementById('fo-usuario:btnLimitOffsetAtualizar').click();"/>
+      	 <p:remoteCommand name="mostrarMensagemSucessoSenhaRedefinirManifestante" process="@this" update="growl"
+      	 	action="#{manterUsuarioBean.mostrarMensagemSucessoSenhaRedefinirManifestante}"/>
+         <p:growl id="growl" autoUpdate="true" />
+			<h:inputHidden id="hiddenlimitOffset" value="#{manterUsuarioBean.limitOffset}"/>
+			<h:commandButton id="btnLimitOffsetAtualizar" style="display: none" onclick="mostrarMensagemSucesso();" >
+				<f:ajax event="click" execute="@this, hiddenlimitOffset" render="@this"/>
+			</h:commandButton>  			
+			<h:commandButton id="btnLimitOffset" style="display: none" >
+				<f:ajax event="click" execute="@this, hiddenlimitOffset" render="@none" />
+			</h:commandButton>  
+			<h:commandButton id="btnAtualizarAtualizarPaginacao" onclick="document.getElementById('fo-usuario:hiddenlimitOffset').value = 'atualizar';" 
+				style="display: none">
+				<f:ajax event="click" execute="@this, hiddenlimitOffset" render="@form" />
+			</h:commandButton>
+			<h:commandButton id="btnTodosRegistros" style="display: none" onclick="document.getElementById('fo-usuario:hiddenlimitOffset').value = 'todos';">
+				<f:ajax event="click" execute="@this, hiddenlimitOffset" render="@none" />
+			</h:commandButton>
+			<h:commandButton id="btnAtualizarAtualizarPaginacaoRedefinirSenha" onclick="document.getElementById('fo-usuario:hiddenlimitOffset').value = 'redefinir';" 
+				style="display: none">
+				<f:ajax event="click" execute="@this, hiddenlimitOffset" render="@form" />
+			</h:commandButton>						
+         <p:toolbar>
+            <f:facet name="left">
+               <p:commandButton
+                  icon="ui-icon-plus"
+                  value="#{msg.usuarioNovo}"
+                  process="@form"
+                  action="#{manterUsuarioBean.abrirModalUsuario(null)}">
+                  <p:ajax
+                     event="dialogReturn" process="@none"
+                     update="@none" oncomplete="document.getElementById('fo-usuario:btnAtualizarAtualizarPaginacao').click();"/>
+               </p:commandButton>
+            </f:facet>
+         </p:toolbar>
+         <p:spacer height="20" />
+         <p:dataTable
+             id="usuarios"
+             value="#{manterUsuarioBean.registros}"
+             var="usuario"
+             style="margin-top: 20px"
+             emptyMessage="#{msg.usuarioNenhum}"
+             rows="#{usuarioPaginateSessionScoped.pageSize}"
+             paginator="true"
+             paginatorAlwaysVisible="false"
+             paginatorPosition="bottom"
+             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+             lazy="true"
+             rowsPerPageTemplate="5,10"
+             widgetVar="usuarios"
+             reflow="true">
+             <f:facet name="header">
+                 <p:outputPanel
+                     id="painelPesquisaUsuario"
+                     style="text-align: right"
+                     autoUpdate="true"
+                     layout="block">
+                     <h:outputText
+                         value="#{msg.usuarioPesquisar}: "
+                         styleClass="fonteNormal"
+                         rendered="false" />
+                     <h:selectOneMenu
+                         id="filtroSelecionado"
+                         value="#{manterUsuarioBean.filtroSelecionado}">
+                         <p:ajax
+                             event="change"
+                             listener="#{manterUsuarioBean.selecionarFiltroPesquisa}" 
+                             oncomplete="if($(filtroSelecionado).val() == 'default'){document.getElementById('fo-usuario:btnTodosRegistros').click();
+                              PF('usuarios').filter(); atualizarRegistros();}" />
+                         <f:selectItem
+                             itemValue="#{null}"
+                             itemLabel="#{msg.usuarioSelecioneOCampo}"
+                             noSelectionOption="true"
+                             itemDisabled="true" />
+                         <f:selectItems
+                             value="#{manterUsuarioBean.filtrosPesquisa}"
+                             var="filtroPesquisa"
+                             itemLabel="#{filtroPesquisa.label}"
+                             itemValue="#{filtroPesquisa.value}" />
+                     </h:selectOneMenu>
+                     <p:spacer
+                         id="espaco"
+                         width="10px" />
+                     <p:inputText
+                         id="nome"
+                         onkeypress="return naoAceitaEnter(event);"
+                         value="#{manterUsuarioBean.filtroValor}"
+                         maxlength="200"
+                         style="display: none" />
+                         
+                     <p:inputText
+                         id="email"
+                         onkeypress="return naoAceitaEnter(event);"
+                         value="#{manterUsuarioBean.filtroValor}"
+                         maxlength="200"
+                         style="display: none" />   
+                         
+                     <p:inputText
+                         id="login"
+                         onkeypress="return naoAceitaEnter(event);"
+                         value="#{manterUsuarioBean.filtroValor}"
+                         maxlength="200"
+                         style="display: none" />
+                         
+	                 <h:selectOneMenu id="funcaoUsuario" value="#{manterUsuarioBean.filtroValor}" style="display: none">
+	                   <f:selectItem itemLabel="Todos" itemValue="" />
+	                   <f:selectItem itemLabel="Ouvidor" itemValue="OUVIDOR" />
+	                   <f:selectItem itemLabel="Interlocutor" itemValue="INTERLOCUTOR" />
+	                   <f:selectItem itemLabel="Operador" itemValue="OPERADOR" />
+	                   <f:selectItem itemLabel="Manifestante" itemValue="MANIFESTANTE" />
+	                   <f:selectItem itemLabel="Administrador" itemValue="ADMINISTRADOR" />
+	                 </h:selectOneMenu>   
+	                 
+                     <h:selectOneMenu
+                         id="unidade"
+                         value="#{manterUsuarioBean.unidade}" 
+                         converter="UnidadeConverter" style="display: none">
+                         <f:selectItem
+                             itemValue="#{null}"
+                             itemLabel="#{msg.usuarioSelecioneUnidade}"
+                             noSelectionOption="true" />
+                         <f:selectItems
+                             value="#{manterUsuarioBean.unidades}"
+                             var="unidade"
+                             itemValue="#{unidade}"
+                             itemLabel="#{unidade.nomeUnidade}" />
+                     </h:selectOneMenu>  	
+                     
+	                 <h:selectOneMenu id="statusUsuario" value="#{manterUsuarioBean.filtroValor}" style="display: none">
+	                   <f:selectItem itemLabel="Todos" itemValue="" />
+	                   <f:selectItem itemLabel="#{msg.ativo}" itemValue="ATIVO" />
+	                   <f:selectItem itemLabel="#{msg.inativo}" itemValue="INATIVO" />
+	                   <f:selectItem itemLabel="#{msg.usuarioSenhaNova}" itemValue="NOVA_SENHA" />
+	                 </h:selectOneMenu>  
+	                 
+	                 <h:selectOneMenu id="tipoAcesso" value="#{manterUsuarioBean.filtroValor}" style="display: none">
+	                   <f:selectItem itemLabel="Todos" itemValue="" />
+	                   <f:selectItem itemLabel="Interno" itemValue="INTERNO" />
+	                   <f:selectItem itemLabel="Externo" itemValue="EXTERNO" />
+	                 </h:selectOneMenu>    	                                                                                                     
+
+                     <h:inputHidden id="globalFilter" />
+                 </p:outputPanel>
+             </f:facet>
+             <p:column
+                 headerText="#{msg.codigo}"
+                 styleClass="tableCodigo"
+                 width="4%">
+                 <h:outputText value="#{usuario.id}"/>
+             </p:column>
+             
+             <p:column
+                 headerText="#{msg.usuarioNome}" width="10%"  style="text-align: center;">
+                 <h:outputText value="#{usuario.nome}" />
+             </p:column>	
+             
+             <p:column
+                 headerText="#{msg.usuarioEmail}" width="10%"  style="text-align: center;">
+                 <h:outputText value="#{usuario.email.email}" />
+             </p:column> 
+             
+             <p:column
+                 headerText="#{msg.usuarioLogin}" width="10%"  style="text-align: center;">
+                 <h:outputText value="#{usuario.login}" />
+             </p:column>              
+             
+             <p:column
+                 headerText="#{msg.usuarioFuncao}" width="5%"  style="text-align: center;">
+                 <h:outputText value="#{usuario.funcaoUsuarioEnum.descricao}" />
+             </p:column>
+             
+             <p:column
+                 headerText="#{msg.usuarioUnidade}" width="10%"  style="text-align: center;">
+                 <h:outputText value="#{usuario.unidade.nomeUnidade eq null ? ' - ' : usuario.unidade.nomeUnidade}" />
+             </p:column>
+             
+             <p:column
+                 headerText="#{msg.usuarioSituacao}" width="5%"  style="text-align: center;">
+                 <h:outputText value="#{usuario.statusUsuarioEnum.descricao}" />
+             </p:column> 
+             
+             <p:column
+                 headerText="#{msg.usuarioTipoAcesso}" width="5%"  style="text-align: center;">
+                 <h:outputText value="#{usuario.tipoUsuarioEnum.descricao}" />
+             </p:column>                                                                          
+                  
+             <p:column
+                 headerText="#{msg.acoes}"
+                 style="text-align: center;"
+                 width="5%">
+	               <p:commandButton
+	                  icon="ui-icon-pencil"
+	                  process="@this" title="#{msg.editar}" rendered="#{usuario.tipoUsuarioEnum != 'EXTERNO' and usuario.funcaoUsuarioEnum ne 'ADMINISTRADOR'}"
+	                  action="#{manterUsuarioBean.abrirModalUsuario(usuario)}">
+	                  <p:ajax
+	                     event="dialogReturn" process="@none"
+                     	update="@none" oncomplete="mostrarMensagemSucesso();"/>
+	               </p:commandButton>
+	               <p:commandButton rendered="#{usuario.tipoUsuarioEnum != 'INTERNO'}"
+	                  icon="fa fa-refresh" title="#{msg.usuarioRedefinirSenha}"
+	                  process="@this" update="@form" action="#{manterUsuarioBean.redefinirSenhaUsuario}" 
+	                  	oncomplete="document.getElementById('fo-usuario:btnAtualizarAtualizarPaginacaoRedefinirSenha').click();">
+	                  	<f:setPropertyActionListener value="#{usuario}" target="#{manterUsuarioBean.usuario}"/>
+	               </p:commandButton>
+	               <!-- 
+		               <p:commandButton
+		                  icon="fa fa-remove" title="#{msg.excluir}"
+		                  process="@this" update="@form" action="#{manterUsuarioBean.excluirUsuario}">
+		                  	<f:setPropertyActionListener value="#{usuario}" target="#{manterUsuarioBean.usuario}"/>
+		                    <p:confirm header="#{msg.usuarioExcluir}" message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />                  	
+		               </p:commandButton> 
+	                --> 	               
+             </p:column>
+         </p:dataTable> 
+		<p:panelGrid id="totalRegistros" columns="1" style="width:100%;">
+			<f:facet name="header">
+				<h:outputText
+					value="#{msg.totalRegistros} : #{manterUsuarioBean.totalDeRegistros}"
+					styleClass="fonteNormal" />
+			</f:facet>
+		</p:panelGrid>         
+      </h:form>
+   </ui:define>
+</ui:composition>

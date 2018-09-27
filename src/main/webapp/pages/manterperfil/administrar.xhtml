@@ -1,0 +1,137 @@
+<ui:composition
+   template="/WEB-INF/template/LayoutPadrao.xhtml"
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:o="http://omnifaces.org/ui"
+   xmlns:c="http://java.sun.com/jsp/jstl/core">
+   
+   <ui:define name="head_js">
+   		<h:outputScript library="js" name="/perfil/pesquisa.js" />
+   	</ui:define>
+   <ui:define name="titulo">#{msg.titleSistema}</ui:define>
+   <ui:define name="corpo">
+      <h3>#{msg.perfilTitulo}</h3>
+      <h:form id="fo-perfil">
+         <p:growl autoUpdate="true" />
+         <p:toolbar>
+            <f:facet name="left">
+               <p:commandButton
+                  icon="ui-icon-plus"
+                  value="#{msg.perfilNovo}"
+                  process="@form"
+                  action="#{manterPerfilBean.abrirModalPerfil(null)}">
+                  <p:ajax
+                     event="dialogReturn"
+                     update="listarPerfis"
+                     listener="#{manterPerfilBean.mostrarMensagemSucesso}" />
+               </p:commandButton>
+            </f:facet>
+         </p:toolbar>
+         <p:spacer height="20" />
+         
+       	 <p:dataTable 
+				id="listarPerfis" 
+       	 		value="#{manterPerfilBean.registros}" 
+       	 		var="perfil"
+                style="margin-top: 20px" 
+                emptyMessage="#{msg.perfilNenhumPerfil}" 
+                rows="5"
+                paginator="true" 
+                paginatorAlwaysVisible="false" 
+                paginatorPosition="bottom"
+                paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				lazy="true" 
+                rowsPerPageTemplate="5,10" 
+                widgetVar="perfis" 
+                reflow="true">
+                
+           	<f:facet name="header">
+					<p:outputPanel 
+						id="painelPesquisaPerfil"
+						style="text-align: right" 
+						autoUpdate="true" 
+						layout="block">
+
+						<h:outputText 
+							id="aep" 
+							value="#{msg.perfilPesquisa}:"
+							styleClass="fonteNormal" 
+							rendered="false" />
+
+						<h:selectOneMenu 
+							id="filtroSelecionado"
+							value="#{manterPerfilBean.filtroSelecionado}">
+							<p:ajax 
+								event="change"
+								listener="#{manterPerfilBean.selecionarFiltroPesquisa}" />
+							<f:selectItems
+								value="#{manterPerfilBean.filtrosPesquisa}"
+								var="filtroPesquisa" 
+								itemLabel="#{filtroPesquisa.label}"
+								itemValue="#{filtroPesquisa.value}" />
+						</h:selectOneMenu>
+
+						<p:spacer 
+							id="espaco" 
+							width="10px" />
+						<p:inputText 
+							id="nome"
+							value="#{manterAreaEntradaBean.filtroValor}" 
+							maxlength="200"
+							style="display: none" autocomplete="true"/>
+
+						<p:inputText 
+							id="id"
+							value="#{manterAreaEntradaBean.filtroValor}"
+							onkeypress="return somenteNumero(event);" 
+							maxlength="200"
+							style="display: none" autocomplete="true"/>
+						<p:defaultCommand target="nome" />
+						<h:inputHidden id="globalFilter" />
+					</p:outputPanel>
+				</f:facet>
+               
+       		<p:column 
+       			headerText="#{msg.codigo}"  
+       			styleClass="tableCodigo" 
+       			width="4%">
+       			<h:outputText value="#{perfil.id}"/>
+       		</p:column>
+       		<p:column headerText="#{msg.perfilNome}" width="7%">
+       			<h:outputText value="#{perfil.nome}"/>
+       		</p:column>
+       		<p:column headerText="#{msg.perfilDescricao}" width="10%">
+       			<h:outputText value="#{perfil.descricao}"/>
+       		</p:column>
+            <p:column
+                 headerText="#{msg.acoes}"
+                 style="text-align: center;"
+                 width="15%">
+	               <p:commandButton
+	                  icon="ui-icon-pencil"
+	                  process="@this" title="#{msg.editar}"
+	                  action="#{manterPerfilBean.abrirModalPerfil(perfil)}">
+	                  <p:ajax
+	                     event="dialogReturn"
+	                     update="listarPerfis"
+	                     listener="#{manterPerfilBean.mostrarMensagemSucesso}" />
+	               </p:commandButton>
+	               <p:commandButton
+	                  icon="fa fa-remove" title="#{msg.excluir}"
+	                  process="@this" update="@form" action="#{manterPerfilBean.excluirPerfil}">
+	                  	<f:setPropertyActionListener value="#{perfil}" target="#{manterPerfilBean.perfil}"/>
+	                    <p:confirm header="#{msg.perfilExcluir}" message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />                  	
+	               </p:commandButton> 
+             </p:column>
+       		<f:facet name="footer">
+                 <h:outputText
+                     value="#{msg.totalRegistros} : #{manterPerfilBean.totalDeRegistros}"
+                     styleClass="fonteNormal" />
+            </f:facet>
+       	</p:dataTable>
+      </h:form>
+   </ui:define>
+</ui:composition>

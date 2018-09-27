@@ -1,0 +1,161 @@
+<ui:composition
+   template="/WEB-INF/template/LayoutPadrao.xhtml"
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:o="http://omnifaces.org/ui"
+   xmlns:c="http://java.sun.com/jsp/jstl/core">
+   <ui:define name="titulo">#{msg.titleSistema}</ui:define>
+   <ui:define name="corpo">
+		<script type="text/javascript">
+			function autenticarOuvidoria(xhr, status, args) {
+				if (args.autenticar) {
+					PF('confirmarCadWV').show();
+				}
+			}
+		</script>
+   	   <f:metadata>
+       		<f:event type="preRenderView" listener="#{minhasInformacoesBean.carregarUsuario(request.remoteUser)}"/>
+   	  </f:metadata>   
+   	  <p:spacer height="20"/>
+      <h:form id="fo-minhas-informacoes">
+			<p:dialog id="dialogSair" header="#{msg.minhasInformacoesDadosAtualizados}" widgetVar="confirmarCadWV"
+				showEffect="explode" hideEffect="bounce" height="80" closable="false" modal="true" 
+					onShow="document.getElementById('fo-minhas-informacoes:btnSair').focus();">
+				<h:panelGrid id="totalRegistros" columns="1"
+					style="width:100%;text-align: center;">
+					<h:outputText value="#{msg.minhasInformacoesDadosAtualizados}"
+						style=" font-weight: bold; font-size: 25px; color: #000000;" />
+				</h:panelGrid>
+				<div align="center">
+					<p:commandButton id="btnSair" oncomplete="window.open('#{request.contextPath}/j_spring_security_logout','_self');" process="@none" update="@none" 
+						icon="fa fa-user" value="#{msg.cadManifestanteRetornarPaginaInicial}" />
+				</div>
+			</p:dialog>      
+      	  <p:growl id="growl"/>
+	      <p:panelGrid id="gridPrincipal" columns="1" style="width:100%;" rendered="#{seguranca.usuario.funcaoUsuarioEnum ne 'ADMINISTRADOR'}">
+	          <f:facet name="header">
+	         		<p:outputLabel id="lblMinhasInformacoes1" value="#{msg.minhasInformacoesTitulo}" />   
+	          </f:facet>  
+	          <p:fieldset legend="#{msg.minhasInformacoesBasico}">
+	          	<h:panelGrid columns="3" style="width:100%;">
+	          		<p:outputLabel id="lblMinhasInformacoesNome" value="#{msg.minhasInformacoesNome}" for="nome" />
+			        <p:inputText id="nome" value="#{minhasInformacoesBean.usuario.nome}" maxlength="180" 
+			        	readonly="#{minhasInformacoesBean.habilitaEdicao}" style="width: 300px; background-color:  #{minhasInformacoesBean.habilitaEdicao ? 'lightgrey' : ''}" />  
+			        <p:message for="nome" />  	
+	          		<p:outputLabel id="lblMinhasInformacoesEmail" value="#{msg.minhasInformacoesEmail}" for="email" />	
+					<p:inputText id="email" value="#{minhasInformacoesBean.usuario.email.email}" maxlength="200" 
+						readonly="#{minhasInformacoesBean.habilitaEdicao}" required="true" requiredMessage="#{msg.minhasInformacoesEmailObrigatorio}"
+							style="width: 300px; background-color:  #{minhasInformacoesBean.habilitaEdicao ? 'lightgrey' : ''}"/>	
+					<p:message for="email" /> 	
+					<p:outputLabel id="lblMinhasInformacoesTelefone" value="#{msg.minhasInformacoesTelefone}" for="telefone" />	
+					<h:panelGroup>
+	 					<p:inputMask id="telefone" value="#{minhasInformacoesBean.usuario.telefone.numero}" mask="(99)9?9999-9999" maxlength="14"
+	 						readonly="#{minhasInformacoesBean.habilitaEdicao}" style="width: 300px; background-color:  #{minhasInformacoesBean.habilitaEdicao ? 'lightgrey' : ''}" />	
+	 					 <p:outputLabel for="tipoTelefone" value="Tipo Telefone" style="display: none" 
+	 					 	rendered="#{!minhasInformacoesBean.habilitaEdicao}" />
+	 					 <h:panelGrid columns="2" rendered="#{!minhasInformacoesBean.habilitaEdicao}">
+	                         <p:selectOneRadio id="tipoTelefone" required="true" requiredMessage="#{msg.minhasInformacoesTipoTelefoneObrigatorio}"
+	                            value="#{minhasInformacoesBean.usuario.tipoTelefone}">
+	                            <f:converter converterId="javax.faces.Boolean" />
+	                            <f:selectItem
+	                                itemLabel="#{msg.fixo}"
+	                                itemValue="true" />
+	                            <f:selectItem
+	                                itemLabel="#{msg.celular}"
+	                                itemValue="false"  />
+	                        </p:selectOneRadio>	
+	                        <p:message for="tipoTelefone" /> 					
+	 					 </h:panelGrid>	
+					</h:panelGroup>	
+ 					<p:message for="telefone" /> 
+ 					<c:if test="#{seguranca.usuario.funcaoUsuarioEnum ne 'MANIFESTANTE'}">	
+						<p:outputLabel id="lblMinhasInformacoesUnidade" value="#{msg.minhasInformacoesUnidade}" for="unidade" />		
+	 					<p:inputText id="unidade" value="#{seguranca.usuario.unidade.nomeUnidade} (#{seguranca.usuario.unidade.siglaUnidade})"
+	 						readonly="true" style="width: 300px; background-color: lightgrey" />	
+	 					<p:message for="unidade" /> 	 													          				        	      		   
+ 					</c:if>
+	          	</h:panelGrid>
+	          </p:fieldset>  
+		      <p:fieldset legend="#{msg.minhasInformacoesDadosAcesso}">
+		        <h:panelGrid columns="2" style="width:100%;">
+	          		<p:outputLabel id="lblMinhasInformacoesLogin" value="#{msg.minhasInformacoesLogin}" for="login" />
+			        <p:inputText id="login" value="#{minhasInformacoesBean.usuario.login}" maxlength="100" 
+			        	readonly="#{minhasInformacoesBean.habilitaEdicao}" style="width: 300px; background-color:  #{minhasInformacoesBean.habilitaEdicao ? 'lightgrey' : ''}" />  		      	
+		        </h:panelGrid>
+		        <p:panelGrid columns="1" style="width:100%;">
+		            <div align="left" class="fonteBold" style="margin-top: 30px;">
+					 	#{msg.minhasInformacoesInserirSenha}
+		       	    </div>	      		      	      	      
+		            <div align="left" class="fonteBold">
+					    #{msg.minhasInformacoesConfirmarSenha}
+		       	   </div>	
+		            <div align="left" class="fonteBold" style="margin-bottom: 30px;">
+					    #{msg.minhasInformacoesVigorNovaSenha}
+		       	   </div>			       	   	
+		        </p:panelGrid>
+		       <h:panelGrid id="painelfocu" columns="3" style="width:50%;">
+		       		<h:panelGroup>
+		       			<p:focus context="painelfocu"/>
+		       			<p:outputLabel id="lblMinhasInformacoesSenhaAtual" value="#{msg.minhasInformacoesSenhaAtual}" for="senhaAtual" />	
+                    </h:panelGroup>
+                    <p:password id="senhaAtual" value="#{minhasInformacoesBean.usuario.senha}" title="#{msg.minhasInformacoesSenhaAtual}"
+                        style="width: 300px;" required="true" requiredMessage="#{msg.minhasInformacoesSenhaNecessaria}" />
+                    <p:message for="senhaAtual" />
+		       		<p:outputLabel id="lblMinhasInformacoesNovaSenha" value="#{msg.minhasInformacoesNovaSenha}" for="novaSenha" />	
+                    <p:password id="novaSenha" value="#{minhasInformacoesBean.usuario.novaSenha}" title="#{msg.minhasInformacoesNovaSenha}"
+                        style="width: 300px;" required="true" requiredMessage="#{msg.minhasInformacoesNovaSenhaNecessaria}"/>
+                    <p:message for="novaSenha" />    
+ 		       		<p:outputLabel id="lblMinhasInformacoesConfirmaSenha" value="#{msg.minhasInformacoesConfirmaSenha}" for="confirmaSenha" />	
+                    <p:password  id="confirmaSenha" value="#{minhasInformacoesBean.usuario.confirmacaoSenha}" title="#{msg.minhasInformacoesConfirmaSenha}"
+                        style="width: 300px;" required="true" requiredMessage="#{msg.minhasInformacoesConfirmaNovaSenhaNecessaria}">
+                        <o:validateEqual id="equal" components="novaSenha confirmaSenha" message="#{msg.minhasInformacoesSenhasNaoConferem}" 
+                        	showMessageFor="confirmaSenha" />
+                    </p:password>                                                  		       				  
+                    <p:message for="confirmaSenha" />     	
+		       </h:panelGrid>     	           
+		      </p:fieldset>
+			  <f:facet name="footer">
+				<div align="center">
+				      <p:commandButton id="botaoSalvar" icon="ui-icon-disk" value="#{msg.btnSalvar}" process="@form" 
+				      	update="@form" 
+				      	actionListener="#{minhasInformacoesBean.atualizarDadosUsuario}" 
+				      	oncomplete="autenticarOuvidoria(xhr, status, args);"/>  				
+				</div>
+			  </f:facet>
+			  <p:defaultCommand target="botaoSalvar" />
+	      </p:panelGrid>
+
+	      
+	      <p:panelGrid columns="1" style="width:100%;" rendered="#{seguranca.usuario.funcaoUsuarioEnum eq 'ADMINISTRADOR'}">
+	          <f:facet name="header">
+	         		<p:outputLabel id="lblMinhasInformacoes" value="#{msg.minhasInformacoesTitulo}" />   
+	          </f:facet>  
+	          <p:fieldset legend="#{msg.minhasInformacoesBasico}">
+	          	<h:panelGrid columns="3" style="width:100%;">
+	          		<p:outputLabel id="lblMinhasInformacoesNome1" value="#{msg.minhasInformacoesNome}" for="nome" />
+			        <p:inputText id="nome1" value="#{minhasInformacoesBean.usuario.nome}" maxlength="180" 
+			        	readonly="#{minhasInformacoesBean.habilitaEdicao}" style="width: 300px; background-color:  #{minhasInformacoesBean.habilitaEdicao ? 'lightgrey' : ''}" />  
+			        <p:message for="nome1" />  	
+ 					<c:if test="#{seguranca.usuario.funcaoUsuarioEnum ne 'MANIFESTANTE'}">	
+						<p:outputLabel id="lblMinhasInformacoesUnidade1" value="#{msg.minhasInformacoesUnidade}" for="unidade1" />		
+	 					<p:inputText id="unidade1" value="#{seguranca.usuario.unidade.nomeUnidade} (#{seguranca.usuario.unidade.siglaUnidade})"
+	 						readonly="true" style="width: 300px; background-color: lightgrey" />	
+	 					<p:message for="unidade1" /> 	 													          				        	      		   
+ 					</c:if>
+	          	</h:panelGrid>
+	          </p:fieldset>  
+		      <p:fieldset legend="#{msg.minhasInformacoesDadosAcesso}">
+		        <h:panelGrid columns="2" style="width:100%;">
+	          		<p:outputLabel id="lblMinhasInformacoesLogin1" value="#{msg.minhasInformacoesLogin}" for="login" />
+			        <p:inputText id="login1" value="#{minhasInformacoesBean.usuario.login}" maxlength="100" 
+			        	readonly="#{minhasInformacoesBean.habilitaEdicao}" style="width: 300px; background-color:  #{minhasInformacoesBean.habilitaEdicao ? 'lightgrey' : ''}" />  		      	
+		        </h:panelGrid>
+		      </p:fieldset>
+	      </p:panelGrid>    	      
+	               
+      </h:form>
+   </ui:define>
+</ui:composition>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">#{msg.titleSistema}</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+	<h:outputScript library="js" name="script.js" />
+	<h:outputScript library="js" name="locales.js" />
+	<ui:insert name="head_css" />
+	<ui:insert name="head_js" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{request.contextPath}/resources/images/favicon.ico" />
+	<f:metadata>
+		<o:enableRestorableView />
+	</f:metadata>
+</h:head>
+<h:body style="background-color: #f2f5f7;">
+	<style type="text/css">
+	.ui-widget-overlay {
+		background: silver !important;
+		opacity: .40;
+		filter: Alpha(Opacity = 40);
+	}
+</style>
+	<div id="wrapper">
+
+		<p:ajaxStatus style="display:block;">
+			<f:facet name="start">
+				<h:outputText value="" />
+			</f:facet>
+
+			<f:facet name="complete">
+				<h:outputText value="" />
+			</f:facet>
+		</p:ajaxStatus>
+
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<h:graphicImage library="images" name="ajaxloadingbar.gif" />
+		</p:dialog>
+
+		<div id="headerLogin" />
+		<br />
+		<h:form>
+			<h:panelGrid columns="1" style="width: 100%">
+        		<h:panelGroup style="margin-left: 10%;">
+		            <p:link outcome="#{url.linkMinhasInformacoes}" rendered="#{seguranca.usuario.statusUsuarioEnum eq 'NOVA_SENHA'}">
+		                <h:graphicImage library="images" name="logo-medianeira.jpg" height="180" />
+		            </p:link>
+		            <p:link outcome="#{url.linkManifestanteManifestacoes}" rendered="#{seguranca.usuario.funcaoUsuarioEnum eq 'MANIFESTANTE'}">
+		                <h:graphicImage library="images" name="logo-medianeira.jpg" height="180" />
+		            </p:link> 
+		            <p:link outcome="#{url.linkPrincipal}" rendered="#{seguranca.usuario.funcaoUsuarioEnum ne 'MANIFESTANTE'}">
+		                <h:graphicImage library="images" name="logo-medianeira.jpg" height="180" />
+		            </p:link>  		              		                		
+        		</h:panelGroup>
+			</h:panelGrid>
+		</h:form>
+		<div style="clear: both"></div>
+		<div id="conteudo">
+			<ui:insert name="corpo" />
+		</div>
+	</div>
+</h:body>
+</html>

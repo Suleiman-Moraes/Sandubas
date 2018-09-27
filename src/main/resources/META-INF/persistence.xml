@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+    version="2.0"
+    xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit
+        name="OuvidoriaPU"
+        transaction-type="RESOURCE_LOCAL">
+        <non-jta-data-source>java:comp/env/jdbc/GerenciadorAcessoDB</non-jta-data-source>
+        <properties>
+            <property
+                name="javax.persistence.jdbc.url"
+                value="jdbc:postgresql://localhost:5432/sandubas" />
+            <property
+                name="javax.persistence.jdbc.user"
+                value="postgres" />
+            <property
+                name="javax.persistence.jdbc.password"
+                value="123456" />
+            <property
+                name="javax.persistence.jdbc.driver"
+                value="com.mysql.jdbc.Driver" />
+            <property
+                name="hibernate.c3p0.min_size"
+                value="5" />
+            <property
+                name="hibernate.c3p0.max_size"
+                value="20" />
+            <property
+                name="hibernate.c3p0.timeout"
+                value="1800" />
+            <property
+                name="hibernate.c3p0.max_statements"
+                value="50" />
+            <property
+                name="hibernate.c3p0.idle_test_period"
+                value="10" />
+            <property
+                name="hibernate.c3p0.acquire_increment"
+                value="5" />
+            <property
+                name="dialect"
+                value="com.ohapp.webtattoon.server.service.Mysql5BitBooleanDialect" />
+            <property
+                name="current_session_context_class"
+                value="thread" />
+            <property
+                name="hibernate.c3p0.testConnectionOnCheckout"
+                value="true" />
+            <property
+                name="connection.provider_class"
+                value="org.hibernate.connection.C3P0ConnectionProvider" />
+            <property
+                name="hibernate.cache.use_second_level_cache"
+                value="true" />
+            <property
+                name="hibernate.cache.use_query_cache"
+                value="true" />
+            <property
+                name="hibernate.cache.region.factory_class"
+                value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory" />
+            <property
+                name="show_sql"
+                value="false" />
+            <property
+                name="format_sql"
+                value="false" />
+            <property
+                name="use_sql_comments"
+                value="false" />
+            <property
+                name="hibernate.hbm2ddl.auto"
+                value="none" />
+        </properties>
+    </persistence-unit>
+</persistence>

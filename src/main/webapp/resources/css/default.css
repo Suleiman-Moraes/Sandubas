@@ -1,0 +1,45 @@
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 10px !important;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 10px;
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #D20005;
+}
+
+.corLinkLegenda a{
+    color: darkslategrey;
+}
+
+.dstextomanifestacao table td{
+	border: solid 1px white!important;
+}
+
+.ui-widget-header {
+    border: 1px solid #aed0ea !important;
+    background: #deedf7 !important;
+    background-color: #deedf7 !important;
+    border: solid 1px #aed0ea !important;
+    color: #02364c !important;
+    font-weight: bold !important;
+}
+
+.ui-panelgrid td{
+    border: solid 1px #aed0ea !important;
+}
+
+.ui-panelgrid tr{
+    border: solid 1px #aed0ea !important;
+}
+

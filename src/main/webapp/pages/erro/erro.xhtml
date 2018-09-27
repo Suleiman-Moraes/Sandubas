@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>  
+        <h:outputStylesheet name="estilo.css" library="css" />
+        <h:outputStylesheet name="estiloGoogle.css" library="css" />
+    </h:head>
+    <!--Shintaku, podemos melhorar essa tela de carregamento!!-->
+    <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+    <p:dialog modal="true" widgetVar="statusDialog" header="Logando"   
+              draggable="false" closable="false">  
+        <p:graphicImage value="/img/carregando.gif" />  
+    </p:dialog>
+    <h:body>
+        <h:form>
+            <div class="global">
+				
+                <div class="cabecalho">
+                    <a onclick="history.back();" href="#">
+                        <div class="logo">
+                            <img src="#{facesContext.externalContext.requestContextPath}/resources/images/logo-ouvidoria-baloes.png" height="120" width="120"/>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="global2">
+                    <div class="menu">
+                        <div class="menuBar">
+                            <div class="menuBar">
+                                <h:form id="menubarForm">
+                                	<p:spacer height="20px" width="100%"/>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- conteédo Login -->
+
+                    <div class="conteudo4">
+                        <div class="conteudoLogin4Borda">
+                            <div class="conteudoLogin4">
+                                <div class="mensagem">
+                                    <p:messages id="messages" autoUpdate="true" showSummary="false" showDetail="true" />
+                                </div>
+                                <p:outputPanel rendered="#{param.type == '1'}">
+                                    <p><img src="#{facesContext.externalContext.requestContextPath}/resources/images/error.png"/></p>
+                                    <h2 style="color: white">Página não encontrada.</h2>
+                                </p:outputPanel>
+                                <p:outputPanel rendered="#{param.type == '2'}">
+                                    <p><img src="#{facesContext.externalContext.requestContextPath}/resources/images/alert.png"/></p>
+                                    <h2 style="color: #FFBF00">Sessão Expirada.</h2>
+                                </p:outputPanel><!-- 
+                                <p:outputPanel rendered="#{param.type == '3'}">
+                                    <p><img src="#{facesContext.externalContext.requestContextPath}/img/error.png"/></p>
+                                    <h2 style="color: white">Manifestação não encontrada</h2>
+                                </p:outputPanel>
+                                 -->
+                                <p:outputPanel rendered="#{param.type != '1' and param.type != '2'}">
+                                    <p><img src="#{facesContext.externalContext.requestContextPath}/resources/images/error.png"/></p>
+                                    <h2 style="color: white">Ocorreu um erro inesperado.</h2>
+                                </p:outputPanel>
+								<!-- 
+									href="#{facesContext.externalContext.requestContextPath}/"
+								 -->
+                                <a onclick="history.back();" href="#">Voltar à página inicial</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rodape">
+		                <div class="geralRodape">
+		                    <div class="box1">
+		                        <h3>Sobre a Ouvidoria</h3>
+		                       	<p>A implantação da Ouvidoria na AGR se deu por meio da Lei 13.569 de 27 de dezembro de 1999. Buscou-se, 
+		                       	com sua criação, garantir aos usuários dos serviços públicos no Estado de Goiás um canal de comunicação 
+		                       	onde possam registrar suas manifestações (reclamações, denúncias, elogios, sugestões etc), e providenciar 
+		                       	soluções para os conflitos entre os usuários e concessionárias ou permissionários.</p>
+								
+								<p>Participe! A qualidade de nossos serviços depende de sua participação..</p>
+								
+		                    </div>
+		                    <div class="box2">
+		                        <h3>Links Importantes</h3>
+		                        <ul>
+		                            <li><h:graphicImage library="images" name="setaHome.png" /> <a href="http://www.cge.go.gov.br/ouvidoria/">Ouvidoria Geral do Estado de Goiás</a></li><br/>
+		                            <li><h:graphicImage library="images" name="setaHome.png" /> <a href="http://www.transparencia.go.gov.br/">Goiás Transparente</a></li><br/>
+									<li><h:graphicImage library="images" name="setaHome.png" /> <a href="http://vaptvupt.goias.gov.br/vvv/index">Vapt Vupt Digital</a></li><br/>
+									<li><h:graphicImage library="images" name="setaHome.png" /> <a href="http://www.saneago.com.br/lai/ouvidoria/">Ouvidoria da Saneago</a></li><br/>
+									<li><h:graphicImage library="images" name="setaHome.png" /> <a href="http://www.celg.com.br/paginas/clientes/centralAtendimento.aspx">Central de Atendimento CELG</a></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </div>
+                    <div class="endereco">Coordenação de Informática - Agência Goiana de Regulação. Todos os Direitos Reservados. <a href="#">AGR</a></div>
+                </div>
+            </div>
+        </h:form>
+        <!-- 
+	        <script src="http://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+         -->
+    </h:body>
+</html>

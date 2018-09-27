@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Manager pathname="" />
+	<Resource name="BeanManager" auth="Container"
+		type="javax.enterprise.inject.spi.BeanManager" factory="org.jboss.weld.resources.ManagerObjectFactory" />
+	<!-- <Resource name="jdbc/GerenciadorAcessoDB" auth="Container" type="javax.sql.DataSource" 
+		username="transporte" password="sw!tch14" driverClassName="com.mysql.jdbc.Driver" 
+		url="jdbc:mysql://localhost:3306/transporte?autoReconnect=true" testWhileIdle="true" 
+		testOnBorrow="true" testOnReturn="false" validationQuery="SELECT 1" validationInterval="30000" 
+		timeBetweenEvictionRunsMillis="5000" maxActive="100" minIdle="10" maxWait="10000" 
+		initialSize="10" removeAbandonedTimeout="60" removeAbandoned="true" logAbandoned="true" 
+		minEvictableIdleTimeMillis="30000" jmxEnabled="true" jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState; 
+		org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer; org.apache.tomcat.jdbc.pool.interceptor.SlowQueryReportJmx(threshold=10000)" 
+		/> -->
+	<Resources cachingAllowed="true" cacheMaxSize="100000" />
+	<Resource name="jdbc/GerenciadorAcessoDB"
+		auth="Container"
+		driverClass="org.postgresql.Driver"
+		jdbcUrl="jdbc:postgresql://localhost:5432/sandubas"
+		user="postgres"
+		password="123456"
+		factory="org.apache.naming.factory.BeanFactory"
+		type="com.mchange.v2.c3p0.ComboPooledDataSource"
+		maxPoolSize="50"
+		minPoolSize="15"
+		acquireIncrement="3"
+		acquireRetryAttempts="0"
+		acquireRetryDelay="3000"
+		breakAfterAcquireFailure="false"
+		maxConnectionAge="60"
+		maxIdleTime="30"
+		maxIdleTimeExcessConnections="10"
+		idleConnectionTestPeriod="15"
+		testConnectionOnCheckout="true"
+		preferredTestQuery="SELECT 1"
+		debugUnreturnedConnectionStackTraces="true"
+		autoCommitOnClose="true"
+		/>
+</Context>

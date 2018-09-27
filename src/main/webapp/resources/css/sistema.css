@@ -1,0 +1,866 @@
+@charset "utf-8";
+
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.rowHeight.ui-panelgrid tr, .rowHeight.ui-panelgrid {
+	border: 1px dotted #929292;
+}
+
+.rowHeight.ui-panelgrid td, .rowHeight.ui-panelgrid {
+	height: 0px;
+}
+
+a:hover, a:visited, a:link, a:active {
+	text-decoration: none;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+}
+
+#header, header {
+	padding: 5px 0px;
+	margin-bottom: 0px;
+	height: 39px;
+	background-color: #02364c;
+	color: #fff;
+	box-shadow: 8px 8px 8px #ccc;
+	padding: 10px;
+}
+
+#headerLogin {
+	padding: 5px 0px;
+	margin-bottom: 0px;
+	height: 10px;
+	background-color: #02364c;
+	color: #fff;
+	box-shadow: 8px 8px 8px #ccc;
+	padding: 10px;
+}
+
+#headerHome {
+	padding: 5px 0px;
+	margin-bottom: 0px;
+	height: 80px;
+	background-color: #02364c;
+	color: #fff;
+	box-shadow: 8px 8px 8px #ccc;
+	padding: 10px;
+}
+
+#header>div {
+	margin-left: 8px
+}
+
+#conteudo {
+	padding: 0px 8px
+}
+
+footer {
+	padding: 0px 8px;
+	margin-bottom: 10px;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: 500;
+	padding: 0px;
+	margin: 0px;
+	font-weight: 500;
+}
+
+h2 {
+	font-family: sans-serif;
+	color: #02364c;
+}
+
+h3 {
+	font-family: sans-serif;
+	font-size: 35px;
+	color: #02364c;
+	margin-left: 100px;
+	font-weight: bold;
+}
+
+h4 {
+	font-family: sans-serif;
+	font-size: 20px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	color: #02364c;
+}
+
+.rotulo {
+	width: 200px;
+}
+
+.campo {
+	width: 150px;
+}
+
+.checkbox-unidade {
+	position: absolute;
+	margin: 0;
+	margin-left: -34px;
+	margin-top: -14px;
+}
+
+.ui-panelgrid td {
+	height: 34px
+}
+
+.ajax-status {
+	position: fixed;
+	top: 55px;
+	right: 10px;
+	width: 35px;
+	height: 35px
+}
+
+.ui-selectmanycheckbox td {
+	border-width: 0px !important;
+	padding: 0px !important;
+}
+
+.ui-selectmanycheckbox td label {
+	padding-right: 10px;
+}
+
+/* Customiza TabView - início */
+.ui-tabs .ui-tabs-panel {
+	padding: 0.5em 0.2em !important;
+}
+
+.ui-tabs {
+	padding: 0px !important;
+}
+
+.ui-tabs .ui-tabs-nav {
+	margin: -1px !important;
+}
+
+.ui-tabs.ui-tabs-top>.ui-tabs-nav {
+	padding: 0px !important;
+}
+/* Customiza TabView - fim */
+
+/* Menu sistema inicio */
+.menu-sistema {
+	border: 0px !important;
+	padding: 0px !important;
+	background: none !important;
+}
+
+.menu-sistema .ui-menu-parent>a .ui-menuitem-text, .menu-sistema>.ui-menu-list>.ui-menuitem>a>.ui-menuitem-text
+	{
+	color: #ffffff !important;
+}
+
+/* Menu sistema fim */
+.many-checkbox td {
+	border-width: 0px !important;
+	padding: 0px !important;
+}
+
+.many-checkbox td label {
+	padding-right: 10px;
+}
+
+.tableCodigo {
+	width: 50px;
+	text-align: center;
+}
+
+.tableDescricao {
+	width: 400px;
+	text-align: center;
+}
+
+.tableAcoes {
+	width: 70px;
+	text-align: center;
+}
+
+.fonteDestaque {
+	font-family: sans-serif;
+	font-size: 17px;
+	color: #02364c;
+}
+
+.centralizar {
+	text-align: center;
+}
+
+.acoesDataTable {
+	text-align: center;
+	width: 200px;
+}
+
+.fonteNormal {
+	font-family: sans-serif;
+	font-size: 13px;
+	color: #02364c;
+}
+
+.fonteBold {
+	font-family: sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	color: #02364c;
+}
+
+.fonteDestaque {
+	color: #02364c;
+	font-family: sans-serif;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.fonteNormal {
+	font-family: sans-serif;
+	font-size: 13px;
+	color: #02364c;
+}
+
+.fonteGrande {
+	font-family: sans-serif;
+	font-size: 15px;
+	color: #02364c;
+}
+
+.labelError {
+	font-weight: bold;
+	font-size: 14px;
+	color: red;
+}
+
+.inputEndereco {
+	width: 300px;
+}
+
+.inputPadrao {
+	width: 300px;
+}
+
+.inputTituloEmail {
+	width: 700px;
+	font-size: 15px;
+	font-weight: bold;
+	border: none !important;
+}
+
+.ui-panel-title {
+	font-size: 13px;
+}
+
+#iconeSistema {
+	margin: 3px;
+	position: relative;
+	padding: 4px;
+	-webkit-border-radius: 20px;
+	border: solid 0.1px;
+	box-shadow: 0.5px 0.5px 0.5px 0.5px #000033;
+}
+
+#iconeSistema:hover {
+	top: -2px;
+	box-shadow: 0 0.5px 0.5px #000033;
+}
+
+#footer {
+	padding: 5px 0px;
+	height: 25px;
+	background-color: #02364c;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	color: white;
+	font-size: 15px;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 20px;
+	width: 100%;
+	position: absolute;
+}
+
+#wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+#conteudo {
+	padding-bottom: 60px;
+}
+
+.titlePainel {
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 22px;
+}
+
+button:focus {
+	outline: none;
+}
+
+.ui-datalist-content {
+	border: 0px;
+}
+
+.ui-custompanelgrid, .ui-custompanelgrid td, .ui-custompanelgrid tr {
+	background-color: #eeeeee !important;
+	border: #02364c;
+	font-family: sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	color: #02364c;
+}
+
+.balao {
+	background: #ffef8f;
+	border-radius: 0 30px 30px 0;
+	height: 22px;
+	/* Position relative para a seta não exceder os limites do balão, já que vamos usar position absolute nele */
+	position: absolute;
+	margin-bottom: 1em;
+	border: 1px solid #ffef8f;
+}
+
+.balao:after {
+	/* content necessário para a criação de um elemento vazio */
+	content: "";
+	width: 22px;
+	height: 0;
+	/* position: absolute para manipularmos a posição da seta */
+	position: absolute;
+	/* Right com valor negativo para ele ficar para fora do balão de dialogo */
+	right: -32px;
+	/* E aqui o truque com as bordas */
+	border-top: 12.5px solid transparent;
+	border-bottom: 12.5px solid transparent;
+	border-left: 25px solid #ffef8f;
+	border-radius: 50%;
+}
+
+.textoInfo {
+	color: #2779aa;
+}
+
+.linkTutorial {
+	color: #2779aa;
+}
+
+.linkTutorial:HOVER {
+	color: #2779aa;
+	text-decoration: underline;
+}
+
+.invisivel {
+	visibility: hidden !important;
+}
+
+.visivel {
+	visibility: visible !important;
+}
+
+.overlay {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/*background-color: black;*/
+	background: #eeeeee
+		url("/ouvidoria/javax.faces.resource/images/ui-bg_diagonals-thick_90_eeeeee_40x40.png.xhtml?ln=primefaces-cupertino")
+		repeat scroll 50% 50%;
+	z-index: 1001;
+	opacity: 0.8;
+	-moz-opacity: 0.8;
+	filter
+	=
+	alpha(opacity=80);
+}
+
+.content {
+	display: none;
+	position: absolute;
+	top: 8%;
+	left: 13.5%;
+	width: 70%;
+	height: 75%;
+	padding: 16px;
+	border: 5px solid #404040;
+	background-color: white;
+	z-index: 1002;
+	overflow: hidden;
+}
+
+.semBorda tr, .semBorda td {
+	border: none !important;
+	background: none;
+}
+
+.ui-datagrid-no-border>.ui-datagrid-content {
+	border: none;
+}
+
+.padding-child-div-0 {
+	padding: 0px;
+}
+/**
+ * Text align
+ */
+.text-align-justify {
+	text-align: justify;
+}
+
+/**
+ * Text color
+ */
+.text-color-white {
+	color: white;
+}
+
+.text-color-black {
+	color: #000;
+}
+
+.text-black {
+	color: #333;
+}
+
+.text-bold {
+	font-weight: bold;
+}
+
+.text-size-1 {
+	font-size: 15px;
+}
+
+/**
+ * Text color
+ */
+.transition-all {
+	transition: all 2s;
+}
+
+.text-bold {
+	font-weight: 900;
+	font-size: 13px;
+}
+
+/**
+ * Link
+ */
+.link-laranja {
+	color: #FFB504;
+}
+
+.link-laranja:hover {
+	color: #B68309;
+}
+
+.link-laranja:visited {
+	color: #B68309;
+}
+
+.link-black, .link-black:link, .link-black:hover, .link-black:visited {
+	color: #000;
+}
+
+.link-white, .link-white:link, .link-white:visited {
+	color: white;
+}
+
+.link-white:hover {
+	color: #c8c8c8;
+}
+/**
+ * Top
+ */
+.top-0 {
+	top: 0;
+}
+
+.top-1 {
+	top: 5px;
+}
+
+.top-2 {
+	top: 15px;
+}
+
+.top-3 {
+	top: 45px;
+}
+/**
+ * Margin
+ */
+.margin-0 {
+	margin: 0;
+}
+
+.margin-1 {
+	margin: 5px;
+}
+
+.margin-2 {
+	margin: 15px;
+}
+
+.margin-3 {
+	margin: 45px;
+}
+
+.margin-bottom-0 {
+	margin-bottom: 0;
+}
+
+.margin-bottom-1 {
+	margin-bottom: 5px;
+}
+
+.margin-bottom-2 {
+	margin-bottom: 15px;
+}
+
+.margin-bottom-3 {
+	margin-bottom: 45px;
+}
+
+.margin-left-0 {
+	margin-left: 0;
+}
+
+.margin-left-1 {
+	margin-left: 5px;
+}
+
+.margin-left-2 {
+	margin-left: 15px;
+}
+
+.margin-left-3 {
+	margin-left: 45px;
+}
+
+.margin-right-0 {
+	margin-right: 0;
+}
+
+.margin-right-1 {
+	margin-right: 5px;
+}
+
+.margin-right-2 {
+	margin-right: 15px;
+}
+
+.margin-right-3 {
+	margin-right: 45px;
+}
+
+.margin-top-0 {
+	margin-top: 0;
+}
+
+.margin-top-1 {
+	margin-top: 5px;
+}
+
+.margin-top-2 {
+	margin-top: 15px;
+}
+
+.margin-top-3 {
+	margin-top: 45px;
+}
+/**
+ * Padding
+ */
+.padding-1 {
+	padding: 5px;
+}
+
+.padding-2 {
+	padding: 15px;
+}
+
+.padding-3 {
+	padding: 45px;
+}
+
+.padding-top-1 {
+	padding-top: 5px;
+}
+
+.padding-top-2 {
+	padding-top: 15px;
+}
+
+.padding-top-3 {
+	padding-top: 45px;
+}
+/**
+ * Seta
+ */
+.seta {
+	position: relative;
+}
+
+.seta::after {
+	content: "";
+	position: absolute;
+	left: 31px;
+	border: 19px solid #02364C;
+	border-bottom-color: rgba(0, 0, 0, 0);
+	border-left-color: rgba(0, 0, 0, 0);
+	border-right-color: rgba(0, 0, 0, 0);
+}
+
+.seta::before {
+	content: "";
+	position: absolute;
+	left: 30px;
+	bottom: -40px;
+	border: 20px solid #B68309;
+	border-bottom-color: rgba(0, 0, 0, 0);
+	border-left-color: rgba(0, 0, 0, 0);
+	border-right-color: rgba(0, 0, 0, 0);
+}
+
+/**
+ * Imagens
+ */
+.img-logo-min {
+	width: 20%;
+	height: auto;
+}
+/**
+ * Background
+ */
+.bg-azul-2 {
+	background-color: #02364c;
+}
+
+.bg-back {
+	background: black;
+}
+
+.bg-orange {
+	background: #FFB504;
+}
+
+/**
+ * Position
+ */
+.position-relative {
+	position: relative;
+}
+
+.position-absolute {
+	position: absolute;
+}
+/**
+ * Alert
+ */
+.alert-danger-1 {
+	color: #f8e5e5;
+	background-color: #ff4343;
+	border-color: #38050d;
+}
+
+/**
+ * Display
+ */
+.display-none {
+	display: none;
+}
+/**
+ * Footer
+ */
+.marginTop input {
+	margin-top: 4px;
+}
+
+.ui-accordion-header.customTabView {
+	margin-top: 0.5em;
+	padding-top: 0.8em;
+	padding-bottom: 0.2em;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
+	color: #02364c;
+	background: #f2f5f7;
+	border: 1px dotted #929292;
+}
+
+/**
+ * Marca de mensagem ouvidoria
+ */
+#dataTableTramiteDaManifestacao .Ouvidor div.ui-widget-header {
+	background: linear-gradient(#FFF 2%, #67d7db 98%);
+	border: 1px #2d8e91 solid;
+}
+
+#dataTableTramiteDaManifestacao .Manifestante div.ui-widget-header {
+	background: linear-gradient(#FFF 2%, #d7d762 98%);
+	border: 1px #959538 solid;
+}
+
+/**
+ * Marca de mensagem ouvidoria interno
+ */
+.Ouvidor div.ui-widget-header {
+	background: linear-gradient(#FFF 2%, #67d7db 98%);
+	border: 1px #2d8e91 solid;
+}
+
+.Manifestante div.ui-widget-header {
+	background: linear-gradient(#FFF 2%, #d7d762 98%);
+	border: 1px #959538 solid;
+}
+
+.Interlocutor div.ui-widget-header {
+	background: linear-gradient(#FFF 2%, #c7762a6b 98%);
+	border: 1px #2d8e91 solid;
+}
+
+.Operador div.ui-widget-header {
+	background: linear-gradient(#FFF 2%, #74b2e2 98%);
+	border: 1px #2d8e91 solid;
+}
+
+/**
+ * DataTable quadrado
+ */
+#dataTableCaixaEntrada div.ui-datatable-header {
+	height: 34px;
+	border-radius: 0px;
+}
+
+#dataTableCaixaEntrada div div {
+	padding: 7px;
+}
+
+/**
+ * Administrar Manifestacao checklist
+ */
+#classficacoesPorUnidade, #subclassificacoesPorClassificacao,
+	#unidadesComClassificacoes {
+	height: 230px;
+}
+
+_::-moz-progress-bar, body:last-child #classficacoesPorUnidade, _::-moz-progress-bar,
+	body:last-child #subclassificacoesPorClassificacao {
+	
+}
+
+.statusTramiteEncaminhado {
+	color: #af6713;
+	/*background-color: #f4b05f;*/
+	border: 1px #af6713 solid;
+	font-weight: bold;
+	font-size: 11px;
+	padding: 3px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.statusTramiteRetornado {
+	color: #5d8e24;
+	/*background-color: #88c045;*/
+	border: 1px #5d8e24 solid;
+	font-weight: bold;
+	font-size: 11px;
+	padding: 3px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.tooltip {
+	background: rgb(205, 10, 10);;
+	padding-bottom: 3px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-left: 100px;
+	position: relative;
+}
+
+.tooltip:before {
+	width: 0;
+	height: 0;
+	border: 8px solid transparent;
+	border-right-color: rgb(205, 10, 10);
+	content: "";
+	left: -16px;
+	position: absolute;
+}
+
+/*
+	Linha das manifestações em atraso coloridas
+*/
+.atrasoEncaminhamento {
+	background-color: #CFDBB9 !important;
+}
+
+.atrasoRespostaOuvidoria {
+	background-color: #ffc1c1 !important;
+}
+
+.atrasoRespostaManifestante {
+	background-color: #FAC798 !important;
+}
+
+.manifestacaoOculta {
+	background-color: #D9D9D9 !important;
+}
+
+/*
+	h:panelGrid
+*/
+.panelGrid td:nth-child(1) {
+	width: 617.717px;
+}
+
+.panelGrid-tipo-email-notificacao td:nth-child(1) {
+	width: 250px;
+}
+
+/*
+	Grafico
+*/
+.ui-titulo-pagina-grafico {
+	margin: 15px 0;
+	font-family: sans-serif;
+	color: #02364c;
+	font-weight: bold;
+}
+
+.ui-informacao-pagina-grafico {
+	font-family: sans-serif;
+	color: #02364c;
+	font-size: 15px;
+}
+
+.ui-form-input-2 input {
+	width: 406.35px;
+}
+
+.ui-form-label-1 {
+	width: 90px;
+}
+
+.ui-form-label-2 {
+	width: 170px;
+}

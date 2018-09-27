@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://xmlns.jcp.org/jsf/html"
+   xmlns:f="http://xmlns.jcp.org/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:o="http://omnifaces.org/ui">
+<h:head>
+   <title>#{msg.perfilCadastro}</title>
+   <h:outputStylesheet
+      library="css"
+      name="sistema.css" />
+</h:head>
+<h:body>
+ 	<f:metadata>
+         <o:viewParam name="perfilId" value="#{manterPerfilBean.perfil}" converter="PerfilConverter"></o:viewParam>
+    </f:metadata> 
+   <header>
+	   <div style="float: left">
+	      <h:graphicImage library="images" name="logo-agr.png" height="75" />
+	   </div>
+   </header>
+   <br/>
+   <h:form
+      id="formDadosPerfil"
+      style="margin-right: 10px; margin-left:10px;">
+      <p:messages autoUpdate="true" />
+      <h4 style="text-align: center">
+         <h:outputText
+            id="title"
+            value="#{empty manterPerfilBean.perfil.id ? msg.perfilNovo : msg.perfilEditar}" />
+      </h4>
+      <p:panelGrid
+         columns="2"
+         id="dadosPerfil" style="width:100%;">
+         <h:panelGroup>
+	     	<p:focus context="dadosPerfil"/>    
+	         <p:outputLabel
+	            id="lblNomePerfil"
+	            for="nomePerfil"
+	            value="#{msg.perfilNome}" />
+	     </h:panelGroup>
+         <p:inputText
+            id="nomePerfil"
+            value="#{manterPerfilBean.perfil.nome}"
+            maxlength="30"
+            style="width: 435px;" autocomplete="off"/>
+         <p:outputLabel
+            id="lblDescricaoPerfil"
+            for="descricaoPerfil"
+            value="#{msg.perfilDescricao}" />
+         <p:inputTextarea
+            id="descricaoPerfil"
+            value="#{manterPerfilBean.perfil.descricao}"
+            maxlength="250"
+            style="width: 435px;"/> 
+         <p:outputLabel
+            id="lblFuncionalidadesPerfil"
+            value="#{msg.perfilPermissoes}" />  
+          <p:pickList id="pickListFuncionalidades" value="#{manterPerfilBean.funcionalidadesDualList}" var="func" converter="FuncionalidadeConverter" 
+          		effect="bounce" itemValue="#{func}" itemLabel=" #{func.descricao}" showCheckbox="true" 
+              	showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains"  required="true"
+              	requiredMessage="#{msg.perfilFuncionalidadeNecessaria}">
+      			<f:facet name="sourceCaption">#{msg.disponiveis}</f:facet>
+      			<f:facet name="targetCaption">#{msg.selecionadas}</f:facet>
+      	  </p:pickList>  
+          <f:facet name="footer">
+              <p:toolbar id="toolbarPerfil">
+                  <f:facet name="left">
+			         <p:commandButton
+			         	value="#{msg.btnLimpar}"
+			            process="@this"
+			            icon="fa fa-eraser"
+			            update="@form"
+			            resetValues="true"
+			            action="#{manterPerfilBean.limpar}" />  
+            	  </f:facet>
+                  <f:facet name="right">            
+				      <p:commandButton
+				      		id="ButaoSalvar"
+				            icon="ui-icon-disk"
+				            value="#{msg.btnSalvar}"
+				            process="@form"
+				            update="@form"
+				            action="#{manterPerfilBean.salvarPerfil}" />
+				            <p:defaultCommand target="ButaoSalvar" />
+                  </f:facet>
+           	 </p:toolbar> 
+           </f:facet>      	                                               
+      </p:panelGrid>
+   </h:form>
+</h:body>
+</html>

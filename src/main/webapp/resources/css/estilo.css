@@ -1,0 +1,990 @@
+/* 
+    Document   : estilo
+    Created on : 26/12/2012, 10:18:38
+    Author     : michel.martins
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#headerHome {
+	padding: 5px 0px;
+	margin-bottom: 0px;
+	height: 63px;
+	background-color: #000033;
+	color: #fff;
+	box-shadow: 8px 8px 8px #ccc;
+	padding: 10px;
+}
+
+
+#wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+
+
+img {
+	border: 0;
+}
+
+root {
+	display: block;
+}
+
+html,body {
+	margin: 0;
+	padding: 0;
+}
+
+#bGroundPrincipal {
+	background: url("../img/header_image_bg.png");
+	background-repeat: no-repeat;
+	height: auto;
+	width: auto;
+	position: relative;
+	top: 30px;
+	z-index: 0;
+}
+
+.global {
+	background: url("../img/blue_pattern.gif");
+}
+
+.global2 {
+	background-color: white;
+}
+
+.bgSistemaOuvidoria {
+	background-color: white;
+	background-position: 50% 0%;
+	height: auto;
+	height: 570px;
+	width: 100%;
+}
+
+.cabecalho {
+	height: 150px;
+	background-color: white;
+	background-position: 190px;
+}
+
+.cabecalho2 {
+	width: 100%;
+	height: 115px;
+}
+
+.menu {
+	background-color: #FFFFFF;
+	border: 1px solid #DDDDDD;
+}
+
+.ui-widget-content {
+	
+}
+
+.ui-widget {
+	font-size: 10px !important;
+}
+
+.menuBar {
+	width: 1220px;
+	margin: 0 auto;
+}
+
+.bgCabecalho {
+	background: url("../resources/img/blue_pattern.gif");
+}
+
+
+.logo {
+    height: 142px;
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.logo-externa {
+    height: 142px;
+    margin: 0 auto;
+    width: 980px;
+}
+
+.logo-externa > img {
+    margin-top: 30px;
+}
+
+.logo img {
+	margin-top: 18px;
+}
+
+.logo .usuarioSistema {
+    background-color: #FFFFFF;
+    float: right;
+    margin-right: 145px;
+    margin-top: 60px;
+    padding: 4px 10px;
+}
+
+.logo .usuarioSistema img {
+	float: left;
+	height: 20px;
+	margin: 0 5px 0 0;
+	padding: 0;
+	width: 20px;
+}
+
+.conteudo {
+	height: 458px;
+	margin: -50px auto;
+	top: 75px;
+	width: 980px;
+}
+
+.perguntas-frequentes {
+	font-family: verdana;
+	font-size: 18px;
+	position: absolute;
+	top: 500px;
+	left: 350px;
+}
+
+.perguntas-frequentes a {
+	color: #000000;
+	text-decoration: none;
+}
+
+.perguntas-frequentes a:HOVER {
+	color: #02364c;
+	text-decoration: none;
+}
+
+.perguntas-frequentes a:FOCUS {
+	color: #000000;
+	text-decoration: none;
+}
+
+.perguntas-frequentes a:VISITED {
+	color: #000000;
+	text-decoration: none;
+}
+
+.question {
+	background: url("../img/question.png");
+	background-repeat: no-repeat;
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+}
+
+.socials-rede {
+	float: right;
+	margin-top: 25px;
+}
+
+.icon-facebook {
+	background: url("../img/facebook.png") no-repeat scroll 0 0
+		rgba(0, 0, 0, 0);
+	display: inline-block;
+	height: 48px;
+	padding: 0 10px;
+	width: 48px;
+}
+
+.icon-twitter {
+	background: url("../img/twitter.png");
+	background-repeat: no-repeat;
+	width: 48px;
+	height: 48px;
+	padding: 0 10px;
+	display: inline-block;
+}
+
+.icon-youtube {
+	background: url("../img/youtube.png");
+	background-repeat: no-repeat;
+	width: 48px;
+	height: 48px;
+	padding: 0 10px;
+	display: inline-block;
+}
+
+.icon-flickr {
+	background: url("../img/flickr.png");
+	background-repeat: no-repeat;
+	width: 48px;
+	height: 48px;
+	padding: 0 5px 0 10px;
+	display: inline-block;
+}
+
+.combo-login {
+	float: right;
+}
+
+.conteudo2 {
+	width: 980px;
+	height: 420px;
+	margin: 0 auto;
+	position: relative;
+	top: 0;
+}
+
+.conteudo3 {
+	width: 980px;
+	height: 420px;
+	margin: 0 auto;
+	position: relative;
+	top: 0;
+}
+
+.conteudo4 {
+	width: 980px;
+	height: 420px;
+	margin: 0 auto;
+	position: relative;
+	top: 0;
+}
+
+.icones {
+	width: 400px;
+	height: auto;
+	margin-top: 20px;
+	float: left;
+}
+
+.painel {
+	width: 330px;
+	height: 380px;
+	float: right;
+	background: url("../img/LoginPainel.png");
+}
+
+.painelLogin {
+	color: white;
+	font-weight: bold;
+	font-size: 14px;
+	width: 280px;
+	height: 70px;
+	border: solid 1px #bebebe;
+	padding: 10px;
+	margin: 12px 0 0 15px;
+}
+
+.aSolucionadora {
+	padding: 10px;
+	width: 280px;
+	border: solid 1px #838383;
+	font-family: sans-serif;
+	font-size: 13px;
+	color: whitesmoke;
+	margin: 10px 0 0 15px;
+}
+
+.listaIcones {
+	width: 100px;
+	float: left;
+	text-align: center;
+	padding: 12px;
+}
+
+.listaIconesAdm {
+	width: 66px;
+	float: left;
+	padding: 0;
+}
+
+.rodape {
+	color: white;
+	background-color: #02364c;
+	width: auto;
+	height: 250px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.geralRodape {
+	width: 980px;
+	height: auto;
+	color: white;
+	margin: 0 auto;
+}
+
+.box1 {
+	font-family: 'Open Sans', serif;
+	width: 560px;
+	height: auto;
+	color: #dddddd;
+	float: left;
+	text-align: justify;
+}
+
+.box1 h3 {
+	width: auto;
+	font-size: 16px;
+}
+
+.box1 p {
+	font-size: 14px;
+}
+
+.box1 span {
+	margin-right: 20px;
+}
+
+.box1 a {
+	color: #e3a345;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.box1 a:hover {
+	color: white;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.box2 {
+	font-family: 'Open Sans', serif;
+	list-style-type: none !important;
+	text-decoration: none;
+	height: auto;
+	color: #dddddd;
+	float: left;
+	margin-left: 102px;
+	margin-top: -8px;
+}
+
+.box2 img {
+	border: 0 none;
+	float: left;
+	margin-top: 1px;
+}
+
+.box2 li {
+	list-style-type: none !important;
+	text-decoration: none;
+}
+
+.box2 h3 {
+	margin-left: 40px;
+	width: auto;
+	font-size: 16px;
+}
+
+.box2 a {
+	color: #E3A345;
+	float: left;
+	height: auto;
+	font-size: 14px;
+	line-height: 10px;
+	text-decoration: none;
+	width: auto;
+}
+
+.box2 a:hover {
+	color: white;
+	width: auto;
+	height: auto;
+	color: #dddddd;
+	float: left;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.box3 {
+	font-family: 'Open Sans', serif;
+	list-style-type: none !important;
+	text-decoration: none;
+	height: auto;
+	color: white;
+	float: right;
+}
+
+.box3 h3 {
+	font-size: 16px;
+}
+
+.nroMan {
+	margin-bottom: 12px;
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+.nroMan input {
+	width: 155px;
+}
+
+.btnMan {
+	margin-top: 16px;
+	font-size: 16px;
+}
+
+.btnMan .ui-button {
+	height: 33px;
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 110px;
+}
+
+.snhMan {
+	margin-bottom: 16px;
+	font-size: 14px;
+}
+
+.endereco {
+	background: #02364c;
+	font-family: 'Open Sans', serif;
+	font-size: 14px;
+	color: white;
+	height: 40px;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+}
+
+.endereco a {
+	color: #E3A345;
+	height: auto;
+	font-size: 14px;
+	line-height: 10px;
+	text-decoration: none;
+	width: auto;
+}
+
+.endereco a:hover {
+	color: white;
+	width: auto;
+	height: auto;
+	color: #dddddd;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.ui-overlaypanel {
+	background: url("../img/bgPanel.png") !important;
+	top: 90px !important;
+	left: 49% !important;
+	height: 60px !important;
+}
+
+.conteudoLogin {
+	background-color: #02364c;
+	height: 230px;
+	width: 380px;
+}
+
+.conteudoLogin2Borda {
+	font-family: 'Open Sans', serif;
+	background-color: #F7F7F7;
+	height: 400px;
+	padding: 10px;
+	width: auto;
+}
+
+.conteudoLogin3Borda {
+	font-family: 'Open Sans', serif;
+	background-color: #F7F7F7;
+	height: 400px;
+	padding: 10px;
+	width: auto;
+}
+
+.conteudoLogin4Borda {
+	font-family: 'Open Sans', serif;
+	background-color: #F7F7F7;
+	height: 400px;
+	padding: 10px;
+	width: auto;
+}
+
+.conteudoLogin2 {
+	font-family: 'Open Sans', serif;
+	background-color: #02364c;
+	color: #FFFFFF;
+	height: 230px;
+	margin: 0 auto;
+	width: 380px;
+}
+
+.conteudoLogin3 {
+	font-family: 'Open Sans', serif;
+	background-color: #02364c;
+	color: #FFFFFF;
+	height: 280px;
+	margin: 0 auto;
+	width: 380px;
+}
+
+.conteudoLogin4 h2 {
+	font-family: 'Open Sans', serif;
+	text-align: center;
+}
+
+.conteudoLogin4 p {
+	text-align: center;
+	padding-top: 15px;
+}
+
+.conteudoLogin4 img {
+	width: 80px;
+	height: 80px;
+}
+
+.conteudoLogin4 {
+	font-family: 'Open Sans', serif;
+	background-color: #02364c;
+	color: #FFFFFF;
+	height: 280px;
+	margin: 0 auto;
+	width: 380px;
+}
+
+.conteudoLogin2 h4 {
+	font-family: 'Open Sans', serif;
+	text-align: center;
+	padding: 20px;
+}
+
+.conteudoLogin3 h4 {
+	font-family: 'Open Sans', serif;
+	text-align: center;
+	padding: 20px;
+}
+
+.conteudoLogin2 a {
+	color: #FFDE00 !important;
+	font-family: 'Open Sans', serif;
+	font-size: 12px;
+	margin-left: 34px;
+	text-decoration: none;
+}
+
+.conteudoLogin2 a:hover {
+	color: #FFFFFF !important;
+	font-family: 'Open Sans', serif;
+	font-size: 12px;
+	margin-left: 34px;
+	text-decoration: none;
+}
+
+.conteudoLogin3 a {
+	color: #FFDE00 !important;
+	font-family: 'Open Sans', serif;
+	font-size: 12px;
+	margin-left: 34px;
+	text-decoration: none;
+}
+
+.conteudoLogin3 a:hover {
+	color: #FFFFFF !important;
+	font-family: 'Open Sans', serif;
+	font-size: 12px;
+	margin-left: 34px;
+	text-decoration: none;
+}
+
+.conteudoLogin4 a {
+	color: #FFDE00 !important;
+	font-family: 'Open Sans', serif;
+	font-size: 16px;
+	margin-left: 114px;
+	text-decoration: none;
+}
+
+.conteudoLogin4 a:hover {
+	color: #FFFFF !important;
+	font-family: 'Open Sans', serif;
+	font-size: 16px;
+	margin-left: 114px;
+	text-decoration: none;
+}
+
+.panelTextoLogin {
+	border: none;
+	width: 430px;
+	height: 320px;
+	float: left;
+	margin: 22px 0 10px 20px;
+	background: url("../img/fundoLoginTexto.png");
+}
+
+.imageLogin1 {
+	width: 382px;
+	height: 130px;
+	border: none;
+	margin: 18px 10px 10px 23px;
+	float: left;
+	color: white;
+	text-size: 12px;
+	text-align: justify;
+	font-family: arial;
+}
+
+.imageLogin3 {
+	width: 186px;
+	height: 130px;
+	border: solid 1px #838383;
+	margin: 40px 10px 10px 26px;
+	border: none;
+	float: left;
+	background: url("../img/tabletsMobileDesktop.png");
+}
+
+.imageLogin4 {
+	width: 173px;
+	height: 130px;
+	margin: 10px;
+	float: left;
+	border: none;
+	color: white;
+	text-align: justify;
+	font-family: arial;
+	font-size: 13px;
+}
+
+.panelLoginLogo {
+	height: 56px;
+	margin: 10px 22px 0 0;
+	width: 200px;
+}
+
+.panelLogin {
+	background-color: #02364c;
+	color: #FFFFFF;
+	height: 176px;
+	margin: 0 auto;
+	padding: 20px 70px 32px 56px;
+	width: 235px;
+}
+
+.cadastroUsuariosOuvidoria {
+	height: 30px;
+	margin-left: 10px;
+	margin-top: 17px;
+	font-family: 'Open Sans', serif;
+	font-size: 14px;
+}
+
+.panelLogin .cadastroUsuariosOuvidoria a {
+	color: #FFB608;
+	text-decoration: none;
+}
+
+.panelLogin .cadastroUsuariosOuvidoria a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.panelLogin .rSenha {
+	color: #FFFF00;
+	float: right;
+	font-family: open sans;
+	font-size: 13px;
+	line-height: 16px;
+	margin-top: 5px;
+	width: 80px;
+}
+
+.panelLogin .rSenha a {
+	color: #FFB608;
+	text-decoration: none;
+}
+
+.panelLogin .rSenha a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.panelRecuperarSenha a:hover {
+	color: #FFFFFF;
+}
+
+.ajusteIcons {
+	width: 976px;
+	margin: 0 auto;
+}
+
+.mensagem {
+	height: 25px;
+	position: absolute;
+	width: 360px;
+	background-color: #02364c;
+}
+
+.mensagem4 {
+	font-size: 12px;
+	height: 25px;
+	margin-top: 60px;
+	position: absolute;
+	width: 360px;
+	text-decoration: none;
+	list-style-type: none;
+	color: #FFFF00;
+}
+
+.mensagem4 li {
+	color: #FFFF00;
+	list-style: none outside none;
+	text-align: center;
+}
+
+.mensagem5 {
+	font-size: 12px;
+	height: 25px;
+	margin-top: 60px;
+	position: absolute;
+	width: 360px;
+	text-decoration: none;
+	list-style-type: none;
+	color: #FFFF00;
+}
+
+.mensagem5 li {
+	color: #FFFF00;
+	list-style: none outside none;
+	text-align: center;
+}
+
+.mensagem li {
+	color: #FFFF00;
+	list-style: none outside none;
+	text-align: center;
+}
+
+.mensagem2 {
+	font-size: 11px;
+	height: 25px;
+	margin-left: -40px;
+	margin-top: -4px !important;
+	position: relative;
+	width: 190px;
+}
+
+.mensagem2 li {
+	color: #FFFF00;
+	list-style: none outside none;
+	text-align: center;
+}
+
+.dadosCadastro1 {
+	height: 35px;
+}
+	
+.dadosCadastro1 .ui-button {
+	background-color: white;
+	border-radius: 4px 4px 4px 4px;
+	height: 33px;
+	margin-top: 5px;
+	margin-right: 5px;
+	width: 90px;
+	float: right;
+}
+
+.dadosCadastro2 {
+	width: 380px;
+	height: 230px;
+	background-color: white;
+}
+
+.dadosCadastro2 p {
+	font-family: 'Open Sans', serif;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: justify;
+	font-size: 14px;
+}
+
+.dadosCadastro2 h4 {
+	font-family: 'Open Sans', serif;
+	line-height: 0;
+	padding-left: 20px;
+	width: auto;
+}
+
+.botaoCadastro {
+	background-color: #FFB504;
+	height: 40px;
+	line-height: 57px;
+	margin: 0 auto;
+	padding-left: 10px;
+	width: 350px;
+}
+
+.dadosCadastro2 a {
+    color: #000000;
+    font-family: 'Open Sans',serif;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 25px;
+    margin-left: 10px;
+    margin-right: 10px !important;
+    text-decoration: none;
+    vertical-align: 8px;
+    width: 380px;
+}
+
+.imageLogin1 {
+	border: none;
+	color: white;
+	float: left;
+	font-family: arial;
+	height: 100px !important;
+	margin: 18px 10px 10px 23px;
+	text-align: justify;
+	width: 382px;
+}
+
+.notch {
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid #02364c;
+	left: 20px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	margin-top: -2px;
+	width: 0;
+}
+
+.alingBox {
+	height: 65px;
+	margin-top: 40px;
+	text-align: right;
+}
+
+.alingButton {
+	height: 40px;
+	text-align: right;
+}
+
+.loginBox {
+	height: auto;
+	margin-bottom: 10px;
+}
+
+.loginBoxPw {
+	height: auto;
+	margin-bottom: 15px;
+}
+
+.topoLoginBox {
+	background-color: #02364c;
+	height: 10px;
+	position: absolute;
+	width: 380px;
+}
+
+.ui-menu .ui-icon {
+	left: 0.2em;
+	position: relative !important;
+	top: 0.2em;
+}
+
+table .jqplot-table-legend {
+	font-size: 12px !important;
+}
+
+.painelLogin .loginBox input {
+	width: 80px !important;
+}
+
+.ui-menubar {
+	border: medium none !important;
+	width: auto;
+}
+
+ui-corner-all {
+	font-size: 12px !important;
+}
+
+.botaoCaixaSelecionado {
+	background: none !important;
+	background-color: #bbb !important;
+}
+
+.botaoCaixaSelecionado span {
+	color: white;
+}
+
+.btnResponderQuestionario {
+	margin-bottom: 10px;"
+}
+	
+.btnResponderQuestionario span {
+	background-color: #02364c;
+	color: #fff;
+	padding: 10px !important;
+}
+
+.texto-anexo {
+    float: left;
+    font-family: 'Open Sans',serif;
+    font-size: 20px;
+    height: auto;
+    margin-bottom: 10px;
+    margin-left: 26px;
+    margin-top: 10px;
+    text-align: justify;
+    width: 100%;
+}
+
+.links-anexo {
+    float: left;
+    font-family: 'Open Sans',serif;
+    height: auto;
+    text-align: justify;
+    width: 100%;
+}
+
+.links-anexo a {
+    color: #02712B;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.links-anexo a:HOVER {
+    color: #000000;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/*
+	Linha das manifestações em atraso coloridas
+*/
+.atrasoEncaminhamento td {  
+    background-color: #CFDBB9 !important;
+}
+
+.atrasoRespostaOuvidoria td {  
+    background-color: #ffc1c1 !important;
+}
+
+.atrasoRespostaManifestante td {
+    background-color: #FAC798 !important;
+}
+
+.atrasoEncaminhamento {
+  -webkit-animation: atrasoEncaminhamento 1s infinite; /* Safari 4+ */
+  -moz-animation:    atrasoEncaminhamento 1s infinite; /* Fx 5+ */
+  -o-animation:      atrasoEncaminhamento 1s infinite; /* Opera 12+ */
+  animation:         atrasoEncaminhamento 1s infinite; /* IE 10+ */
+}
+
+@-webkit-keyframes atrasoEncaminhamento {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+
+@-moz-keyframes invalid {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+
+@-o-keyframes invalid {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+
+@keyframes invalid {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
