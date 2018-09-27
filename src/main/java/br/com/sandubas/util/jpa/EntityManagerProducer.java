@@ -21,7 +21,7 @@ public class EntityManagerProducer {
    private EntityManagerFactory factory;
    
    public EntityManagerProducer() throws IOException {
-      factory = Persistence.createEntityManagerFactory("OuvidoriaPU");
+      factory = Persistence.createEntityManagerFactory("ProjetoPU");
    }
    
    @Produces
