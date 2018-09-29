@@ -45,8 +45,7 @@ public class AppUserDetailsService implements UserDetailsService {
 		UsuarioDAO usuarioDAO = CDIServiceLocator.getBean(UsuarioDAO.class);
 		Usuario usuario = usuarioDAO.login(username);
 		UsuarioSistema user = null;
-		if (usuario.isAtivoOuNovaSenha()) {
-			profile = EnumHelper.getFuncaoUsuarioEnum(usuario.getFuncaoUsuarioEnum().getId(), usuario);
+		profile = EnumHelper.getFuncaoUsuarioEnum(usuario.getFuncaoUsuarioEnum().getId(), usuario);
 			if (profile == null) {
 				throw new UsuarioSemPerfilException("Usuário sem perfil associado !");
 			} else {
@@ -55,9 +54,6 @@ public class AppUserDetailsService implements UserDetailsService {
 						usuario.getPerfilOperador());
 				return user;
 			}
-		} else {
-			throw new UsuarioInativoException("Usuário inativo !");
-		}
 	}
 
 	private List<Perfil> getPerfis(Usuario usuario) {

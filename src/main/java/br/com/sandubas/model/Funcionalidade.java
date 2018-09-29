@@ -35,9 +35,7 @@ public class Funcionalidade implements Serializable {
 	@Column(nullable = false, length = 200)
 	private String descricao;
 
-	public Funcionalidade() {
-
-	}
+	public Funcionalidade() {}
 
 	public Funcionalidade(Long id, String descricao) {
 		this.id = id;

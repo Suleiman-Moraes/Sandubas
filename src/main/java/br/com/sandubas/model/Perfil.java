@@ -49,9 +49,7 @@ public class Perfil implements Serializable {
 			@JoinColumn(name = "id_funcionalidade") })
 	private List<Funcionalidade> funcionalidades;
 
-	public Perfil() {
-
-	}
+	public Perfil() {}
 
 	public Long getId() {
 		return id;

@@ -96,6 +96,26 @@
 						<p:menuitem value="Cadastrar Classificação de Mercadoria"
 							action="/pages/manterclassificacaomercadoria/administrar.xhtml?faces-redirect=true"/>
 					</p:submenu>
+					<p:submenu style="float: right; margin-right: 130px"
+						label="Usuário">
+						<p:menuitem value="Usuário" ajax="false"
+							action="/pages/manterusuario/administrar.xhtml?faces-redirect=true"
+							rendered="#{seguranca.temFuncionalidade('MANTER_USUARIOS')}" />
+						<p:menuitem value="Perfil" ajax="false"
+							action="/pages/manterperfil/administrar.xhtml?faces-redirect=true"
+							rendered="#{seguranca.temFuncionalidade('MANTER_PERFIL')}" />
+						<!--  
+						<p:menuitem value="Perfil Funcionalidades" ajax="false"
+							action="/pages/manterperfilfuncionalidade/principal.xhtml?faces-redirect=true"
+							rendered="#{seguranca.temFuncionalidade('MANTER_PERFIL_X_FUNCIONALIDADES')}" />
+						-->
+						<p:menuitem value="Minhas Informações" ajax="false"
+							action="/pages/manterusuario/minhasInformacoes.xhtml?faces-redirect=true"
+							rendered="#{seguranca.temFuncionalidade('ATUALIZAR_MINHAS_INFORMACOES') and seguranca.usuarioLogado.usuario.statusUsuarioEnum != 'NOVA_SENHA'}" />
+						<p:separator />
+						<p:menuitem value="#{msg.sair}" icon="ui-icon-close"
+							url="/j_spring_security_logout" />
+					</p:submenu>
 				</p:menubar>
 			</h:panelGrid>
 		</h:form>

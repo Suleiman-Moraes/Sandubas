@@ -12,7 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import br.com.sandubas.model.Perfil;
 import br.com.sandubas.model.Usuario;
-import br.com.sandubas.util.jsf.FacesUtil;
 
 @Named
 @RequestScoped
@@ -24,8 +23,6 @@ public class Seguranca {
 		if (usuarioLogado != null) {
 			usuario = usuarioLogado.getUsuario();
 			usuario.setPerfis(usuarioLogado.getPerfis());
-			usuario.setPerfilAdm(usuarioLogado.getPerfilAdm());
-			usuario.setSAVE_DIR_SMB(FacesUtil.propertiesLoader().getProperty("diretorioAnexoSmb"));
 		}
 		return usuario;
 	}

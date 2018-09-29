@@ -97,30 +97,6 @@ public class Usuario implements Serializable {
 	@Transient
 	private String tooltipStatus;
 
-	@Transient
-	private Boolean redefinirSenha;
-
-	@Transient
-	private Date dataAtualizacaoManifestacao;
-
-	@Transient
-	private Boolean perfilAdm;
-
-	@Transient
-	private Boolean perfilOuvidor;
-
-	@Transient
-	private Boolean perfilInterlocutor;
-
-	@Transient
-	private Boolean perfilOperador;
-
-	@Transient
-	private String SAVE_DIR_SMB;
-
-	@Transient
-	private Boolean tipoTelefone;
-
 	public Usuario() {
 
 	}
@@ -240,96 +216,12 @@ public class Usuario implements Serializable {
 		this.tooltipStatus = tooltipStatus;
 	}
 
-	public boolean isAtivoOuNovaSenha() {
-		return getStatusUsuarioEnum().getId() == StatusUsuarioEnum.ATIVO.getId()
-				|| getStatusUsuarioEnum().getId() == StatusUsuarioEnum.NOVA_SENHA.getId();
-	}
-
-	public Boolean getRedefinirSenha() {
-		if (redefinirSenha == null) {
-			redefinirSenha = Boolean.FALSE;
-		}
-		return redefinirSenha;
-	}
-
-	public void setRedefinirSenha(Boolean redefinirSenha) {
-		this.redefinirSenha = redefinirSenha;
-	}
-
-	public Date getDataAtualizacaoManifestacao() {
-		return dataAtualizacaoManifestacao;
-	}
-
-	public void setDataAtualizacaoManifestacao(Date dataAtualizacaoManifestacao) {
-		this.dataAtualizacaoManifestacao = dataAtualizacaoManifestacao;
-	}
-
-	public Boolean getPerfilAdm() {
-		if (perfilAdm == null) {
-			perfilAdm = new Boolean(Boolean.FALSE);
-		}
-		return perfilAdm;
-	}
-
-	public void setPerfilAdm(Boolean perfilAdm) {
-		this.perfilAdm = perfilAdm;
-	}
-
 	private String getEntidade() {
 		return "Usuário";
 	}
 
 	private String getDescricao() {
 		return nome + " " + email;
-	}
-
-	public Boolean getPerfilOuvidor() {
-		if (perfilOuvidor == null) {
-			perfilOuvidor = new Boolean(Boolean.FALSE);
-		}
-		return perfilOuvidor;
-	}
-
-	public void setPerfilOuvidor(Boolean perfilOuvidor) {
-		this.perfilOuvidor = perfilOuvidor;
-	}
-
-	public Boolean getPerfilInterlocutor() {
-		if (perfilInterlocutor == null) {
-			perfilInterlocutor = new Boolean(Boolean.FALSE);
-		}
-		return perfilInterlocutor;
-	}
-
-	public void setPerfilInterlocutor(Boolean perfilInterlocutor) {
-		this.perfilInterlocutor = perfilInterlocutor;
-	}
-
-	public Boolean getPerfilOperador() {
-		if (perfilOperador == null) {
-			perfilOperador = new Boolean(Boolean.FALSE);
-		}
-		return perfilOperador;
-	}
-
-	public void setPerfilOperador(Boolean perfilOperador) {
-		this.perfilOperador = perfilOperador;
-	}
-
-	public String getSAVE_DIR_SMB() {
-		return SAVE_DIR_SMB;
-	}
-
-	public void setSAVE_DIR_SMB(String sAVE_DIR_SMB) {
-		SAVE_DIR_SMB = sAVE_DIR_SMB;
-	}
-
-	public Boolean getTipoTelefone() {
-		return tipoTelefone;
-	}
-
-	public void setTipoTelefone(Boolean tipoTelefone) {
-		this.tipoTelefone = tipoTelefone;
 	}
 
 	@Override

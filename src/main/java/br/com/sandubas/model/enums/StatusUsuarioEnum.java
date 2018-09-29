@@ -6,8 +6,7 @@ package br.com.sandubas.model.enums;
 public enum StatusUsuarioEnum {
 	
     INATIVO(0, "Inativo"), 
-    ATIVO(1, "Ativo"),
-    NOVA_SENHA(2,"Cadastrar nova senha");
+    ATIVO(1, "Ativo");
     
     private Integer id;
     private String descricao;
