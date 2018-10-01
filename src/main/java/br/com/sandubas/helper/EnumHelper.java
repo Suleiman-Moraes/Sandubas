@@ -1,6 +1,5 @@
 package br.com.sandubas.helper;
 
-import br.com.sandubas.model.Perfil;
 import br.com.sandubas.model.Usuario;
 import br.com.sandubas.model.enums.FuncaoUsuarioEnum;
 import br.com.sandubas.model.enums.FuncionalidadeEnum;
@@ -10,6 +9,7 @@ import br.com.sandubas.model.enums.StatusUsuarioEnum;
 
 /**
  * @author Samuel Correia Guimarães
+ * @author Suleiman Alves de Moraes
  */
 public class EnumHelper {
 
@@ -59,12 +59,17 @@ public class EnumHelper {
 		case 2:
 			return FuncionalidadeEnum.CONFIGURAR_PREFERENCIAS_DE_SISTEMA;
 		case 3:
-			return FuncionalidadeEnum.CONSULTAR_PROJETOS_DO_SALIC;
+			return FuncionalidadeEnum.MANTER_CRUD_SIMPLES;
+		}
 		throw new Exception("Funcionalidade não listada.");
 	}
 
 	public static FuncaoUsuarioEnum getFuncaoUsuarioEnum(String id, Usuario usuario) {
-		// TODO Auto-generated method stub
+		boolean adm = Boolean.FALSE;
+		boolean ouvidor = Boolean.FALSE;
+		boolean interlocutor = Boolean.FALSE;
+		boolean operador = Boolean.FALSE;
+		boolean operador = Boolean.FALSE;
 		return null;
 	}
 }

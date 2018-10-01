@@ -96,82 +96,111 @@ public class Usuario implements Serializable {
 
 	@Transient
 	private String tooltipStatus;
+	
+	@Transient
+	private Boolean perfilCliente;
+	
+	@Transient
+	private Boolean perfilFuncionario;
+	
+	@Transient
+	private Boolean perfilAdministrador;
+	
+	@Transient
+	private Boolean perfilOperador;
+	
+	@Transient
+	private Boolean perfilROOT;
 
-	public Usuario() {
-
+	public Usuario() {}
+	/**
+	 * 
+	 * @param id
+	 * @param email
+	 * @param login
+	 * @param senha
+	 * @param novaSenha
+	 * @param confirmacaoSenha
+	 * @param nome
+	 * @param statusUsuarioEnum
+	 * @param funcaoUsuarioEnum
+	 * @param dataAtivacao
+	 * @param dataDesativacao
+	 * @param perfis
+	 */
+	public Usuario(Long id, Email email, String login, String senha, String novaSenha, String confirmacaoSenha,
+			String nome, StatusUsuarioEnum statusUsuarioEnum, FuncaoUsuarioEnum funcaoUsuarioEnum, Date dataAtivacao,
+			Date dataDesativacao, List<Perfil> perfis) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.login = login;
+		this.senha = senha;
+		this.novaSenha = novaSenha;
+		this.confirmacaoSenha = confirmacaoSenha;
+		this.nome = nome;
+		this.statusUsuarioEnum = statusUsuarioEnum;
+		this.funcaoUsuarioEnum = funcaoUsuarioEnum;
+		this.dataAtivacao = dataAtivacao;
+		this.dataDesativacao = dataDesativacao;
+		this.perfis = perfis;
 	}
+
 
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public Email getEmail() {
 		if (email == null) {
 			email = new Email();
 		}
 		return email;
 	}
-
 	public void setEmail(Email email) {
 		this.email = email;
 	}
-
 	public String getLogin() {
 		return login;
 	}
-
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 	public String getNovaSenha() {
 		return novaSenha;
 	}
-
 	public void setNovaSenha(String novaSenha) {
 		this.novaSenha = novaSenha;
 	}
-
 	public String getConfirmacaoSenha() {
 		return confirmacaoSenha;
 	}
-
 	public void setConfirmacaoSenha(String confirmacaoSenha) {
 		this.confirmacaoSenha = confirmacaoSenha;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public StatusUsuarioEnum getStatusUsuarioEnum() {
 		return statusUsuarioEnum;
 	}
-
 	public void setStatusUsuarioEnum(StatusUsuarioEnum statusUsuarioEnum) {
 		this.statusUsuarioEnum = statusUsuarioEnum;
 	}
-
 	public FuncaoUsuarioEnum getFuncaoUsuarioEnum() {
 		return funcaoUsuarioEnum;
 	}
-
 	public void setFuncaoUsuarioEnum(FuncaoUsuarioEnum funcaoUsuarioEnum) {
 		this.funcaoUsuarioEnum = funcaoUsuarioEnum;
 	}
@@ -184,44 +213,80 @@ public class Usuario implements Serializable {
 	public Date getDataAtivacao() {
 		return dataAtivacao;
 	}
-
 	public void setDataAtivacao(Date dataAtivacao) {
 		this.dataAtivacao = dataAtivacao;
 	}
-
 	public Date getDataDesativacao() {
 		return dataDesativacao;
 	}
-
 	public void setDataDesativacao(Date dataDesativacao) {
 		this.dataDesativacao = dataDesativacao;
 	}
-
 	public List<Perfil> getPerfis() {
 		if (perfis == null) {
 			perfis = new ArrayList<Perfil>(0);
 		}
 		return perfis;
 	}
-
 	public void setPerfis(List<Perfil> perfis) {
 		this.perfis = perfis;
 	}
-
 	public String getTooltipStatus() {
 		return tooltipStatus;
 	}
-
 	public void setTooltipStatus(String tooltipStatus) {
 		this.tooltipStatus = tooltipStatus;
 	}
-
 	private String getEntidade() {
 		return "Usuário";
 	}
-
 	private String getDescricao() {
 		return nome + " " + email;
+	}
+	public Boolean getPerfilCliente() {
+		if (perfilCliente == null) {
+			perfilCliente = new Boolean(Boolean.FALSE);
+		}
+		return perfilCliente;
+	}
+	public Boolean getPerfilFuncionario() {
+		if (perfilFuncionario == null) {
+			perfilFuncionario = new Boolean(Boolean.FALSE);
+		}
+		return perfilFuncionario;
+	}
+	public Boolean getPerfilAdministrador() {
+		if (perfilAdministrador == null) {
+			perfilAdministrador = new Boolean(Boolean.FALSE);
+		}
+		return perfilAdministrador;
+	}
+	public Boolean getPerfilOperador() {
+		if (perfilOperador == null) {
+			perfilOperador = new Boolean(Boolean.FALSE);
+		}
+		return perfilOperador;
+	}
+	public Boolean getPerfilROOT() {
+		if (perfilROOT == null) {
+			perfilROOT = new Boolean(Boolean.FALSE);
+		}
+		return perfilROOT;
+	}
+	public void setPerfilCliente(Boolean perfilCliente) {
+		this.perfilCliente = perfilCliente;
+	}
+	public void setPerfilFuncionário(Boolean perfilFuncionário) {
+		this.perfilFuncionario = perfilFuncionário;
+	}
+	public void setPerfilAdministrador(Boolean perfilAdministrador) {
+		this.perfilAdministrador = perfilAdministrador;
+	}
+	public void setPerfilOperador(Boolean perfilOperador) {
+		this.perfilOperador = perfilOperador;
+	}
+	public void setPerfilROOT(Boolean perfilROOT) {
+		this.perfilROOT = perfilROOT;
 	}
 
 	@Override
@@ -248,5 +313,4 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
-
 }

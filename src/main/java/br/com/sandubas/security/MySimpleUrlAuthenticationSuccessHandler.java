@@ -17,7 +17,6 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import br.com.sandubas.model.enums.FuncaoUsuarioEnum;
-import br.com.sandubas.model.enums.StatusUsuarioEnum;
 
 public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -51,17 +50,16 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 		UsuarioSistema usuario = (UsuarioSistema) userDetails;
 		String id = request.getParameter("id");
 		if (id != null) {
-			if (usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.MANIFESTANTE)) {
+			if (usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.USUARIO_EXTERNO)) {
 				return "/pages/manifestacao/manifestante/acompanharManifestacao.xhtml?manifestacaoId=" + id;
 			} else {
 				return "/pages/manifestacao/administrar.xhtml?id=" + id;
 			}
 
 		} else {
-			if (usuario.getUsuario().getStatusUsuarioEnum().equals(StatusUsuarioEnum.NOVA_SENHA)) {
-				return "/pages/manterusuario/minhasInformacoes.xhtml";
-			} else if (usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.MANIFESTANTE)) {
-				return "/pages/principal.xhtml";
+			if (usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.USUARIO_EXTERNO)) {
+				//TODO usuario externo 
+				return "";
 			} else {
 				return "/pages/principal.xhtml";
 			}

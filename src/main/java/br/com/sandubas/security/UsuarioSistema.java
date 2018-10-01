@@ -17,48 +17,58 @@ public class UsuarioSistema extends User {
 
 	private List<Perfil> perfis;
 
-	private Boolean perfilAdm;
+	private Boolean perfilCliente;
 	
-	private Boolean perfilOuvidor;
+	private Boolean perfilFuncionario;
 	
-	private Boolean perfilInterlocutor;
+	private Boolean perfilAdministrador;
 	
 	private Boolean perfilOperador;
-
+	
+	private Boolean perfilROOT;
+	
+	/**
+	 * 
+	 * @param usuario
+	 * @param perfis
+	 * @param authorities
+	 * @param perfilCliente
+	 * @param perfilFuncionario
+	 * @param perfilAdministrador
+	 * @param perfilOperador
+	 * @param perfilROOT
+	 */
 	public UsuarioSistema(Usuario usuario, List<Perfil> perfis, Collection<? extends GrantedAuthority> authorities,
-			Boolean perfilAdm, Boolean perfilOuvidor, Boolean perfilInterlocutor, Boolean perfilOperador) {
+			Boolean perfilCliente, Boolean perfilFuncionario, Boolean perfilAdministrador, Boolean perfilOperador, Boolean perfilROOT) {
 		super(usuario.getLogin(), usuario.getSenha(), authorities);
 		this.usuario = usuario;
 		this.perfis = perfis;
-		this.perfilAdm = perfilAdm;
-		this.perfilOuvidor = perfilOuvidor;
-		this.perfilInterlocutor = perfilInterlocutor;
+		this.perfilCliente = perfilCliente;
+		this.perfilFuncionario = perfilFuncionario;
+		this.perfilAdministrador = perfilAdministrador;
 		this.perfilOperador = perfilOperador;
+		this.perfilROOT = perfilROOT;
 	}
 
 	public Usuario getUsuario() {
 		return usuario;
 	}
-
 	public List<Perfil> getPerfis() {
 		return perfis;
 	}
-
-	public Boolean getPerfilAdm() {
-		return perfilAdm;
-	}
-
-	public Boolean getPerfilOuvidor() {
-		return perfilOuvidor;
-	}
-
-	public Boolean getPerfilInterlocutor() {
-		return perfilInterlocutor;
-	}
-
 	public Boolean getPerfilOperador() {
 		return perfilOperador;
 	}
-
-	
+	public Boolean getPerfilCliente() {
+		return perfilCliente;
+	}
+	public Boolean getPerfilFuncionario() {
+		return perfilFuncionario;
+	}
+	public Boolean getPerfilAdministrador() {
+		return perfilAdministrador;
+	}
+	public Boolean getPerfilROOT() {
+		return perfilROOT;
+	}
 }

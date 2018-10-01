@@ -25,21 +25,20 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
 		if (!request.getRequestURI().equals("/sandubas/")) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			if (auth.isAuthenticated() && request.getRequestURI().equals("/sandubas/login.jsp")
-					&& usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.MANIFESTANTE)) {
-				response.sendRedirect(
-						request.getContextPath() + "/pages/principal.xhtml");
-
-			} else if (auth.isAuthenticated() && request.getRequestURI().equals("/sandubas/login.jsp")
-					&& !usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.MANIFESTANTE)) {
-				response.sendRedirect(request.getContextPath() + "/pages/principal.xhtml");
-			} else {
+			if (auth.isAuthenticated() && request.getRequestURI().equals("/sandubas/login.jsp")) {
+				if(usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.USUARIO_EXTERNO)) {
+					//TODO tem q fazer alguma coisa.
+				}
+				else {
+					response.sendRedirect(request.getContextPath() + "/pages/principal.xhtml");
+				}
+			}
+			else {
 				response.sendRedirect(request.getContextPath() + "/pages/erro/404.xhtml");
 			}
 		} else {
-			if (usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.MANIFESTANTE)) {
-				response.sendRedirect(
-						request.getContextPath() + "/pages/principal.xhtml");
+			if (usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.USUARIO_EXTERNO)) {
+				//TODO tem q fazer alguma coisa.
 			} else {
 				response.sendRedirect(request.getContextPath() + "/pages/principal.xhtml");
 			}
