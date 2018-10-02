@@ -69,7 +69,10 @@ public class EnumHelper {
 		boolean ouvidor = Boolean.FALSE;
 		boolean interlocutor = Boolean.FALSE;
 		boolean operador = Boolean.FALSE;
-		boolean operador = Boolean.FALSE;
+		boolean root = Boolean.FALSE;
+		
+		
+		
 		return null;
 	}
 }
