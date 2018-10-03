@@ -49,8 +49,13 @@ public class Seguranca {
 	}
 
 	public boolean temFuncionalidade(String funcionalidade) {
-		Collection<? extends GrantedAuthority> authorities = getUsuarioLogado().getAuthorities();
-		return authorities.contains(new SimpleGrantedAuthority(funcionalidade));
+		try {
+			Collection<? extends GrantedAuthority> authorities = getUsuarioLogado().getAuthorities();
+			return authorities.contains(new SimpleGrantedAuthority(funcionalidade));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Boolean.FALSE;
+		}
 	}
 
 }

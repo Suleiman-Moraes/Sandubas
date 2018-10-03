@@ -65,14 +65,28 @@ public class EnumHelper {
 	}
 
 	public static FuncaoUsuarioEnum getFuncaoUsuarioEnum(String id, Usuario usuario) {
-		boolean adm = Boolean.FALSE;
-		boolean ouvidor = Boolean.FALSE;
-		boolean interlocutor = Boolean.FALSE;
-		boolean operador = Boolean.FALSE;
-		boolean root = Boolean.FALSE;
-		
-		
-		
-		return null;
+		usuario.setPerfilROOT(Boolean.FALSE);
+		usuario.setPerfilOperador(Boolean.FALSE);
+		usuario.setPerfilAdministrador(Boolean.FALSE);
+		usuario.setPerfilCliente(Boolean.FALSE);
+		usuario.setPerfilFuncionario(Boolean.FALSE);
+		switch (id) {
+		case "1":
+			usuario.setPerfilROOT(Boolean.TRUE);
+			return FuncaoUsuarioEnum.ROOT;
+		case "2":
+			usuario.setPerfilAdministrador(Boolean.TRUE);
+			return FuncaoUsuarioEnum.ADMINISTRADOR;
+		case "3":
+			usuario.setPerfilOperador(Boolean.TRUE);
+			return FuncaoUsuarioEnum.OPERADOR_CAIXA;
+		case "4":
+			usuario.setPerfilFuncionario(Boolean.TRUE);
+			return FuncaoUsuarioEnum.FUNCIONARIO;
+		case "5":
+			return FuncaoUsuarioEnum.USUARIO_EXTERNO;
+		default:
+			return null;
+		}
 	}
 }

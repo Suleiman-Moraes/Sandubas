@@ -31,7 +31,7 @@ public class UsuarioConverter implements Converter {
 			if (StringUtils.isNumeric(value) && value != null) {
 				usuario = this.usuarioService.getUsuarioDAO().buscarUsuarioPassandoId(Long.valueOf(value));
 				usuario.setConfirmacaoSenha(usuario.getSenha());
-				usuario.setRedefinirSenha(Boolean.TRUE);
+//				usuario.setRedefinirSenha(Boolean.TRUE);
 				if (StatusUsuarioEnum.INATIVO.equals(usuario.getStatusUsuarioEnum())) {
 					usuario.setTooltipStatus(FacesUtil.propertiesLoader().getProperty("usuarioInativar"));
 				} else {

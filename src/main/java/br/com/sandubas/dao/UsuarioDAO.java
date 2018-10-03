@@ -23,7 +23,6 @@ public class UsuarioDAO extends GenericDAO<Usuario, Long> implements Serializabl
 
 	@Override
 	public List<Usuario> getWithPagination(int first, int pageSize, Map<String, Object> filters) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -108,43 +107,11 @@ public class UsuarioDAO extends GenericDAO<Usuario, Long> implements Serializabl
 		return null;
 	}
 
-	public List<Usuario> buscarUsuariosOuvidores() {
-		try {
-			return getEntityManager().createQuery(
-					"select u from Usuario u where u.funcaoUsuarioEnum = :funcaoUsuarioEnum order by u.nome ASC",
-					Usuario.class).setParameter("funcaoUsuarioEnum", FuncaoUsuarioEnum.OUVIDOR).getResultList();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public List<Usuario> buscarUsuariosIntelocutores() {
+	public List<Usuario> buscarUsuariosPassandoFuncao(FuncaoUsuarioEnum funcaoUsuarioEnum) {
 		try {
 			return getEntityManager().createQuery(
 					"SELECT u FROM Usuario u WHERE u.funcaoUsuarioEnum = :funcaoUsuarioEnum ORDER BY u.nome ASC",
-					Usuario.class).setParameter("funcaoUsuarioEnum", FuncaoUsuarioEnum.INTERLOCUTOR).getResultList();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public List<Usuario> buscarUsuariosExternoPassandoEmail(String email) {
-		try {
-			List<Usuario> lista = getEntityManager().createQuery(
-					"SELECT u FROM Usuario u WHERE u.funcaoUsuarioEnum = :funcaoUsuarioEnum AND email.email = :email",
-					Usuario.class).setParameter("funcaoUsuarioEnum", FuncaoUsuarioEnum.MANIFESTANTE)
-					.setParameter("email", email).getResultList();
-			return lista;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public List<Usuario> buscarOperadoresIntelocutores() {
-		try {
-			return getEntityManager().createQuery(
-					"SELECT u FROM Usuario u WHERE u.funcaoUsuarioEnum = 'OPERADOR' OR funcaoUsuarioEnum = 'INTERLOCUTOR' ORDER BY u.nome",
-					Usuario.class).getResultList();
+					Usuario.class).setParameter("funcaoUsuarioEnum", funcaoUsuarioEnum).getResultList();
 		} catch (Exception e) {
 			return null;
 		}

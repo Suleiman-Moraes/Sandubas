@@ -31,7 +31,6 @@ public class PerfilService implements Serializable {
 	public void salvarPerfil(Perfil perfil) throws NegocioException {
 		try {
 			if (!this.perfilExiste(perfil)) {
-//				perfil.setTipoPerfilEnum(TipoPerfilEnum.INTERNO);
 				perfilDAO.update(perfil);
 			} else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("perfilExistente"), Boolean.FALSE);
@@ -138,13 +137,16 @@ public class PerfilService implements Serializable {
 		StringBuilder select = new StringBuilder("SELECT p FROM Perfil p WHERE p.id IN ");
 
 		switch (funcaoUsuarioEnum) {
-		case OUVIDOR:
+		case ROOT:
 			select.append("(1, 2)");
 			break;
-		case INTERLOCUTOR:
+		case ADMINISTRADOR:
+			select.append("(2)");
+			break;
+		case OPERADOR_CAIXA:
 			select.append("(3, 4)");
 			break;
-		case OPERADOR:
+		case FUNCIONARIO:
 			select.append("(4)");
 			break;
 		default:

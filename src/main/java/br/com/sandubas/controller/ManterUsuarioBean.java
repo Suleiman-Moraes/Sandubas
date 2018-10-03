@@ -212,7 +212,7 @@ public class ManterUsuarioBean implements Serializable {
 	}
 
 	public void redefinirSenha() {
-		getUsuario().setRedefinirSenha(Boolean.FALSE);
+//		getUsuario().setRedefinirSenha(Boolean.FALSE);
 		getUsuario().setSenha("");
 		getUsuario().setConfirmacaoSenha("");
 	}
@@ -244,11 +244,11 @@ public class ManterUsuarioBean implements Serializable {
 	}
 
 	public void redefinirSenhaUsuario() {
-		try {
-			this.usuarioService.redefinirSenhaUsuario(usuario);
-		} catch (NegocioException e) {
-			FacesUtil.addDynamicMessage(e.getMessage(), e.isTypeException());
-		}
+//		try {
+//			this.usuarioService.redefinirSenhaUsuario(usuario);
+//		} catch (NegocioException e) {
+//			FacesUtil.addDynamicMessage(e.getMessage(), e.isTypeException());
+//		}
 	}
 
 	public void mostrarMensagemSucessoSenhaRedefinirManifestante() {
@@ -425,5 +425,4 @@ public class ManterUsuarioBean implements Serializable {
 	public void setLimitOffset(String limitOffset) {
 		this.limitOffset = limitOffset;
 	}
-
 }

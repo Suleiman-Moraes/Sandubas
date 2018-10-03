@@ -51,19 +51,19 @@
 		<!-- Manifestacao - Usuario interno logado -->
 
 		<intercept-url pattern="/pages/manterperfil/administrar.xhtml"
-			access="hasRole('MANTER_PERFIL')" />
+			access="hasRole('ATUALIZAR_MINHAS_INFORMACOES')" />
 
 		<intercept-url pattern="/pages/manterperfil/modal/cadastroPerfil.xhtml"
-			access="hasRole('MANTER_PERFIL')" />
+			access="hasRole('ATUALIZAR_MINHAS_INFORMACOES')" />
 
 		<intercept-url pattern="/pages/manterusuario/minhasInformacoes.xhtml"
 			access="hasRole('ATUALIZAR_MINHAS_INFORMACOES')" />
 
 		<intercept-url pattern="/pages/manterusuario/administrar.xhtml"
-			access="hasRole('MANTER_USUARIOS')" />
+			access="hasRole('ATUALIZAR_MINHAS_INFORMACOES')" />
 
 		<intercept-url pattern="/pages/manterusuario/modal/cadastroUsuario.xhtml"
-			access="hasRole('MANTER_USUARIOS')" />
+			access="hasRole('ATUALIZAR_MINHAS_INFORMACOES')" />
 
 		<intercept-url pattern="/**" access="denyAll" />
 

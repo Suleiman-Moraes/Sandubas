@@ -276,8 +276,8 @@ public class Usuario implements Serializable {
 	public void setPerfilCliente(Boolean perfilCliente) {
 		this.perfilCliente = perfilCliente;
 	}
-	public void setPerfilFuncionário(Boolean perfilFuncionário) {
-		this.perfilFuncionario = perfilFuncionário;
+	public void setPerfilFuncionario(Boolean perfilFuncionario) {
+		this.perfilFuncionario = perfilFuncionario;
 	}
 	public void setPerfilAdministrador(Boolean perfilAdministrador) {
 		this.perfilAdministrador = perfilAdministrador;

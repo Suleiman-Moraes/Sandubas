@@ -23,7 +23,6 @@ import br.com.sandubas.model.Usuario;
 import br.com.sandubas.model.enums.FuncaoUsuarioEnum;
 import br.com.sandubas.model.enums.StatusUsuarioEnum;
 import br.com.sandubas.security.Seguranca;
-import br.com.sandubas.util.GeradorSenha;
 import br.com.sandubas.util.StringUtil;
 import br.com.sandubas.util.jsf.FacesUtil;
 
@@ -71,14 +70,14 @@ public class UsuarioService implements Serializable {
 
 	public void atualizarDadosUsuarioMinhasInformacoes(Usuario usuario) throws NegocioException {
 		try {
-			boolean manifestante = this.seguranca.getUsuario().getFuncaoUsuarioEnum()
-					.equals(FuncaoUsuarioEnum.MANIFESTANTE);
+			boolean usuarioExterno = this.seguranca.getUsuario().getFuncaoUsuarioEnum()
+					.equals(FuncaoUsuarioEnum.USUARIO_EXTERNO);
 			this.encoder = new Md5PasswordEncoder();
 			String hashedPass = this.encoder.encodePassword(usuario.getSenha(), null);
 			if (hashedPass.equals(this.seguranca.getUsuario().getSenha())) {
 				this.setMd5PasswordEncoder(usuario);
 				usuario.setStatusUsuarioEnum(StatusUsuarioEnum.ATIVO);
-				if (manifestante) {
+				if (usuarioExterno) {
 					this.salvarContatosUsuario(usuario);
 				}
 				this.usuarioDAO.update(usuario);
@@ -166,14 +165,8 @@ public class UsuarioService implements Serializable {
 			case "nome":
 			case "email.email":
 			case "login":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(usuario." + campo + ")", valor.toUpperCase());
-				break;
 			case "funcaoUsuarioEnum":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(usuario." + campo + ")", valor.toUpperCase());
-				break;
 			case "statusUsuarioEnum":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(usuario." + campo + ")", valor.toUpperCase());
-				break;
 			case "tipoUsuarioEnum":
 				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(usuario." + campo + ")", valor.toUpperCase());
 				break;
@@ -195,7 +188,7 @@ public class UsuarioService implements Serializable {
 				} else {
 					edicao = true;
 				}
-				if (usuario.getId() == null || !usuario.getRedefinirSenha()) {
+				if (usuario.getId() == null) {
 					this.setMd5PasswordEncoder(usuario);
 				}
 				if (!StringUtil.valalidarEmail(usuario.getEmail().getEmail())) {
@@ -204,32 +197,19 @@ public class UsuarioService implements Serializable {
 				}
 				this.salvarContatosUsuario(usuario);
 				usuarioDAO.update(usuario);
-//				EmailNotificacao emailNotificacao = emailNotificacaoDAO
-//						.buscarEmailNotificacaoPorTipoEmailNotificacaoAtivoPassandoCodigoEmailNotificacao(27l);
-//				if (!edicao) {
-//					enviadorEmailService.enviarEmailRecuperarSenha(usuario, usuario.getConfirmacaoSenha(),
-//							emailNotificacao);
-//				}
+				// EmailNotificacao emailNotificacao = emailNotificacaoDAO
+				// .buscarEmailNotificacaoPorTipoEmailNotificacaoAtivoPassandoCodigoEmailNotificacao(27l);
+				// if (!edicao) {
+				// enviadorEmailService.enviarEmailRecuperarSenha(usuario,
+				// usuario.getConfirmacaoSenha(),
+				// emailNotificacao);
+				// }
 			} else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("usuarioExistente"), Boolean.FALSE);
 			}
 		} catch (NegocioException e) {
 			throw new NegocioException(e.getMessage(), e.isTypeException());
 		} catch (Exception e) {
-			throw new NegocioException(e.getMessage(), Boolean.FALSE);
-		}
-	}
-
-	public void redefinirSenhaUsuario(Usuario usuario) throws NegocioException {
-		try {
-			usuario.setStatusUsuarioEnum(StatusUsuarioEnum.NOVA_SENHA);
-			usuario.setConfirmacaoSenha(GeradorSenha.getSenha());
-//			EmailNotificacao emailNotificacao = emailNotificacaoDAO
-//					.buscarEmailNotificacaoPorTipoEmailNotificacaoAtivoPassandoCodigoEmailNotificacao(4l);
-//			enviadorEmailService.enviarEmailRecuperarSenha(usuario, usuario.getConfirmacaoSenha(), emailNotificacao);
-			this.setMd5PasswordEncoder(usuario);
-			usuarioDAO.update(usuario);
-		} catch (NegocioException e) {
 			throw new NegocioException(e.getMessage(), Boolean.FALSE);
 		}
 	}
@@ -245,14 +225,14 @@ public class UsuarioService implements Serializable {
 
 	public void salvarUsuarioExterno(Usuario usuario) throws NegocioException {
 		try {
-			if (!usuarioDAO.buscarUsuariosExternoPassandoEmail(usuario.getEmail().getEmail()).isEmpty()) {
-				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("usuarioEmailIndisponivel"),
-						Boolean.FALSE);
-			}
+//			if (!usuarioDAO.buscarUsuariosExternoPassandoEmail(usuario.getEmail().getEmail()).isEmpty()) {
+//				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("usuarioEmailIndisponivel"),
+//						Boolean.FALSE);
+//			}
 			if (!this.usuarioExiste(usuario)) {
 				usuario.setDataAtivacao(new Date());
 				usuario.setPerfis(null);
-				usuario.setFuncaoUsuarioEnum(FuncaoUsuarioEnum.MANIFESTANTE);
+				usuario.setFuncaoUsuarioEnum(FuncaoUsuarioEnum.USUARIO_EXTERNO);
 				usuario.setStatusUsuarioEnum(StatusUsuarioEnum.ATIVO);
 				this.setMd5PasswordEncoder(usuario);
 				this.salvarContatosUsuario(usuario);
@@ -261,10 +241,11 @@ public class UsuarioService implements Serializable {
 							Boolean.FALSE);
 				}
 				usuarioDAO.update(usuario);
-//				EmailNotificacao emailNotificacao = emailNotificacaoDAO
-//						.buscarEmailNotificacaoPorTipoEmailNotificacaoAtivoPassandoCodigoEmailNotificacao(26l);
-//				enviadorEmailService.enviarEmailRecuperarSenha(usuario, usuario.getConfirmacaoSenha(),
-//						emailNotificacao);
+				// EmailNotificacao emailNotificacao = emailNotificacaoDAO
+				// .buscarEmailNotificacaoPorTipoEmailNotificacaoAtivoPassandoCodigoEmailNotificacao(26l);
+				// enviadorEmailService.enviarEmailRecuperarSenha(usuario,
+				// usuario.getConfirmacaoSenha(),
+				// emailNotificacao);
 			} else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("usuarioExistente"), Boolean.FALSE);
 			}
@@ -342,19 +323,22 @@ public class UsuarioService implements Serializable {
 		lista = usuarioDAO.getList(Usuario.class);
 		return lista;
 	}
-	
+
 	public List<Usuario> retornarTodosUsuariosOrdenados() {
 		List<Usuario> lista = new ArrayList<>();
 		lista = usuarioDAO.retornaTodosUsuariosOrdenados();
 		return lista;
 	}
 
-//	public void novaSenhaCheckInformacao(Manifestacao manifestacao, String email) throws NegocioException {
-//		if (manifestacao == null)
-//			throw new NegocioException(FacesUtil.propertiesLoader().getProperty("manifestacaoNenhuma"));
-//		if (!manifestacao.getEmailPrincipal().equals(email))
-//			throw new NegocioException(FacesUtil.propertiesLoader().getProperty("minhasInformacoesEMailCorreto"));
-//	}
+	// public void novaSenhaCheckInformacao(Manifestacao manifestacao, String email)
+	// throws NegocioException {
+	// if (manifestacao == null)
+	// throw new
+	// NegocioException(FacesUtil.propertiesLoader().getProperty("manifestacaoNenhuma"));
+	// if (!manifestacao.getEmailPrincipal().equals(email))
+	// throw new
+	// NegocioException(FacesUtil.propertiesLoader().getProperty("minhasInformacoesEMailCorreto"));
+	// }
 
 	public void novaSenhaCheckInformacao(Usuario usuario, String nome, String email, String login)
 			throws NegocioException {
@@ -377,8 +361,8 @@ public class UsuarioService implements Serializable {
 		}
 	}
 
-	public Paginacao registroLazyDataModel(String filtroSelecionado, int first, int pageSize,
-			String sortField, SortOrder sortOrder, Map<String, Object> filters, String limitOffset) {
+	public Paginacao registroLazyDataModel(String filtroSelecionado, int first, int pageSize, String sortField,
+			SortOrder sortOrder, Map<String, Object> filters, String limitOffset) {
 		Paginacao paginacao = new Paginacao();
 		String filtroValor = filters.isEmpty() ? "" : filters.get("globalFilter").toString();
 		boolean update = true;
@@ -393,12 +377,14 @@ public class UsuarioService implements Serializable {
 				int page = (this.paginateSessionScoped.getFirst() / this.paginateSessionScoped.getPageSize());
 				int firstSessionScoped = this.paginateSessionScoped.getFirst();
 				int pageSizeSessionScoped = this.paginateSessionScoped.getPageSize();
-//				registros = paginarUsuarios(firstSessionScoped, pageSizeSessionScoped,
-//						this.paginateSessionScoped.getFiltroSelecionado(), this.paginateSessionScoped.getFiltroValor(),
-//						this.paginateSessionScoped.getUnidade());
-//				paginacao.setTotalDeRegistros(
-//						contarUsuariosCadastrados(this.paginateSessionScoped.getFiltroSelecionado(),
-//								this.paginateSessionScoped.getFiltroValor(), this.paginateSessionScoped.getUnidade()));
+				// registros = paginarUsuarios(firstSessionScoped, pageSizeSessionScoped,
+				// this.paginateSessionScoped.getFiltroSelecionado(),
+				// this.paginateSessionScoped.getFiltroValor(),
+				// this.paginateSessionScoped.getUnidade());
+				// paginacao.setTotalDeRegistros(
+				// contarUsuariosCadastrados(this.paginateSessionScoped.getFiltroSelecionado(),
+				// this.paginateSessionScoped.getFiltroValor(),
+				// this.paginateSessionScoped.getUnidade()));
 				if (!this.paginateSessionScoped.isUpdate()) {
 					paginacao.setTotalDeRegistrosReal(paginacao.getTotalDeRegistros());
 					paginacao.setTotalDeRegistros(pageSizeSessionScoped + 1);
@@ -424,17 +410,20 @@ public class UsuarioService implements Serializable {
 					filtroValor = this.paginateSessionScoped.getFiltroValor() != null
 							? this.paginateSessionScoped.getFiltroValor()
 							: filtroValor;
-//					unidade = this.paginateSessionScoped.getUnidade() != null ? this.paginateSessionScoped.getUnidade()
-//							: unidade;
+					// unidade = this.paginateSessionScoped.getUnidade() != null ?
+					// this.paginateSessionScoped.getUnidade()
+					// : unidade;
 				}
-//				registros = paginarUsuarios(first, pageSize, filtroSelecionado, filtroValor, unidade);
-//				paginacao.setTotalDeRegistros(contarUsuariosCadastrados(filtroSelecionado, filtroValor, unidade));
+				// registros = paginarUsuarios(first, pageSize, filtroSelecionado, filtroValor,
+				// unidade);
+				// paginacao.setTotalDeRegistros(contarUsuariosCadastrados(filtroSelecionado,
+				// filtroValor, unidade));
 				this.paginateSessionScoped.initLimitOffSet(first, pageSize);
 				this.paginateSessionScoped.setFirst(first);
 				this.paginateSessionScoped.setPageSize(pageSize);
 				this.paginateSessionScoped.setFiltroValor(filtroValor, filtroSelecionado);
 				this.paginateSessionScoped.setFiltroSelecionado(filtroSelecionado, filtroSelecionado);
-//				this.paginateSessionScoped.setUnidade(unidade, filtroSelecionado);
+				// this.paginateSessionScoped.setUnidade(unidade, filtroSelecionado);
 				this.paginateSessionScoped.setFiltroValor(filtroValor, filtroSelecionado);
 				if (paginacao.getTotalDeRegistros() < pageSize + 1) {
 					update = false;
@@ -479,24 +468,13 @@ public class UsuarioService implements Serializable {
 
 	public FuncaoUsuarioEnum[] getFuncoes() {
 		FuncaoUsuarioEnum[] funcoes;
-		int i = 0, contidadeDeFucao = 3;
+		int i = 0;
 
-		funcoes = new FuncaoUsuarioEnum[contidadeDeFucao];
+		funcoes = new FuncaoUsuarioEnum[2];
 
-		// if(this.usuario.getUnidade() != null &&
-		// (this.usuario.getUnidade().getId() == 1l)) {
-		// contidadeDeFucao++;
-		// funcoes = new FuncaoUsuarioEnum[contidadeDeFucao];
-		// funcoes[i] = FuncaoUsuarioEnum.OUVIDOR;
-		// i++;
-		//
-		// } else {
-		// funcoes = new FuncaoUsuarioEnum[contidadeDeFucao];
-		// }
 		for (FuncaoUsuarioEnum funcao : FuncaoUsuarioEnum.values()) {
-			if (!funcao.equals(FuncaoUsuarioEnum.ADMINISTRADOR) && !funcao.equals(FuncaoUsuarioEnum.MANIFESTANTE)
-			// && !funcao.equals(FuncaoUsuarioEnum.OUVIDOR)
-			) {
+			if (!funcao.equals(FuncaoUsuarioEnum.ADMINISTRADOR) && !funcao.equals(FuncaoUsuarioEnum.USUARIO_EXTERNO)
+					&& !funcao.equals(FuncaoUsuarioEnum.ROOT)) {
 				funcoes[i] = funcao;
 				i++;
 			}
@@ -507,5 +485,4 @@ public class UsuarioService implements Serializable {
 	public EnviadorEmailService getEnviadorEmailService() {
 		return enviadorEmailService;
 	}
-
 }

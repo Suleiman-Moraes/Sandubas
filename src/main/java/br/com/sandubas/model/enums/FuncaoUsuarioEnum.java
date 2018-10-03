@@ -5,11 +5,11 @@ package br.com.sandubas.model.enums;
  */
 public enum FuncaoUsuarioEnum {
 	
-    USUARIO_EXTERNO("1","Cliente"),
-    OPERADOR_CAIXA("2","Operador de Caixa"),
-    FUNCIONARIO("3","Funcionário"),
-    ADMINISTRADOR("4","Administrador"),
-	ROOT("5","root");
+	ROOT("1","root"),
+	ADMINISTRADOR("2","Administrador"),
+    OPERADOR_CAIXA("3","Operador de Caixa"),
+    FUNCIONARIO("4","Funcionário"),
+	USUARIO_EXTERNO("5","Cliente");
     
     private String id;
     private String descricao;
