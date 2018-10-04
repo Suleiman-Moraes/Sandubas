@@ -27,7 +27,7 @@
 	<http pattern="/login.jsp" security="none" />
 	<http pattern="/loginNovo.jsp" security="none" />
 	
-	<http pattern="/pages/principal.xhtml" security="none" />
+	<http pattern="/pages/mantertipoproduto/administrar.xhtml" security="none" />
 	<http pattern="/pages/mantertipoproduto/modal/cadastroTipoProduto.xhtml" security="none" />
 	<http pattern="/pages/manterclassificacaomercadoria/administrar.xhtml" security="none" />
 	<http pattern="/pages/manterclassificacaomercadoria/modal/cadastroClassificacaoMercadoria.xhtml" security="none" />
@@ -42,10 +42,10 @@
 		<access-denied-handler ref="customAccessDeniedHandler" />
 
 		<intercept-url pattern="/pages/erro/**"
-			access="hasAnyRole('GERENCIAR_MANIFESTACAO', 'GERENCIAR_MANIFESTACAO_MANIFESTANTE')" />
+			access="hasRole('MANTER_CRUD_SIMPLES')" />
 
 		<intercept-url pattern="/pages/manifestacao/manifestante/**"
-			access="hasRole('GERENCIAR_MANIFESTACAO_MANIFESTANTE')" />
+			access="hasRole('MANTER_CRUD_SIMPLES')" />
 
 		<!-- Manifestacao - Usuario interno logado -->
 		
@@ -66,7 +66,7 @@
 		<intercept-url pattern="/pages/manterusuario/modal/cadastroUsuario.xhtml"
 			access="hasRole('ATUALIZAR_MINHAS_INFORMACOES')" />
 
-		<intercept-url pattern="/pages/mantertipoproduto/administrar.xhtml"
+		<intercept-url pattern="/pages/principal.xhtml"
 			access="hasRole('MANTER_CRUD_SIMPLES')" />
 
 		<intercept-url pattern="/**" access="denyAll" />

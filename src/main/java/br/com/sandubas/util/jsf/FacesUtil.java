@@ -95,7 +95,7 @@ public class FacesUtil {
 	}
 
 	public static String getURLBase() {
-		return getServletRequest().getRequestURL().toString().split("ouvidoria")[0];
+		return getServletRequest().getRequestURL().toString().split("sandubas")[0];
 	}
 
 	public static void removeSessionMapValue(String key) {
