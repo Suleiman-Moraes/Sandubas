@@ -10,7 +10,7 @@
 
 	<beans:bean id="loginFailureHandler"
 		class="br.com.sandubas.security.LoginFailureHandler" />
-
+		
 	<beans:bean id="myAuthenticationSuccessHandler"
 		class="br.com.sandubas.security.MySimpleUrlAuthenticationSuccessHandler" />
 
@@ -28,7 +28,6 @@
 	<http pattern="/loginNovo.jsp" security="none" />
 	
 	<http pattern="/pages/principal.xhtml" security="none" />
-	<http pattern="/pages/mantertipoproduto/administrar.xhtml" security="none" />
 	<http pattern="/pages/mantertipoproduto/modal/cadastroTipoProduto.xhtml" security="none" />
 	<http pattern="/pages/manterclassificacaomercadoria/administrar.xhtml" security="none" />
 	<http pattern="/pages/manterclassificacaomercadoria/modal/cadastroClassificacaoMercadoria.xhtml" security="none" />
@@ -49,6 +48,8 @@
 			access="hasRole('GERENCIAR_MANIFESTACAO_MANIFESTANTE')" />
 
 		<!-- Manifestacao - Usuario interno logado -->
+		
+		<!-- USUARIO -->
 
 		<intercept-url pattern="/pages/manterperfil/administrar.xhtml"
 			access="hasRole('ATUALIZAR_MINHAS_INFORMACOES')" />
@@ -64,6 +65,9 @@
 
 		<intercept-url pattern="/pages/manterusuario/modal/cadastroUsuario.xhtml"
 			access="hasRole('ATUALIZAR_MINHAS_INFORMACOES')" />
+
+		<intercept-url pattern="/pages/mantertipoproduto/administrar.xhtml"
+			access="hasRole('MANTER_CRUD_SIMPLES')" />
 
 		<intercept-url pattern="/**" access="denyAll" />
 

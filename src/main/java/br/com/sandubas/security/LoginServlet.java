@@ -16,7 +16,7 @@ import br.com.sandubas.helper.ValidacaoHelper;
 @WebServlet(description = "Servlet responsável por efetuar o login do usuário", urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String LOGGED_INDEX_PAGE = "/pages/manifestacao/listarmanifestacoes.xhtml";
+	private static final String LOGGED_INDEX_PAGE = "/pages/principal.xhtml";
 	@SuppressWarnings("unused")
 	private static final String MANIFESTATION_DETAIL_PAGE = "/pages/manifestacao/administrar.xhtml?num=%s&id=%s";
 
