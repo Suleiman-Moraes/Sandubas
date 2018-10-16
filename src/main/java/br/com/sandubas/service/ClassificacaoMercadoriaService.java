@@ -28,17 +28,7 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 		valor = valor == null ? "" : valor;
 		String condicao = "1 = 1";
 		if (!campo.isEmpty() && !valor.isEmpty()) {
-			switch (campo) {
-			case "nome":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(classificacaomercadoria." + campo + ")", valor.toUpperCase());
-				break;
-			case "id":
-				condicao += String.format(" AND %s = %s", campo, valor);
-				break;
-			case "descricao":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(classificacaomercadoria." + campo + ")", valor.toUpperCase());
-				break;
-			}
+			condicao += devolverCondicaoParaPaginacao(campo, valor);
 		}
 		condicao += " ORDER BY classificacaomercadoria.id DESC";
 		
@@ -54,20 +44,27 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 		valor = valor == null ? "" : valor;
 		String condicao = "1 = 1";
 		if (!campo.isEmpty() && !valor.isEmpty()) {
-			switch (campo) {
-			case "nome":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(classificacaomercadoria." + campo + ")", valor.toUpperCase());
-				break;
-			case "id":
-				condicao += String.format(" AND %s = %s", campo, valor);
-				break;
-			case "descricao":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(classificacaomercadoria." + campo + ")", valor.toUpperCase());
-				break;
-			}
+			condicao += devolverCondicaoParaPaginacao(campo, valor);
 		}
 		total = persistencia.count(ClassificacaoMercadoria.class, condicao).intValue();
 		return total;
+	}
+	
+	@Override
+	public String devolverCondicaoParaPaginacao(String campo, String valor) {
+		String condicao = "";
+		switch (campo) {
+		case "nome":
+			condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(classificacaomercadoria." + campo + ")", valor.toUpperCase());
+			break;
+		case "id":
+			condicao += String.format(" AND %s = %s", campo, valor);
+			break;
+		case "descricao":
+			condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(classificacaomercadoria." + campo + ")", valor.toUpperCase());
+			break;
+		}
+		return condicao;
 	}
 	
 	@Override
