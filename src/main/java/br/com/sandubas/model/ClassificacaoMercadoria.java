@@ -13,7 +13,11 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.sandubas.model.interfaces.IEntidadeRelacional;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "classificacao_mercadoria")
 public class ClassificacaoMercadoria implements Serializable, IEntidadeRelacional{
@@ -54,26 +58,6 @@ public class ClassificacaoMercadoria implements Serializable, IEntidadeRelaciona
 	@Override
 	public String getNomeTabela() {
 		return "classificacao_mercadoria";
-	}
-	
-	//Getters And Setters
-	public Long getId() {
-		return id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 	
 	@Override

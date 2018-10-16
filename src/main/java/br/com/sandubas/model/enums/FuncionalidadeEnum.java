@@ -1,5 +1,6 @@
 package br.com.sandubas.model.enums;
 
+import lombok.Getter;
 
 /**
  * @author marcos.ribeiro
@@ -12,7 +13,9 @@ public enum FuncionalidadeEnum {
     CONFIGURAR_PREFERENCIAS_DE_SISTEMA(2, "Configurar Preferencias de Sistema"),
     MANTER_CRUD_SIMPLES(3, "Manter CRUD Simples");
     
+	@Getter
     private Integer id;
+	@Getter
     private String descricao;
     
     private FuncionalidadeEnum(Integer id, String descricao) {
@@ -20,15 +23,6 @@ public enum FuncionalidadeEnum {
         this.descricao = descricao;
 
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-    
     
     public static FuncionalidadeEnum retornaSituacao(String situacao) {
     	FuncionalidadeEnum retorno = null;

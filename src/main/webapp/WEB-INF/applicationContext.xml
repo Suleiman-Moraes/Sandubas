@@ -27,11 +27,6 @@
 	<http pattern="/login.jsp" security="none" />
 	<http pattern="/loginNovo.jsp" security="none" />
 	
-	<http pattern="/pages/mantertipoproduto/administrar.xhtml" security="none" />
-	<http pattern="/pages/mantertipoproduto/modal/cadastroTipoProduto.xhtml" security="none" />
-	<http pattern="/pages/manterclassificacaomercadoria/administrar.xhtml" security="none" />
-	<http pattern="/pages/manterclassificacaomercadoria/modal/cadastroClassificacaoMercadoria.xhtml" security="none" />
-
 	<http pattern="/javax.faces.resource/**" security="none" />
 	<http pattern="/resources/**" security="none" />
 	<http pattern="/primepush/**" security="none" />
@@ -48,6 +43,17 @@
 			access="hasRole('MANTER_CRUD_SIMPLES')" />
 
 		<!-- Manifestacao - Usuario interno logado -->
+		
+		<!-- CADASTRAR -->
+		
+		<intercept-url pattern="/pages/mantertipoproduto/administrar.xhtml" 
+			access="hasRole('MANTER_CRUD_SIMPLES')" />
+		<intercept-url pattern="/pages/mantertipoproduto/modal/cadastroTipoProduto.xhtml" 
+			access="hasRole('MANTER_CRUD_SIMPLES')" />
+		<intercept-url pattern="/pages/manterclassificacaomercadoria/administrar.xhtml" 
+			access="hasRole('MANTER_CRUD_SIMPLES')" />
+		<intercept-url pattern="/pages/manterclassificacaomercadoria/modal/cadastroClassificacaoMercadoria.xhtml" 
+			access="hasRole('MANTER_CRUD_SIMPLES')" />
 		
 		<!-- USUARIO -->
 
