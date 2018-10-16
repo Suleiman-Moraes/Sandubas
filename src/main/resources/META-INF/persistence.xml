@@ -62,7 +62,7 @@
                 value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory" />
             <property
                 name="show_sql"
-                value="false" />
+                value="true" />
             <property
                 name="format_sql"
                 value="false" />
