@@ -50,9 +50,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col col-md-4 visible-md-block visible-lg-block padding-top-3">
+					<!-- 
 					<div class="">
-						<img src="${context}/resources/images/logo-ouvidoria-baloes.png"/>
+						<img src="${context}/resources/images/pombos1.png"/>
 					</div>
+					-->
 				</div>
 				<div class="col col-md-8">
 					<div class="visible-md-block visible-lg-block" style="margin-top: 50px;"></div>
@@ -129,7 +131,7 @@
 						<p class="h3 margin-0 position-relative">
 							<a class="link-black" href="${context}/pages/externo/cadastrarManifestacaoExterna.xhtml">
 								<img src="${context}/resources/images/addManifestacao.png" class="position-absolute top-0"/>
-								<strong class="margin-left-3">Cadastrar Manifestação</strong>
+								<strong class="margin-left-3">Botão 1</strong>
 							</a>
 						</p>
 					</div><!-- item:1 -->
@@ -137,14 +139,14 @@
 						<p class="h3 margin-0 position-relative">
 							<a class="link-black" href="${context}/pages/externo/acompanharManifestacao.xhtml">
 								<img src="${context}/resources/images/icon-search.png" class="position-absolute top-0"/>
-								<strong class="margin-left-3">Acompanhar Manifestação</strong>
+								<strong class="margin-left-3">Botão 2</strong>
 							</a>
 						</p>
 					</div><!-- item:2 -->
 					<div id="item:3" class="padding-1 margin-top-2">
 						<p class="h4 margin-0 position-relative text-color-black text-align-justify">
 							<strong>
-								À Ouvidoria compete receber, examinar e encaminhar as manifestações.
+								Texto se eu quiser colocar alguma coisa.
 							</strong>
 						</p>
 					</div><!-- item:3 -->
@@ -156,18 +158,15 @@
 		<div class="container">
 			<div class="row margin-top-2 text-color-white">
 				<div class="col col-md-5">
-					<h4 class="text-color-white margin-left-0">Sobre a Ouvidoria</h4>
+					<h4 class="text-color-white margin-left-0">Sobre o Snadubas</h4>
 					<p class="h5">
-						A implantação da Ouvidoria na AGR se deu por meio da Lei 13.569 de 27 de dezembro de 1999. 
-						Buscou-se, com sua criação, garantir aos usuários dos serviços públicos no Estado de Goiás um canal
-						de comunicação onde possam registrar suas manifestações (reclamações, denúncias, elogios, sugestões etc),
-						e providenciar soluções para os conflitos entre os usuários e concessionárias ou permissionários.
+						Aqui vai ficar a história do Sandubas.
 					</p class="h5">
 					<p>Participe! A qualidade de nossos serviços depende de sua participação.</p>
 				</div><!-- col -->
 				<div class="col col-md-4 col-md-offset-3">
 					<h4 class="text-color-white margin-left-0">
-						<a class="h3 link-white" href="http://www.agr.go.gov.br/pagina/ver/6901/ouvidor" target="_blank">Mais Informações</a>
+						<a class="h3 link-white" href="http://www.agr.go.gov.br/pagina/ver/6901/ouvidor" target="_blank">Pode colocar uns links massa aki</a>
 					</h4>
 					<ul class="list-unstyled">
 						<li>
