@@ -111,7 +111,7 @@
 						-->
 						<p:menuitem value="Minhas Informações" ajax="false"
 							action="/pages/manterusuario/minhasInformacoes.xhtml?faces-redirect=true"
-							rendered="#{seguranca.temFuncionalidade('ATUALIZAR_MINHAS_INFORMACOES') and seguranca.usuarioLogado.usuario.statusUsuarioEnum != 'NOVA_SENHA'}" />
+							rendered="#{seguranca.temFuncionalidade('ATUALIZAR_MINHAS_INFORMACOES')}" />
 						<p:separator />
 						<p:menuitem value="#{msg.sair}" icon="ui-icon-close"
 							url="/j_spring_security_logout" />
