@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Sistema de Ouvidoria</title>
+	<title>Sistema Sandubas</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -158,7 +158,7 @@
 		<div class="container">
 			<div class="row margin-top-2 text-color-white">
 				<div class="col col-md-5">
-					<h4 class="text-color-white margin-left-0">Sobre o Snadubas</h4>
+					<h4 class="text-color-white margin-left-0">Sobre o Sandubas</h4>
 					<p class="h5">
 						Aqui vai ficar a história do Sandubas.
 					</p class="h5">
