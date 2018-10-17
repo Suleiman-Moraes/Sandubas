@@ -51,7 +51,7 @@ public class Usuario implements Serializable {
 
 	@NotNull
 	@NotBlank
-	@Column(length = 100)
+	@Column(length = 100, unique = true)
 	private String login;
 
 	@Size(min = 6, message = "A confirmação da senha deve ter pelo menos 6 caracteres")
