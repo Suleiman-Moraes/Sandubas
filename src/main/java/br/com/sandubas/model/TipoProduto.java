@@ -40,6 +40,10 @@ public class TipoProduto implements Serializable, IEntidadeRelacional{
 		this.nome = nome;
 		this.descricao = descricao;
 	}
+	public TipoProduto(String nome, String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+	}
 	public TipoProduto(TipoProduto objeto) {
 		this.id = objeto.id;
 		this.nome = objeto.nome;
