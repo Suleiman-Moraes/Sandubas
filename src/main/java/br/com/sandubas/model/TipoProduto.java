@@ -29,8 +29,6 @@ public class TipoProduto implements Serializable, IEntidadeRelacional{
 	@Column(nullable = false)
 	private String nome;
 	
-	@NotBlank
-	@NotNull
 	@Column(nullable = false)
 	private String descricao;
 
