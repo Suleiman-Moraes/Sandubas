@@ -54,6 +54,10 @@
 			access="hasRole('MANTER_CRUD_SIMPLES')" />
 		<intercept-url pattern="/pages/manterclassificacaomercadoria/modal/cadastroClassificacaoMercadoria.xhtml" 
 			access="hasRole('MANTER_CRUD_SIMPLES')" />
+		<intercept-url pattern="/pages/mantermercadoria/administrar.xhtml" 
+			access="hasRole('MANTER_CRUD_SIMPLES')" />
+		<intercept-url pattern="/pages/mantermercadoria/modal/cadastroMercadoria.xhtml" 
+			access="hasRole('MANTER_CRUD_SIMPLES')" />
 		
 		<!-- USUARIO -->
 
