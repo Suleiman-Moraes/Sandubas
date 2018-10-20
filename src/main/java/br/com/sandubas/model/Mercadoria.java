@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -40,7 +43,7 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	
 	@NotBlank
 	@NotNull
-	@Column
+	@Column(length = 50)
 	private String marca;
 	
 	@NotBlank
@@ -50,7 +53,7 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	
 	@NotBlank
 	@NotNull
-	@Column(name = "valor_medida")
+	@Column(name = "valor_medida", length = 20)
 	private String valorMedida;
 	
 	@NotBlank
@@ -58,13 +61,15 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	@Column(name = "valor_agrupamento")
 	private Double valorAgrupamento;
 	
-	@NotBlank
-	@NotNull
-	@Column
+	@Column(length = 100)
 	private String descricao;
 	
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_tipo_produto")
 	private TipoProduto tipoProduto;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_classificacao_mercadoria")
 	private ClassificacaoMercadoria classificacaoMercadoria; 
 	
 	public Mercadoria() {}
@@ -103,6 +108,20 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	@Override
 	public String getNomeTabela() {
 		return "mercadoria";
+	}
+	
+	public ClassificacaoMercadoria getClassificacaoMercadoria(){
+		if(this.classificacaoMercadoria == null) {
+			this.classificacaoMercadoria = new ClassificacaoMercadoria();
+		}
+		return this.classificacaoMercadoria;
+	}
+	
+	public TipoProduto getTipoProduto(){
+		if(this.tipoProduto == null) {
+			this.tipoProduto = new TipoProduto();
+		}
+		return this.tipoProduto;
 	}
 	
 	@Override

@@ -15,6 +15,10 @@ public class MercadoriaDAO extends GenericDAO<Mercadoria, Long> implements IPagi
 	public List<Mercadoria> paginar(Integer inicioDaPagina, Integer tamanhoDaPagina, String... condicao) {
 		return this.paginate(Mercadoria.class, tamanhoDaPagina, inicioDaPagina, condicao);
 	}
+	
+	public List<Mercadoria> paginar(String join, Integer inicioDaPagina, Integer tamanhoDaPagina, String... condicao) {
+		return this.paginate(Mercadoria.class, tamanhoDaPagina, inicioDaPagina, join, condicao);
+	}
 
 	@Override
 	public List<Mercadoria> paginar(Integer inicioDaPagina, Integer tamanhoDaPagina, String join, Object obj,

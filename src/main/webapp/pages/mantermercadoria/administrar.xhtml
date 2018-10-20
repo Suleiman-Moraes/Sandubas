@@ -1,0 +1,161 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="head_js">
+		<h:outputScript library="js" name="/filtroregistro/pesquisa.js" />
+	</ui:define>
+	<ui:define name="titulo">#{msg.titleSistema}</ui:define>
+	<ui:define name="corpo">
+		<h3>#{msg.mercadoria}</h3>
+		<h:form id="formulario">
+			<p:growl autoUpdate="true" />
+			<ui:param name="controlador" value="#{manterMercadoriaBean}" />
+			
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton icon="ui-icon-plus"
+						value="#{msg.mercadoriaNovo}" process="@form"
+						action="#{controlador.abrirModalCrud(null)}">
+						<p:ajax event="dialogReturn" update="listarRegistros"
+							listener="#{controlador.mostrarMensagemSucesso(false)}" />
+					</p:commandButton>
+				</f:facet>
+			</p:toolbar>
+			<p:spacer height="20" />
+			
+			<p:dataTable id="listarRegistros"
+				value="#{controlador.registros}" var="registro"
+				paginator="true" rows="5" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				lazy="true" towsPerPageTemplate="5, 10" widgetVar="registroWV"
+				reflow="true" emptyMessage="#{msg.nenhumRegistro}">
+
+				<f:facet name="header">
+					
+					<p:outputPanel id="painelPesquisa"
+						style="text-align: right" autoUpdate="true" layout="block">
+						
+						<h:outputText id="aep" value="#{msg.mercadoriaPesquisa}:"
+							styleClass="fonteNormal" rendered="false" />
+
+						<h:selectOneMenu id="filtroSelecionado"
+							value="#{controlador.filtroSelecionado}">
+							<p:ajax event="change"
+								listener="#{controlador.selecionarFiltroPesquisa}" />
+							<f:selectItem itemValue="#{null}"
+								itemLabel="#{msg.selecioneOCampo}"
+								noSelectionOption="true" itemDisabled="true" />
+							<f:selectItems value="#{controlador.filtrosPesquisa}"
+								var="filtroPesquisa" itemLabel="#{filtroPesquisa.label}"
+								itemValue="#{filtroPesquisa.value}" />
+						</h:selectOneMenu>
+
+						<p:spacer id="espaco" width="10px" />
+
+						<h:inputText id="id" value="#{controlador.filtroValor}"
+							onkeypress="return somenteNumero(event);" maxlength="200"
+							style="display: none" />
+
+						<h:inputText id="precoPago" value="#{controlador.filtroValor}"
+							onkeypress="return somenteNumero(event);" maxlength="200"
+							style="display: none" />
+
+						<h:inputText id="porcentagemVenda" value="#{controlador.filtroValor}"
+							onkeypress="return somenteNumero(event);" maxlength="200"
+							style="display: none" />
+
+						<h:inputText id="quantidade" value="#{controlador.filtroValor}"
+							onkeypress="return somenteNumero(event);" maxlength="200"
+							style="display: none" />
+
+						<h:inputText id="valorAgrupamento" value="#{controlador.filtroValor}"
+							onkeypress="return somenteNumero(event);" maxlength="200"
+							style="display: none" />
+						
+						<h:inputText id="descricao" value="#{controlador.filtroValor}"
+							onkeypress="return naoAceitaEnter(event);" maxlength="100"
+							style="display: none" />
+						
+						<h:inputText id="marca" value="#{controlador.filtroValor}"
+							onkeypress="return naoAceitaEnter(event);" maxlength="50"
+							style="display: none" />
+						
+						<h:inputText id="valorMedida" value="#{controlador.filtroValor}"
+							onkeypress="return naoAceitaEnter(event);" maxlength="20"
+							style="display: none" />
+						
+						<h:inputText id="tipoProduto_nome" value="#{controlador.filtroValor}"
+							onkeypress="return naoAceitaEnter(event);" maxlength="20"
+							style="display: none" />
+						
+						<h:inputText id="classificacaoMercadoria_nome" value="#{controlador.filtroValor}"
+							onkeypress="return naoAceitaEnter(event);" maxlength="20"
+							style="display: none" />
+						
+						<h:inputHidden id="globalFilter" />
+					</p:outputPanel>
+				</f:facet>
+				
+				<p:column headerText="#{msg.codigo}" styleClass="tableCodigo"
+					width="5%">
+					<h:outputText value="#{registro.id}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.precoPago}"
+					width="5%">
+					<h:outputText value="#{registro.precoPago}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.porcentagemVenda}"
+					width="5%">
+					<h:outputText value="#{registro.porcentagemVenda}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.marca}"
+					width="8%">
+					<h:outputText value="#{registro.marca}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.quantidade}"
+					width="5%">
+					<h:outputText value="#{registro.quantidade}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.valorMedida}"
+					width="5%">
+					<h:outputText value="#{registro.valorMedida}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.descricao}">
+					<h:outputText value="#{registro.descricao}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.mercadoriaNomeTipoProduto}"
+					width="10%">
+					<h:outputText value="#{registro.tipoProduto.nome}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.mercadoriaNomeClassificacaoMercadoria}"
+					width="10%">
+					<h:outputText value="#{registro.classificacaoMercadoria.nome}" />
+				</p:column>
+				<p:column headerText="#{msg.acoes}" width="10%"
+					style="text-align: center;">
+					<p:commandButton icon="ui-icon-pencil" process="@this"
+						title="#{msg.editar}"
+						action="#{controlador.abrirModalCrud(registro)}">
+						<p:ajax event="dialogReturn" update="listarRegistros"
+							listener="#{controlador.mostrarMensagemSucesso(true)}" />
+					</p:commandButton>
+					<p:commandButton icon="fa fa-remove" title="#{msg.excluir}"
+						process="@this" update="@form"
+						action="#{controlador.deletarObjeto}">
+						<f:setPropertyActionListener value="#{registro}"
+							target="#{controlador.objeto}" />
+						<p:confirm header="#{msg.registroDeletar}"
+							message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+				
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

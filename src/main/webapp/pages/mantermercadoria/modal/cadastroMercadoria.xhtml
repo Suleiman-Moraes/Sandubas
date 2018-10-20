@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+<h:head>
+	<title>#{msg.mercadoriaCadastro}</title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+<h:body>
+	<f:metadata>
+		<o:viewParam name="objetoId" value="#{manterMercadoriaBean.objeto}"
+			converter="MercadoriaConverter"></o:viewParam>
+	</f:metadata>
+	<header>
+	<div style="float: left">
+		<h:graphicImage library="images" name="logo-medianeira.jpg"
+			height="75" />
+	</div>
+	</header>
+	<br />
+	<h:form id="formulario" style="margin-right: 10px; margin-left:10px;">
+		<ui:param name="controlador" value="#{manterMercadoriaBean}" />
+		<p:messages autoUpdate="true" />
+		<h4 style="text-align: center">
+			<h:outputText id="title"
+				value="#{empty controlador.objeto.id ? msg.mercadoriaNovo : msg.mercadoriaEditar}" />
+		</h4>
+		<p:panelGrid columns="2" id="dados"
+			style="width:100%; margin-top:20px;">
+			<h:panelGroup>
+				<p:focus context="dados" />
+				<p:outputLabel id="lblprecoPago" for="precoPago"
+					value="#{msg.precoPago}" />
+			</h:panelGroup>
+
+			<p:inputText id="precoPago" value="#{controlador.objeto.precoPago}"
+				maxlength="150" style="width: 420px;" autocomplete="off"
+				required="true" />
+			<p:column>
+				<p:outputLabel id="lblporcentagemVenda"
+					value="#{msg.porcentagemVenda}" for="porcentagemVenda" />
+			</p:column>
+			<p:column>
+				<p:inputText id="porcentagemVenda"
+					value="#{controlador.objeto.porcentagemVenda}" maxlength="150"
+					style="width: 420px;" autocomplete="off" required="true" />
+			</p:column>
+			<p:column>
+				<p:outputLabel id="lblmarca" value="#{msg.marca}" for="marca" />
+			</p:column>
+			<p:column>
+				<p:inputText id="marca" value="#{controlador.objeto.marca}"
+					maxlength="50" style="width: 420px;" autocomplete="off"
+					required="true" />
+			</p:column>
+			<p:column>
+				<p:outputLabel id="lblquantidade" value="#{msg.quantidade}"
+					for="quantidade" />
+			</p:column>
+			<p:column>
+				<p:inputText id="quantidade"
+					value="#{controlador.objeto.quantidade}" maxlength="150"
+					style="width: 420px;" autocomplete="off" required="true" />
+			</p:column>
+			<p:column>
+				<p:outputLabel id="lblvalorMedida" value="#{msg.valorMedida}"
+					for="valorMedida" />
+			</p:column>
+			<p:column>
+				<p:inputText id="valorMedida"
+					value="#{controlador.objeto.valorMedida}" maxlength="20"
+					style="width: 420px;" autocomplete="off" required="true" />
+			</p:column>
+			<p:column>
+				<p:outputLabel id="lblvalorAgrupamento"
+					value="#{msg.valorAgrupamento}" for="valorAgrupamento" />
+			</p:column>
+			<p:column>
+				<p:inputText id="valorAgrupamento"
+					value="#{controlador.objeto.valorAgrupamento}" maxlength="150"
+					style="width: 420px;" autocomplete="off" required="true" />
+			</p:column>
+			<p:column>
+				<p:outputLabel id="lblDescricao" value="#{msg.descricao}"
+					for="descricao" />
+			</p:column>
+			<p:column>
+				<p:inputText id="descricao" value="#{controlador.objeto.descricao}"
+					maxlength="100" style="width: 420px;" autocomplete="off"
+					required="false" />
+			</p:column>
+			<p:outputLabel id="lblTipoProduto"
+				value="#{msg.tipoDeProduto}"
+				for="tipoProduto" />
+			<p:selectOneMenu id="tipoProduto"
+				value="#{controlador.objeto.tipoProduto}"
+				style="width:300px;" converter="TipoProdutoConverter"
+				filter="true" filterMatchMode="startsWith" effect="fade" required="true">
+				<f:selectItem itemValue="#{null}"
+					itemLabel="#{msg.selecioneTipoProduto}"
+					noSelectionOption="true" />
+				<f:selectItems value="#{controlador.listaTipoProduto}"
+					var="tipoProduto" itemValue="#{tipoProduto}"
+					itemLabel="#{tipoProduto.nome}" />
+			</p:selectOneMenu>
+			<p:outputLabel id="lblClassificacaoMercadoria"
+				value="#{msg.classificacaoDeMercadoria}"
+				for="classificacaoMercadoria" />
+			<p:selectOneMenu id="classificacaoMercadoria"
+				value="#{controlador.objeto.classificacaoMercadoria}"
+				style="width:300px;" converter="ClassificacaoMercadoriaConverter"
+				filter="true" filterMatchMode="startsWith" effect="fade" required="true">
+				<f:selectItem itemValue="#{null}"
+					itemLabel="#{msg.selecioneClassificacaoMercadoria}"
+					noSelectionOption="true" />
+				<f:selectItems value="#{controlador.listaClassificacaoMercadoria}"
+					var="classificacaoMercadoria" itemValue="#{classificacaoMercadoria}"
+					itemLabel="#{classificacaoMercadoria.nome}" />
+			</p:selectOneMenu>
+
+			<f:facet name="footer">
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="#{msg.btnLimpar}" process="@this"
+							icon="fa fa-eraser" update="@form" resetValues="true"
+							action="#{controlador.limpar}" />
+						<p:defaultCommand target="ButaoSalvar" />
+					</f:facet>
+					<f:facet name="right">
+						<p:commandButton id="ButaoSalvar" icon="ui-icon-disk"
+							value="#{msg.btnSalvar}" process="@form" update="@form"
+							action="#{controlador.salvarObjeto}" />
+						<p:defaultCommand target="ButaoSalvar" />
+					</f:facet>
+				</p:toolbar>
+			</f:facet>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>
