@@ -318,6 +318,10 @@ public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataMod
 	 * @return
 	 */
 	public List<T> paginate(Class<T> clazz, Integer rows, Integer start, String... criteria) {
+		return this.paginate(clazz, rows, start, "", criteria);
+	}
+	
+	public List<T> paginate(Class<T> clazz, Integer rows, Integer start, String join, String... criteria) {
 		TypedQuery<T> query = null;
 		Table table = clazz.getAnnotation(javax.persistence.Table.class);
 		if (table != null) {
@@ -332,6 +336,7 @@ public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataMod
 					}
 				}
 				if (!conditions.toString().isEmpty()) {
+					hql += join == null ? "" : join;
 					hql = String.format("%s WHERE %s", hql, conditions.toString());
 				}
 			}
