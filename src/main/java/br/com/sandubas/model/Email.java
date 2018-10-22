@@ -23,7 +23,6 @@ public class Email implements Serializable {
 	private Long id;
 
 	@Column(length = 200)
-	@org.hibernate.validator.constraints.Email
 	private String email;
 
 	@Column(name = "principal_manifestacao")

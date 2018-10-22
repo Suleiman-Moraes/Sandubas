@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.primefaces.PrimeFaces;
 import org.primefaces.component.calendar.Calendar;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.datatable.DataTable;
@@ -42,7 +43,6 @@ import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.panel.Panel;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.component.spacer.Spacer;
-import org.primefaces.context.RequestContext;
 
 import br.com.sandubas.exception.PersonException;
 import br.com.sandubas.message.MessagesLoader;
@@ -358,20 +358,20 @@ public class FacesUtil {
 
 	}
 
-	public static RequestContext getRequestContext() {
-		return RequestContext.getCurrentInstance();
+	public static PrimeFaces getPrimeFaces() {
+		return PrimeFaces.current();
 	}
 
-	public static RequestContext requestContext() {
-		return getRequestContext();
+	public static PrimeFaces primeFaces() {
+		return getPrimeFaces();
 	}
 
 	public static void execute(String script) {
-		requestContext().execute(script);
+		primeFaces().executeScript(script);
 	}
 
 	public static void update(String name) {
-		requestContext().update(name);
+		primeFaces().ajax().update(name);
 	}
 
 	public static FacesContext getFacesContext() {
@@ -523,7 +523,7 @@ public class FacesUtil {
 				options.put("contentWidth", 945);
 				options.put("contentHeight", 580);
 			}
-			requestContext().openDialog(url, options, params);
+			primeFaces().dialog().openDynamic(url, options, params);
 		}
 	}
 
@@ -560,7 +560,7 @@ public class FacesUtil {
 	}
 
 	public static void closeDialog(Object data) {
-		requestContext().closeDialog(data);
+		primeFaces().dialog().closeDynamic(data);
 	}
 
 	public static void closeDialog() {

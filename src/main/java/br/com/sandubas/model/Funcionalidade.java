@@ -14,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 /**
  *
  * @author Manoel Albino Neto
@@ -30,7 +28,6 @@ public class Funcionalidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotNull
 	@Column(nullable = false, length = 200)
 	private String descricao;

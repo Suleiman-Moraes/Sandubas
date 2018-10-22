@@ -12,7 +12,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -89,7 +89,7 @@ public class ManterTipoProdutoBean extends TemplatePaginacao<TipoProduto> implem
 	public void salvarObjeto() {
 		try {
 			service.salvar(objeto);
-			RequestContext.getCurrentInstance().closeDialog(objeto);
+			PrimeFaces.current().dialog().closeDynamic(objeto);
 		} catch (NegocioException e) {
 			FacesUtil.addDynamicMessage(e.getMessage(), e.isTypeException());
 		}
@@ -104,9 +104,9 @@ public class ManterTipoProdutoBean extends TemplatePaginacao<TipoProduto> implem
 	@Override
 	public void init() {
 		filtrosPesquisa.add(new FiltroPesquisa("Todos", ""));
-		filtrosPesquisa.add(new FiltroPesquisa("Código", "id"));
+		filtrosPesquisa.add(new FiltroPesquisa("Cï¿½digo", "id"));
 		filtrosPesquisa.add(new FiltroPesquisa("Nome", "nome"));
-		filtrosPesquisa.add(new FiltroPesquisa("Descrição", "descricao"));
+		filtrosPesquisa.add(new FiltroPesquisa("Descriï¿½ï¿½o", "descricao"));
 	}
 	
 	@Override

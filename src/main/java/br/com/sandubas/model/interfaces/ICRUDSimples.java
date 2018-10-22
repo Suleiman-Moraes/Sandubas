@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 
 import br.com.sandubas.util.jsf.FacesUtil;
 
@@ -35,7 +35,8 @@ public interface ICRUDSimples <T extends Serializable>{
 			objetoId.add(((IEntidadeRelacional)objeto).getAtributoIndentificador().toString());
 			params.put("objetoId", objetoId);
 		}
-		RequestContext.getCurrentInstance().openDialog(
-				FacesUtil.propertiesLoaderURL().getProperty(retorno[1]+""), opcoes, params);
+		PrimeFaces.current().dialog().openDynamic(FacesUtil.propertiesLoaderURL().getProperty(retorno[1]+""), opcoes, params);
+//		RequestContext.getCurrentInstance().openDialog(
+//				FacesUtil.propertiesLoaderURL().getProperty(retorno[1]+""), opcoes, params);
 	}
 }

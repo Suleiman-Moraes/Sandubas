@@ -6,7 +6,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 
 import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.Usuario;
@@ -27,7 +27,7 @@ public class MinhasInformacoesBean implements Serializable {
 	public void atualizarDadosUsuario() {
 		try {
 			this.usuarioService.atualizarDadosUsuarioMinhasInformacoes(usuario);
-			RequestContext.getCurrentInstance().addCallbackParam("autenticar", Boolean.TRUE);
+			PrimeFaces.current().ajax().addCallbackParam("autenticar", Boolean.TRUE);
 		} catch (NegocioException e) {
 			FacesUtil.addDynamicMessage(e.getMessage(), e.isTypeException());
 		}

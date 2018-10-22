@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import br.com.sandubas.model.interfaces.IEntidadeRelacional;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,32 +29,26 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
 	@NotNull
 	@Column(name = "preco_pago")
 	private Double precoPago;
 	
-	@NotBlank
 	@NotNull
 	@Column(name = "porcentagem_venda")
 	private Double porcentagemVenda;
 	
-	@NotBlank
 	@NotNull
 	@Column(length = 50)
 	private String marca;
 	
-	@NotBlank
 	@NotNull
 	@Column
 	private Double quantidade;
 	
-	@NotBlank
 	@NotNull
 	@Column(name = "valor_medida", length = 20)
 	private String valorMedida;
 	
-	@NotBlank
 	@NotNull
 	@Column(name = "valor_agrupamento")
 	private Double valorAgrupamento;

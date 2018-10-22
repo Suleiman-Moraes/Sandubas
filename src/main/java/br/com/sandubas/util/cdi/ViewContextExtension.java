@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
  *
  * @author Steve Taylor
  */
+@SuppressWarnings("deprecation")
 public class ViewContextExtension implements Extension
 {
 	public void addScope(@Observes final BeforeBeanDiscovery event)

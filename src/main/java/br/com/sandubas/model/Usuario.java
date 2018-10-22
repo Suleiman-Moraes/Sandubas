@@ -26,7 +26,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.sandubas.model.enums.FuncaoUsuarioEnum;
 import br.com.sandubas.model.enums.StatusUsuarioEnum;
@@ -50,7 +49,6 @@ public class Usuario implements Serializable {
 	private Email email;
 
 	@NotNull
-	@NotBlank
 	@Column(length = 100, unique = true)
 	private String login;
 
@@ -67,7 +65,6 @@ public class Usuario implements Serializable {
 	private String confirmacaoSenha;
 
 	@NotNull
-	@NotBlank
 	@Column(length = 180)
 	private String nome;
 

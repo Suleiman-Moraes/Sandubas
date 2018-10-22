@@ -17,5 +17,4 @@ public class SpringEnconder {
 		//20FDF1A3B4EDBD94A385B34564A5D24A
 		assertEquals("25d55ad283aa400af464c76d713c07ad", hashedPass);
 	}
-
 }

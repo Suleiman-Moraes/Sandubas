@@ -13,9 +13,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.PrimeFaces;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.spacer.Spacer;
-import org.primefaces.context.RequestContext;
 import org.primefaces.model.DualListModel;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -84,8 +84,7 @@ public class ManterPerfilBean implements Serializable {
 			perfilId.add(perfil.getId().toString());
 			params.put("perfilId", perfilId);
 		}
-		RequestContext.getCurrentInstance()
-				.openDialog(FacesUtil.propertiesLoaderURL().getProperty("linkModalCadastroPerfil"), opcoes, params);
+		PrimeFaces.current().dialog().openDynamic(FacesUtil.propertiesLoaderURL().getProperty("linkModalCadastroPerfil"), opcoes, params);
 	}
 
 	public void mostrarMensagemSucesso() {
@@ -96,7 +95,7 @@ public class ManterPerfilBean implements Serializable {
 		try {
 			this.perfil.setFuncionalidades(funcionalidadesDualList.getTarget());
 			perfilService.salvarPerfil(perfil);
-			RequestContext.getCurrentInstance().closeDialog(perfil);
+			PrimeFaces.current().dialog().closeDynamic(perfil);
 		} catch (NegocioException e) {
 			FacesUtil.addDynamicMessage(e.getMessage(), e.isTypeException());
 		}

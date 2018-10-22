@@ -19,8 +19,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 /**
  *
  * @author Manoel Albino Neto
@@ -35,12 +33,10 @@ public class Perfil implements Serializable {
 	private Long id;
 
 	@NotNull
-	@NotBlank
 	@Column(nullable = false, length = 30)
 	private String nome;
 
 	@NotNull
-	@NotBlank
 	@Column(nullable = false, length = 250)
 	private String descricao;
 

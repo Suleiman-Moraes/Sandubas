@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import br.com.sandubas.model.interfaces.IEntidadeRelacional;
 
 @Entity
@@ -24,7 +22,6 @@ public class TipoProduto implements Serializable, IEntidadeRelacional{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
 	@NotNull
 	@Column(nullable = false)
 	private String nome;

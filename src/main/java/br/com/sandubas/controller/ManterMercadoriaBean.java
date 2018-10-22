@@ -12,7 +12,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -145,7 +145,7 @@ public class ManterMercadoriaBean extends TemplatePaginacao<Mercadoria>
 	public void salvarObjeto() {
 		try {
 			service.salvar(objeto);
-			RequestContext.getCurrentInstance().closeDialog(objeto);
+			PrimeFaces.current().dialog().closeDynamic(objeto);
 		} catch (NegocioException e) {
 			FacesUtil.addDynamicMessage(e.getMessage(), e.isTypeException());
 		}
