@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.StoredProcedureQuery;
@@ -70,6 +72,50 @@ public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataMod
 		return this.entityManager.find(type, pk);
 	}
 
+	/**
+	 * 
+	 * @param type
+	 * @param pk
+	 * @return
+	 * @author suleiman
+	 */
+	public T findByIdEager(Class<T> type, PK pk) {
+		TypedQuery<T> query = null;
+		Table table = type.getAnnotation(javax.persistence.Table.class);
+		if (table != null) {
+
+			String hql = String.format("SELECT %s FROM %s %s", type.getSimpleName().toLowerCase(), type.getSimpleName(),
+					type.getSimpleName().toLowerCase());
+			//JOIN FETCH apelidoTabela.atributo apelidoAtributo
+			Field[] atribustos = type.getDeclaredFields();
+			StringBuilder joins = new StringBuilder("");
+			StringBuilder where = new StringBuilder("");
+			for(Field atributo : atribustos) {
+				if(atributo.getAnnotation(ManyToOne.class) != null) {
+					joins.append(" JOIN FETCH ").append(type.getSimpleName().toLowerCase());
+					joins.append(".").append(atributo.getName()).append(" ");
+					joins.append(atributo.getName().toLowerCase());
+				}else if(atributo.getAnnotation(Id.class) != null) {
+					where.append(" WHERE ").append(type.getSimpleName().toLowerCase());
+					where.append(".").append(atributo.getName()).append(" = '").append(pk).append("'");
+				}
+			}
+			hql += joins.toString();
+			hql += where.toString();
+			query = this.entityManager.createQuery(hql, type);
+			query.setMaxResults(1);
+			return query.getSingleResult();
+
+		} else {
+			try {
+				throw new DAOException("A classe informada não é uma Entidade JPA!");
+			} catch (DAOException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+	}
+
 	public boolean findBy(T t) throws NegocioException {
 		return this.entityManager.contains(t);
 	}
@@ -118,8 +164,8 @@ public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataMod
 	}
 
 	/**
-	 * Abstrai detalhes (iserção ou edição) da persistência de um objeto no
-	 * banco de dados. Método experimental.
+	 * Abstrai detalhes (iserção ou edição) da persistência de um objeto no banco de
+	 * dados. Método experimental.
 	 * 
 	 * @param entity
 	 * @throws DAOException
@@ -320,7 +366,7 @@ public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataMod
 	public List<T> paginate(Class<T> clazz, Integer rows, Integer start, String... criteria) {
 		return this.paginate(clazz, rows, start, "", criteria);
 	}
-	
+
 	public List<T> paginate(Class<T> clazz, Integer rows, Integer start, String join, String... criteria) {
 		TypedQuery<T> query = null;
 		Table table = clazz.getAnnotation(javax.persistence.Table.class);

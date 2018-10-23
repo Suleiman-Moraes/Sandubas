@@ -23,103 +23,142 @@
 	<br />
 	<h:form id="formulario" style="margin-right: 10px; margin-left:10px;">
 		<ui:param name="controlador" value="#{manterMercadoriaBean}" />
-		<p:messages autoUpdate="true" />
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
 		<h4 style="text-align: center">
 			<h:outputText id="title"
 				value="#{empty controlador.objeto.id ? msg.mercadoriaNovo : msg.mercadoriaEditar}" />
 		</h4>
-		<p:panelGrid columns="2" id="dados"
-			style="width:100%; margin-top:20px;">
-			<h:panelGroup>
-				<p:focus context="dados" />
-				<p:outputLabel id="lblprecoPago" for="precoPago"
-					value="#{msg.precoPago}" />
-			</h:panelGroup>
+		<p:panelGrid id="dados" style="width:100%; margin-top:20px;">
+			<p:row>
+				<p:column>
+					<h:panelGroup>
+						<p:focus context="dados" />
+						<p:outputLabel id="lblprecoPago" for="precoPago"
+							value="#{msg.precoPago}" />
+					</h:panelGroup>
+				</p:column>
+				<p:column>
+					<p:inputNumber id="precoPago"
+						value="#{controlador.objeto.precoPago}" required="true"
+						minValue="0.01" symbol="R$ " />
+				</p:column>
+			</p:row>
 
-			<p:inputText id="precoPago" value="#{controlador.objeto.precoPago}"
-				maxlength="150" style="width: 420px;" autocomplete="off"
-				required="true" />
-			<p:column>
-				<p:outputLabel id="lblporcentagemVenda"
-					value="#{msg.porcentagemVenda}" for="porcentagemVenda" />
-			</p:column>
-			<p:column>
-				<p:inputText id="porcentagemVenda"
-					value="#{controlador.objeto.porcentagemVenda}" maxlength="150"
-					style="width: 420px;" autocomplete="off" required="true" />
-			</p:column>
-			<p:column>
-				<p:outputLabel id="lblmarca" value="#{msg.marca}" for="marca" />
-			</p:column>
-			<p:column>
-				<p:inputText id="marca" value="#{controlador.objeto.marca}"
-					maxlength="50" style="width: 420px;" autocomplete="off"
-					required="true" />
-			</p:column>
-			<p:column>
-				<p:outputLabel id="lblquantidade" value="#{msg.quantidade}"
-					for="quantidade" />
-			</p:column>
-			<p:column>
-				<p:inputText id="quantidade"
-					value="#{controlador.objeto.quantidade}" maxlength="150"
-					style="width: 420px;" autocomplete="off" required="true" />
-			</p:column>
-			<p:column>
-				<p:outputLabel id="lblvalorMedida" value="#{msg.valorMedida}"
-					for="valorMedida" />
-			</p:column>
-			<p:column>
-				<p:inputText id="valorMedida"
-					value="#{controlador.objeto.valorMedida}" maxlength="20"
-					style="width: 420px;" autocomplete="off" required="true" />
-			</p:column>
-			<p:column>
-				<p:outputLabel id="lblvalorAgrupamento"
-					value="#{msg.valorAgrupamento}" for="valorAgrupamento" />
-			</p:column>
-			<p:column>
-				<p:inputText id="valorAgrupamento"
-					value="#{controlador.objeto.valorAgrupamento}" maxlength="150"
-					style="width: 420px;" autocomplete="off" required="true" />
-			</p:column>
-			<p:column>
-				<p:outputLabel id="lblDescricao" value="#{msg.descricao}"
-					for="descricao" />
-			</p:column>
-			<p:column>
-				<p:inputText id="descricao" value="#{controlador.objeto.descricao}"
-					maxlength="100" style="width: 420px;" autocomplete="off"
-					required="false" />
-			</p:column>
-			<p:outputLabel id="lblTipoProduto"
-				value="#{msg.tipoDeProduto}"
-				for="tipoProduto" />
-			<p:selectOneMenu id="tipoProduto"
-				value="#{controlador.objeto.tipoProduto}"
-				style="width:300px;" converter="TipoProdutoConverter"
-				filter="true" filterMatchMode="startsWith" effect="fade" required="true">
-				<f:selectItem itemValue="#{null}"
-					itemLabel="#{msg.selecioneTipoProduto}"
-					noSelectionOption="true" />
-				<f:selectItems value="#{controlador.listaTipoProduto}"
-					var="tipoProduto" itemValue="#{tipoProduto}"
-					itemLabel="#{tipoProduto.nome}" />
-			</p:selectOneMenu>
-			<p:outputLabel id="lblClassificacaoMercadoria"
-				value="#{msg.classificacaoDeMercadoria}"
-				for="classificacaoMercadoria" />
-			<p:selectOneMenu id="classificacaoMercadoria"
-				value="#{controlador.objeto.classificacaoMercadoria}"
-				style="width:300px;" converter="ClassificacaoMercadoriaConverter"
-				filter="true" filterMatchMode="startsWith" effect="fade" required="true">
-				<f:selectItem itemValue="#{null}"
-					itemLabel="#{msg.selecioneClassificacaoMercadoria}"
-					noSelectionOption="true" />
-				<f:selectItems value="#{controlador.listaClassificacaoMercadoria}"
-					var="classificacaoMercadoria" itemValue="#{classificacaoMercadoria}"
-					itemLabel="#{classificacaoMercadoria.nome}" />
-			</p:selectOneMenu>
+			<p:row>
+				<p:column>
+					<p:outputLabel id="lblporcentagemVenda"
+						value="#{msg.porcentagemVenda}" for="porcentagemVenda" />
+				</p:column>
+				<p:column>
+					<p:inputNumber id="porcentagemVenda"
+						value="#{controlador.objeto.porcentagemVenda}" symbol=" %"
+						symbolPosition="s" emptyValue="zero" autocomplete="on"
+						minValue="0.01" required="true" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel id="lblquantidade" value="#{msg.quantidade}"
+						for="quantidade" />
+				</p:column>
+				<p:column>
+					<p:inputNumber id="quantidade"
+						value="#{controlador.objeto.quantidade}" minValue="0.01"
+						required="true" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel id="lblvalorAgrupamento"
+						value="#{msg.valorAgrupamento}" for="valorAgrupamento" />
+				</p:column>
+				<p:column>
+					<p:inputNumber id="valorAgrupamento"
+						value="#{controlador.objeto.valorAgrupamento}" minValue="0.01"
+						required="true" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel id="lblmarca" value="#{msg.marca}" for="marca" />
+				</p:column>
+				<p:column>
+					<p:inputText id="marca" value="#{controlador.objeto.marca}"
+						maxlength="50" style="width: 200px;" autocomplete="off"
+						required="true" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel id="lblvalorMedida" value="#{msg.valorMedida}"
+						for="valorMedida" />
+				</p:column>
+				<p:column>
+					<p:inputText id="valorMedida"
+						value="#{controlador.objeto.valorMedida}" maxlength="20"
+						style="width: 200px;" autocomplete="off" required="true" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel id="lblDescricao" value="#{msg.descricao}"
+						for="descricao" />
+				</p:column>
+				<p:column>
+					<p:inputText id="descricao" value="#{controlador.objeto.descricao}"
+						maxlength="100" style="width: 200px;" autocomplete="off"
+						required="false" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel id="lblTipoProduto" value="#{msg.tipoDeProduto}"
+						for="tipoProduto" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="tipoProduto"
+						value="#{controlador.objeto.tipoProduto}" style="width:200px;"
+						converter="TipoProdutoConverter" filter="true"
+						filterMatchMode="startsWith" effect="fade" required="true">
+						<f:selectItem itemValue="#{null}"
+							itemLabel="#{msg.selecioneTipoProduto}" noSelectionOption="true" />
+						<f:selectItems value="#{controlador.listaTipoProduto}"
+							var="tipoProduto" itemValue="#{tipoProduto}"
+							itemLabel="#{tipoProduto.nome}" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel id="lblClassificacaoMercadoria"
+						value="#{msg.classificacaoDeMercadoria}"
+						for="classificacaoMercadoria" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="classificacaoMercadoria"
+						value="#{controlador.objeto.classificacaoMercadoria}"
+						style="width:200px;" converter="ClassificacaoMercadoriaConverter"
+						filter="true" filterMatchMode="startsWith" effect="fade"
+						required="true">
+						<f:selectItem itemValue="#{null}"
+							itemLabel="#{msg.selecioneClassificacaoMercadoria}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{controlador.listaClassificacaoMercadoria}"
+							var="classificacaoMercadoria"
+							itemValue="#{classificacaoMercadoria}"
+							itemLabel="#{classificacaoMercadoria.nome}" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
 
 			<f:facet name="footer">
 				<p:toolbar>

@@ -14,9 +14,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.PrimeFaces;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.spacer.Spacer;
-import org.primefaces.context.RequestContext;
 import org.primefaces.model.DualListModel;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -207,8 +207,7 @@ public class ManterUsuarioBean implements Serializable {
 			usuarioId.add(usuario.getId().toString());
 			params.put("usuarioId", usuarioId);
 		}
-		RequestContext.getCurrentInstance()
-				.openDialog(FacesUtil.propertiesLoaderURL().getProperty("linkModalCadastroUsuario"), opcoes, params);
+		PrimeFaces.current().dialog().openDynamic(FacesUtil.propertiesLoaderURL().getProperty("linkModalCadastroUsuario"), opcoes, params);
 	}
 
 	public void redefinirSenha() {
@@ -237,7 +236,7 @@ public class ManterUsuarioBean implements Serializable {
 		try {
 			this.usuario.setPerfis(this.perfisDualList.getTarget());
 			this.usuarioService.salvarUsuario(usuario);
-			RequestContext.getCurrentInstance().closeDialog(usuario);
+			PrimeFaces.current().dialog().closeDynamic(usuario);
 		} catch (NegocioException e) {
 			FacesUtil.addDynamicMessage(e.getMessage(), e.isTypeException());
 		}

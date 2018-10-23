@@ -44,7 +44,12 @@ public class ClassificacaoMercadoriaConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		return null;
-	}
+		if (value != null) {
+			Long codigo = ((ClassificacaoMercadoria) value).getId();
+			String retorno = (codigo == null ? null : codigo.toString());
 
+			return retorno;
+		}
+		return "";
+	}
 }

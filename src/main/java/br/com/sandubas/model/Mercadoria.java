@@ -31,12 +31,10 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
 	@NotNull
 	@Column(name = "preco_pago")
 	private Double precoPago;
 	
-	@NotBlank
 	@NotNull
 	@Column(name = "porcentagem_venda")
 	private Double porcentagemVenda;
@@ -46,7 +44,6 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	@Column(length = 50)
 	private String marca;
 	
-	@NotBlank
 	@NotNull
 	@Column
 	private Double quantidade;
@@ -56,7 +53,6 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	@Column(name = "valor_medida", length = 20)
 	private String valorMedida;
 	
-	@NotBlank
 	@NotNull
 	@Column(name = "valor_agrupamento")
 	private Double valorAgrupamento;
@@ -73,20 +69,21 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	private ClassificacaoMercadoria classificacaoMercadoria; 
 	
 	public Mercadoria() {}
-	public Mercadoria(Long id, Double precoPago, Double porcentagemVenda, String marca, Double quantidade,
-			String valorMedida, Double valorAgrupamento, String descricao, TipoProduto tipoProduto,
-			ClassificacaoMercadoria classificacaoMercadoria) {
-		this.id = id;
-		this.precoPago = precoPago;
-		this.porcentagemVenda = porcentagemVenda;
-		this.marca = marca;
-		this.quantidade = quantidade;
-		this.valorMedida = valorMedida;
-		this.valorAgrupamento = valorAgrupamento;
-		this.descricao = descricao;
-		this.tipoProduto = tipoProduto;
-		this.classificacaoMercadoria = classificacaoMercadoria;
-	}
+//	public Mercadoria(Long id, BigDecimal precoPago, BigDecimal porcentagemVenda, String marca, BigDecimal quantidade,
+//			String valorMedida, BigDecimal valorAgrupamento, String descricao, TipoProduto tipoProduto,
+//			ClassificacaoMercadoria classificacaoMercadoria) {
+//		super();
+//		this.id = id;
+//		this.precoPago = precoPago;
+//		this.porcentagemVenda = porcentagemVenda;
+//		this.marca = marca;
+//		this.quantidade = quantidade;
+//		this.valorMedida = valorMedida;
+//		this.valorAgrupamento = valorAgrupamento;
+//		this.descricao = descricao;
+//		this.tipoProduto = tipoProduto;
+//		this.classificacaoMercadoria = classificacaoMercadoria;
+//	}
 	public Mercadoria(Mercadoria objeto) {
 		this.id = objeto.id;
 		this.precoPago = objeto.precoPago;

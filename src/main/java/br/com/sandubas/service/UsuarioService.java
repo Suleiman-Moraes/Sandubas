@@ -181,12 +181,12 @@ public class UsuarioService implements Serializable {
 
 	public void salvarUsuario(Usuario usuario) throws NegocioException {
 		try {
-			boolean edicao = false;
+//			boolean edicao = false;
 			if (!this.usuarioExiste(usuario)) {
 				if (usuario.getId() == null) {
 					usuario.setDataAtivacao(new Date());
 				} else {
-					edicao = true;
+//					edicao = true;
 				}
 				if (usuario.getId() == null) {
 					this.setMd5PasswordEncoder(usuario);
@@ -375,7 +375,7 @@ public class UsuarioService implements Serializable {
 					|| (this.paginateSessionScoped.isLimitOffset() && filtroSelecionado == null))
 					&& limitOffset == null) {
 				int page = (this.paginateSessionScoped.getFirst() / this.paginateSessionScoped.getPageSize());
-				int firstSessionScoped = this.paginateSessionScoped.getFirst();
+//				int firstSessionScoped = this.paginateSessionScoped.getFirst();
 				int pageSizeSessionScoped = this.paginateSessionScoped.getPageSize();
 				// registros = paginarUsuarios(firstSessionScoped, pageSizeSessionScoped,
 				// this.paginateSessionScoped.getFiltroSelecionado(),

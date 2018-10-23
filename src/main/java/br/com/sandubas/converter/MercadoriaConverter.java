@@ -28,7 +28,7 @@ public class MercadoriaConverter implements Converter {
 		Mercadoria objeto = null;
 		try {
 			if (StringUtils.isNumeric(value) && value != null) {
-				objeto = this.service.getPersistencia().findById(Mercadoria.class, Long.valueOf(value));
+				objeto = this.service.getPersistencia().findByIdEager(Mercadoria.class, Long.valueOf(value));
 			} else {
 				throw new IOException();
 			}

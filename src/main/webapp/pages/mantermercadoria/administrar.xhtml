@@ -107,27 +107,24 @@
 					<h:outputText value="#{registro.id}" />
 				</p:column>
 				<p:column style="text-align:center;" headerText="#{msg.precoPago}"
-					width="5%">
-					<h:outputText value="#{registro.precoPago}" />
+					width="7%">
+					<h:outputText value="R$ #{registro.precoPago}" />
 				</p:column>
 				<p:column style="text-align:center;" headerText="#{msg.porcentagemVenda}"
-					width="5%">
-					<h:outputText value="#{registro.porcentagemVenda}" />
+					width="7%">
+					<h:outputText value="#{registro.porcentagemVenda} %" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.quantidade}"
+					width="8%">
+					<h:outputText value="#{registro.quantidade} #{registro.valorMedida}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.valorAgrupamento}"
+					width="8%">
+					<h:outputText value="#{registro.valorAgrupamento} #{registro.valorMedida}" />
 				</p:column>
 				<p:column style="text-align:center;" headerText="#{msg.marca}"
 					width="8%">
 					<h:outputText value="#{registro.marca}" />
-				</p:column>
-				<p:column style="text-align:center;" headerText="#{msg.quantidade}"
-					width="5%">
-					<h:outputText value="#{registro.quantidade}" />
-				</p:column>
-				<p:column style="text-align:center;" headerText="#{msg.valorMedida}"
-					width="5%">
-					<h:outputText value="#{registro.valorMedida}" />
-				</p:column>
-				<p:column style="text-align:center;" headerText="#{msg.descricao}">
-					<h:outputText value="#{registro.descricao}" />
 				</p:column>
 				<p:column style="text-align:center;" headerText="#{msg.mercadoriaNomeTipoProduto}"
 					width="10%">
@@ -136,6 +133,9 @@
 				<p:column style="text-align:center;" headerText="#{msg.mercadoriaNomeClassificacaoMercadoria}"
 					width="10%">
 					<h:outputText value="#{registro.classificacaoMercadoria.nome}" />
+				</p:column>
+				<p:column style="text-align:center;" headerText="#{msg.descricao}">
+					<h:outputText value="#{registro.descricao}" />
 				</p:column>
 				<p:column headerText="#{msg.acoes}" width="10%"
 					style="text-align: center;">

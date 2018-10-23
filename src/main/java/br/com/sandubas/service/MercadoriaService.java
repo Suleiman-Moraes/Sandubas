@@ -36,7 +36,7 @@ public class MercadoriaService implements Serializable, ICRUDService<Mercadoria>
 		campo = campo == null ? "" : campo;
 		valor = valor == null ? "" : valor;
 		String condicao = "1 = 1";
-		String join = " join fetch mercadoria.tipoProduto tp join fetch mercadoria.classificacaoMercadoria cm ";
+		String join = " JOIN FETCH mercadoria.tipoProduto tp JOIN FETCH mercadoria.classificacaoMercadoria cm ";
 		if (!campo.isEmpty() && !valor.isEmpty()) {
 			condicao += devolverCondicaoParaPaginacao(campo, valor);
 		}

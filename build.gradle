@@ -29,7 +29,7 @@ dependencies {
    compile 'org.hibernate:hibernate-ehcache:4.3.6.Final'
    compile 'org.glassfish:javax.faces:2.2.7'
    compile 'jstl:jstl:1.2'
-   compile 'org.primefaces:primefaces:5.2'
+   compile 'org.primefaces:primefaces:6.2'
    
    compile 'javax:javaee-web-api:7.0'
    

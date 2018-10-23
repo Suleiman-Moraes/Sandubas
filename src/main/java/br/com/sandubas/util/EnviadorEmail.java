@@ -19,7 +19,7 @@ public class EnviadorEmail implements Serializable {
 
 	private static final long serialVersionUID = 6898260035636385622L;
 	private Properties properties;
-	private Session session;
+//	private Session session;
 
 	public void enviarEmail(String destinatario, String assunto, String corpo,
 			String... anexos) throws NegocioException {
