@@ -14,6 +14,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.StoredProcedureQuery;
@@ -91,7 +93,9 @@ public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataMod
 			StringBuilder joins = new StringBuilder("");
 			StringBuilder where = new StringBuilder("");
 			for(Field atributo : atribustos) {
-				if(atributo.getAnnotation(ManyToOne.class) != null) {
+				if(atributo.getAnnotation(ManyToOne.class) != null 
+						|| atributo.getAnnotation(OneToOne.class) != null 
+						|| atributo.getAnnotation(OneToMany.class) != null) {
 					joins.append(" JOIN FETCH ").append(type.getSimpleName().toLowerCase());
 					joins.append(".").append(atributo.getName()).append(" ");
 					joins.append(atributo.getName().toLowerCase());
