@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core">
+<h:head>
+	<title>#{msg.usuarioCadastro}</title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+<h:body>
+	<f:metadata>
+		<o:viewParam name="usuarioId" value="#{manterUsuarioBean.usuario}"
+			converter="UsuarioConverter"></o:viewParam>
+	</f:metadata>
+	<header>
+	<div style="float: left">
+		<h:graphicImage library="images" name="logo-agr.png" height="75" />
+	</div>
+	</header>
+	<br />
+	<h:form id="formDadosUsuario"
+		style="margin-right: 10px; margin-left:10px;">
+		<p:growl autoUpdate="true" />
+		<h4 style="text-align: center">
+			<h:outputText id="title"
+				value="#{empty manterUsuarioBean.usuario.id ? msg.usuarioNovo : msg.usuarioEditar}" />
+		</h4>
+		<p:fieldset legend="#{msg.usuarioInfBasico}">
+			<h:panelGrid id="gridUsuario" columns="2" style="width:100%;">
+				<h:panelGroup>
+					<p:focus context="gridUsuario" />
+					<p:outputLabel id="lblUsuarioNome" value="#{msg.usuarioNome}"
+						for="nome" />
+				</h:panelGroup>
+				<p:inputText id="nome" value="#{manterUsuarioBean.usuario.nome}"
+					maxlength="180" size="60" autocomplete="off" />
+				<p:outputLabel id="lblUsuarioEmail" value="#{msg.usuarioEmail}"
+					for="email" />
+				<p:inputText id="email"
+					value="#{manterUsuarioBean.usuario.email.email}" maxlength="200"
+					size="60" required="true" autocomplete="off"
+					requiredMessage="#{msg.minhasInformacoesEMailValido}" />
+				<p:outputLabel id="lblUsuarioTelefone"
+					value="#{msg.usuarioTelefone}" for="telefone" />
+				<h:panelGrid columns="3" style="width:55%;margin-left:-3px;">
+					<p:inputMask id="telefone"
+						value="#{manterUsuarioBean.usuario.telefone.numero}"
+						mask="(99)9?9999-9999" maxlength="14"  autocomplete="off"/>
+					<p:outputLabel id="lblUsuarioTipoTelefone"
+						value="#{msg.usuarioTipoTefone}" for="tipoTelefone" />
+					<p:selectOneRadio id="tipoTelefone"
+						value="#{manterUsuarioBean.usuario.telefone.tipoTelefoneEnum}"
+						style="margin-left: 5px;">
+						<f:selectItems value="#{manterUsuarioBean.tipoTelefones}"
+							var="tipoTelefone" itemValue="#{tipoTelefone}"
+							itemLabel="#{tipoTelefone.descricao}" />
+					</p:selectOneRadio>
+				</h:panelGrid>
+				<p:outputLabel id="lblUsuarioUnidade" value="#{msg.usuarioUnidade}"
+					for="unidade" />
+				<p:selectOneMenu 
+					id="unidade"
+					value="#{manterUsuarioBean.usuario.unidade}" 
+					style="width:439px;"
+					converter="UnidadeConverter" 
+					filter="true"
+					filterMatchMode="startsWith" 
+					effect="fade" 
+					required="true"
+					requiredMessage="#{msg.usuarioUnidadeNecessaria}">
+					<p:ajax 
+						event="change"
+						listener="#{manterUsuarioBean.configurarOpcaoDeAcordoComUnidadeOuvidoriaAGR}"
+						update="tipo pickListPerfis" />
+					<f:selectItem 
+						itemValue="#{null}"
+						itemLabel="#{msg.usuarioSelecioneUnidade}"
+						noSelectionOption="true" />
+					<f:selectItems 
+						value="#{manterUsuarioBean.unidadesParaCadastro}"
+						var="unidade" 
+						itemValue="#{unidade}"
+						itemLabel="#{unidade.nomeUnidade}" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+		</p:fieldset>
+		<p:fieldset id="dadosAcesso" legend="#{msg.usuarioDadosAcesso}">
+			<h:panelGrid id="gridSenha" style="width:100%;" columns="2">
+				<p:outputLabel id="lblUsuarioLogin" value="#{msg.usuarioLogin}"
+					for="login" />
+				<p:inputText id="login" value="#{manterUsuarioBean.usuario.login}"
+					maxlength="100" style="width: 230px;" autocomplete="off" />
+				<p:outputLabel id="lblUsuarioSenha" value="#{msg.usuarioSenha}"
+					for="senha" />
+				<p:password id="senha" value="#{manterUsuarioBean.usuario.senha}"
+					title="#{msg.usuarioSenha}"
+					style="width: 230px; background-color:  #{manterUsuarioBean.usuario.redefinirSenha ? 'lightgrey' : ''}"
+					required="true"
+					requiredMessage="#{msg.minhasInformacoesSenhaNecessaria}"
+					redisplay="true"
+					readonly="#{manterUsuarioBean.usuario.redefinirSenha}" />
+				<p:outputLabel id="lblUsuarioConfirmaSenha"
+					value="#{msg.usuarioConfirmaSenha}" for="confirmaSenha" />
+				<p:password id="confirmaSenha"
+					value="#{manterUsuarioBean.usuario.confirmacaoSenha}"
+					title="#{msg.usuarioConfirmaSenha}"
+					style="width: 230px; background-color:  #{manterUsuarioBean.usuario.redefinirSenha ? 'lightgrey' : ''}"
+					required="true"
+					requiredMessage="#{msg.minhasInformacoesConfirmaNovaSenhaNecessaria}"
+					redisplay="true" 
+					readonly="#{manterUsuarioBean.usuario.redefinirSenha}">
+					<o:validateEqual id="equal" components="senha confirmaSenha"
+						message="#{msg.minhasInformacoesSenhasNaoConferem}"
+						showMessageFor="confirmaSenha" />
+				</p:password>
+				<p:outputLabel id="lblSituacaoSenha" value="#{msg.usuarioSituacao}"
+					for="tipoAcesso" />
+				<p:selectOneRadio id="tipoAcesso"
+					value="#{manterUsuarioBean.usuario.statusUsuarioEnum}"
+					style="margin-left: 5px;">
+					<f:selectItem itemLabel="#{msg.ativo}" itemValue="ATIVO"/>
+					<f:selectItem itemLabel="#{msg.inativo}" itemValue="INATIVO" />
+					<f:selectItem itemLabel="#{msg.usuarioSenhaNova}"
+						itemValue="NOVA_SENHA" />
+					<p:ajax event="change" process="@this" update="info, unidade"
+						listener="#{manterUsuarioBean.alteraTooltip}" />
+				</p:selectOneRadio>
+			</h:panelGrid>
+			<h:panelGroup id="info">
+				<div align="left" class="fonteBold" style="margin-top: 20px;">
+					<ul>
+						<li>#{msg.usuarioSenhaPadrao}</li>
+						<c:if test="#{not empty manterUsuarioBean.usuario.tooltipStatus}">
+							<li>#{manterUsuarioBean.usuario.tooltipStatus}</li>
+						</c:if>
+					</ul>
+					<br />
+				</div>
+			</h:panelGroup>
+			<p:panelGrid columns="1" style="width: 100%;"
+				rendered="#{manterUsuarioBean.usuario.redefinirSenha}">
+				<f:facet name="header">
+					<p:toolbar id="toolbarRedefinirSenha">
+						<f:facet name="right">
+							<p:commandButton value="#{msg.usuarioRedefinirSenha}"
+								process="dadosAcesso" icon="fa fa-refresh" update="gridSenha"
+								action="#{manterUsuarioBean.redefinirSenha}" />
+						</f:facet>
+					</p:toolbar>
+				</f:facet>
+			</p:panelGrid>
+		</p:fieldset>
+		<p:fieldset legend="#{msg.usuarioPerfis}">
+			<h:panelGrid style="width:100%;" columns="2">
+				<p:outputLabel id="lblUsuarioTipo" value="#{msg.usuarioTipo}"
+					for="tipo" />
+				<p:selectOneMenu id="tipo"
+					value="#{manterUsuarioBean.usuario.funcaoUsuarioEnum}"
+					style="width:202px;" filter="true" filterMatchMode="startsWith"
+					effect="fade">
+					<p:ajax event="change" update="pickListPerfis unidade"
+						listener="#{manterUsuarioBean.configurarOpcaoDeAcordoComUnidadeOuvidoriaAGR}" />
+					<f:selectItem itemValue="#{null}"
+						itemLabel="#{msg.usuarioSelecione}" noSelectionOption="true"
+						itemDisabled="true" />
+					<f:selectItems value="#{manterUsuarioBean.funcoes}" var="funcao"
+						itemValue="#{funcao}" itemLabel="#{funcao.descricao}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel id="lblUsuarioPerfil" value="#{msg.usuarioPerfis}"
+					for="pickListPerfis" />
+				<p:pickList id="pickListPerfis"
+					value="#{manterUsuarioBean.perfisDualList}" var="perfil"
+					converter="PerfilCadastroConverter" effect="bounce"
+					itemValue="#{perfil}" itemLabel=" #{perfil.nome}"
+					showCheckbox="true" required="true"
+					requiredMessage="Um Perfil deve ser informado."
+					showSourceFilter="true" showTargetFilter="true"
+					filterMatchMode="contains">
+					<f:facet name="sourceCaption">#{msg.disponiveis}</f:facet>
+					<f:facet name="targetCaption">#{msg.selecionadas}</f:facet>
+				</p:pickList>
+			</h:panelGrid>
+		</p:fieldset>
+		<p:panelGrid columns="1" style="width:100%;">
+			<f:facet name="header">
+				<p:toolbar id="toolbarUsuarioFooter">
+					<f:facet name="left">
+						<p:commandButton value="#{msg.btnLimpar}" process="@this"
+							icon="fa fa-eraser" update="@form" resetValues="true"
+							action="#{manterUsuarioBean.limpar}" />
+					</f:facet>
+					<f:facet name="right">
+						<p:commandButton id="butaoSalvar" icon="ui-icon-disk"
+							value="#{msg.btnSalvar}" process="@form" update="@form"
+							action="#{manterUsuarioBean.salvarUsuario}"  />
+						<p:defaultCommand target="butaoSalvar" />
+					</f:facet>
+				</p:toolbar>
+			</f:facet>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>

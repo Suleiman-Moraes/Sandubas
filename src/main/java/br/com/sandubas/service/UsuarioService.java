@@ -112,17 +112,13 @@ public class UsuarioService implements Serializable {
 		String condicao = "1 = 1";
 		if (!campo.isEmpty() && !valor.isEmpty()) {
 			switch (campo) {
+			case "id":
+				condicao += String.format(" AND %s = %s", campo, valor);
+				break;
 			case "nome":
-			case "email.email":
 			case "login":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(usuario." + campo + ")", valor.toUpperCase());
-				break;
 			case "funcaoUsuarioEnum":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(usuario." + campo + ")", valor.toUpperCase());
-				break;
 			case "statusUsuarioEnum":
-				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(usuario." + campo + ")", valor.toUpperCase());
-				break;
 			case "tipoUsuarioEnum":
 				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(usuario." + campo + ")", valor.toUpperCase());
 				break;
@@ -130,7 +126,6 @@ public class UsuarioService implements Serializable {
 			}
 		}
 
-		condicao = filtrarUsiariosFuncaoAdmin(condicao);
 		condicao += " ORDER BY usuario.id DESC";
 		usuarios = usuarioDAO.paginarUsuarios(inicioDaPagina, tamanhoDaPagina, condicao);
 		return usuarios;
@@ -162,6 +157,9 @@ public class UsuarioService implements Serializable {
 		String condicao = "1 = 1";
 		if (!campo.isEmpty() && !valor.isEmpty()) {
 			switch (campo) {
+			case "id":
+				condicao += String.format(" AND %s = %s", campo, valor);
+				break;
 			case "nome":
 			case "email.email":
 			case "login":
@@ -170,11 +168,9 @@ public class UsuarioService implements Serializable {
 			case "tipoUsuarioEnum":
 				condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(usuario." + campo + ")", valor.toUpperCase());
 				break;
-
 			}
 		}
 
-		condicao = filtrarUsiariosFuncaoAdmin(condicao);
 		total = usuarioDAO.count(Usuario.class, condicao).intValue();
 		return total;
 	}
