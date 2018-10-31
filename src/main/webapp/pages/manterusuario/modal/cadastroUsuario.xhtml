@@ -29,7 +29,9 @@
 				value="#{empty controlador.objeto.id ? msg.usuarioNovo : msg.usuarioEditar}" />
 		</h4>
 
-		<p:wizard nextLabel="#{msg.proximo}" backLabel="#{msg.anterior}">
+		<p:wizard id="wizardID" widgetVar="wizardWV"
+			nextLabel="#{msg.proximo}" backLabel="#{msg.anterior}"
+			style="width: 100%">
 			<p:tab id="dadosPessoaisID" title="#{msg.dadosPessoais}">
 				<p:panelGrid columns="2" id="dados"
 					style="width:100%; margin-top:20px;">
@@ -42,12 +44,30 @@
 						maxlength="150" style="width: 420px;" autocomplete="off"
 						required="true" />
 					<p:column>
-						<p:outputLabel id="lblDescricao" value="#{msg.descricao}"
-							for="descricao" />
+						<p:outputLabel id="lblLogin" value="#{msg.login}"
+							for="login" />
 					</p:column>
 					<p:column>
-						<p:inputText id="descricao"
-							value="#{controlador.objeto.descricao}" maxlength="150"
+						<p:inputText id="login"
+							value="#{controlador.objeto.login}" maxlength="150"
+							style="width: 420px;" autocomplete="off" required="true" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="lblSenha" value="#{msg.senha}"
+							for="senha" />
+					</p:column>
+					<p:column>
+						<p:password id="senha"
+							value="#{controlador.objeto.senha}" maxlength="150"
+							style="width: 420px;" autocomplete="off" required="true" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="lblConfirmaSenha" value="#{msg.confirmaSenha}"
+							for="confirmaSenha" />
+					</p:column>
+					<p:column>
+						<p:password id="confirmaSenha"
+							value="#{controlador.objeto.confirmacaoSenha}" maxlength="150"
 							style="width: 420px;" autocomplete="off" required="true" />
 					</p:column>
 				</p:panelGrid>
