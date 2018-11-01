@@ -11,13 +11,15 @@ import br.com.sandubas.model.TipoProduto;
 import br.com.sandubas.model.interfaces.ICRUDService;
 import br.com.sandubas.model.interfaces.IPaginacaoService;
 import br.com.sandubas.util.jsf.FacesUtil;
+import lombok.Setter;
 
 @SuppressWarnings("all")
 public class TipoProdutoService implements Serializable, ICRUDService<TipoProduto>, IPaginacaoService<TipoProduto>{
 
 	private static final long serialVersionUID = -8735358206076950412L;
 	 
-	@Inject
+	@Setter
+	@Inject 
 	private TipoProdutoDAO persistencia;
 
 	@Override

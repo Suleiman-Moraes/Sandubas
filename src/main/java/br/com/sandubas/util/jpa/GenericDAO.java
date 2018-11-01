@@ -32,11 +32,13 @@ import org.primefaces.model.SortOrder;
 import br.com.sandubas.exception.DAOException;
 import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.helper.Assert;
+import lombok.Setter;
 
 public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataModel<T> implements Serializable {
 
 	private static final long serialVersionUID = -1350868251167801491L;
 
+	@Setter
 	protected EntityManagerFactory entityManagerFactory;
 
 	@Inject

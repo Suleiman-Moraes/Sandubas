@@ -3,52 +3,83 @@ package br.com.sandubas.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.FlushModeType;
-import javax.persistence.LockModeType;
-import javax.persistence.Query;
-import javax.persistence.StoredProcedureQuery;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.metamodel.Metamodel;
 
+import org.jsoup.helper.StringUtil;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import br.com.sandubas.dao.TipoProdutoDAO;
 import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.TipoProduto;
-import junit.framework.TestCase;
+import sun.swing.plaf.synth.Paint9Painter;
 
-public class TipoProdutoServiceTest extends TestCase{
+public class TipoProdutoServiceTest{
 
 	private TipoProduto objeto = new TipoProduto("Teste Inserção", "Teste");
+	private static EntityManagerFactory factory;
+	private EntityManager manager;
 	
-	@Inject
-	private TipoProdutoService service;;
+	private static WebDriver driver;
 	
-//	@Before
-//	public void inicialiaDependencias() {
+	private TipoProdutoService service = new TipoProdutoService();
+	
+	@BeforeClass
+	public static void inicializaFabrica() {
+		System.setProperty("webdriver.chrome.driver", new File("src\\test\\resources\\br\\com\\sandubas\\driverselenium\\chromedriver.exe").getAbsolutePath());
+
+		driver = new ChromeDriver();
+
+		driver.get("http://localhost:8080/sandubas/login.jsp");
+		driver.manage().window().maximize();
+		
+//		driver.findElement(By.className("close")).click();// Fechar modal
+		
+		WebElement element = driver.findElement(By.id("login-username"));
+		element.sendKeys("root");
+		driver.findElement(By.id("login-password")).sendKeys("123456");
+		
+		driver.findElement(By.id("btn-login")).click();
+		
+		try {
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	@Before
+	public void inicialiaDependencias() {
+//		System.out.println("inicialiaDependencias");
+//		this.manager = factory.createEntityManager();
 //		service.setPersistencia(new TipoProdutoDAO());
-//		service.getPersistencia().setEntityManager(new EntityManager);
-//	}
+//		service.getPersistencia().use("ProjetoPU");
+//		service.getPersistencia().setEntityManagerFactory(factory);
+//		service.getPersistencia().setEntityManager(manager);
+	}
 	
 	@Test
 	public void testContarRegistrosCadastrados() {
-		System.out.println();
-		int cont = service.contarRegistrosCadastrados("", "");
-		System.out.println(cont);
-		assertEquals(8, cont);
+		driver.get("http://localhost:8080/sandubas/pages/mantertipoproduto/administrar.xhtml");
+		String conteudo = driver.getPageSource();
+		System.out.println(conteudo);
+		System.out.println("\n\n\n\n\n\n\n\n\n");
+		final Pattern PATTERN = Pattern.compile("<tr data-ri=\"\\d+\" class=\"[^\"]+\" role=\"row\">", Pattern.MULTILINE);
+		Matcher matcher = PATTERN.matcher(conteudo);
+		System.out.println(matcher.matches());
+		System.out.println(matcher.groupCount());
+		for (int i = 0; i <= matcher.groupCount(); i++) {
+			System.out.println(matcher.group(i));
+		}
 	}
 
 	@Test
