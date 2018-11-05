@@ -87,8 +87,9 @@ public class TipoProdutoServiceTest {
 			Thread.sleep(2000);
 			driver.findElement(By.id("formulario:j_idt45")).click();
 			Thread.sleep(2000);
-			driver.findElement(By.className("ui-panelgrid-cell")).sendKeys("Teste Selinium Inserção");
-			driver.findElement(By.id("formulario:descricao")).sendKeys("Teste Selinium Inserção");
+			WebElement element = driver.findElement(By.id("formulario:nome"));
+			element.sendKeys("Teste Selinium Inserção");
+			driver.findElement(By.cssSelector("#formulario\\3a nome")).sendKeys("Teste Selinium Inserção");
 			driver.findElement(By.id("formulario:ButaoSalvar")).click();
 			String testeAlterar = "Teste alterar";
 			service.salvar(objeto);
