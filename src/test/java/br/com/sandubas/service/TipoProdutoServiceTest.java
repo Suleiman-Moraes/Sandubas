@@ -3,25 +3,25 @@ package br.com.sandubas.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
-import org.jsoup.helper.StringUtil;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import br.com.sandubas.dao.TipoProdutoDAO;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.omnifaces.util.Faces;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
 import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.TipoProduto;
-import sun.swing.plaf.synth.Paint9Painter;
+import br.com.sandubas.util.jsf.FacesUtil;
 
 public class TipoProdutoServiceTest{
 
@@ -70,16 +70,12 @@ public class TipoProdutoServiceTest{
 	@Test
 	public void testContarRegistrosCadastrados() {
 		driver.get("http://localhost:8080/sandubas/pages/mantertipoproduto/administrar.xhtml");
-		String conteudo = driver.getPageSource();
-		System.out.println(conteudo);
-		System.out.println("\n\n\n\n\n\n\n\n\n");
-		final Pattern PATTERN = Pattern.compile("<tr data-ri=\"\\d+\" class=\"[^\"]+\" role=\"row\">", Pattern.MULTILINE);
-		Matcher matcher = PATTERN.matcher(conteudo);
-		System.out.println(matcher.matches());
-		System.out.println(matcher.groupCount());
-		for (int i = 0; i <= matcher.groupCount(); i++) {
-			System.out.println(matcher.group(i));
-		}
+		
+		WebElement element = driver.findElement(By.id("formulario:listarRegistros:totalRegistrosID"));
+		System.out.println(element.getText());
+		String label = element.getText().replaceAll("Total de Registros", "").trim();
+		System.out.println(label);
+		assertEquals(Integer.parseInt(label), 2);
 	}
 
 	@Test
