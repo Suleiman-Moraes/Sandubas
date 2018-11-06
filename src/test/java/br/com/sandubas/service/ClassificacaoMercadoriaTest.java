@@ -18,7 +18,7 @@ public class ClassificacaoMercadoriaTest extends TemplateTestUtil{
 	private static final String TESTE_INSERCAO = "Teste Selinium Inserção \"nome\" Teste Selinium Inserção \"descricao\"";
 	private static final String TESTE_ALTERACAO = "Teste Selinium Alteração \"nome\" Teste Selinium Alteração \"descricao\"";
 	private static final String URL_ADMINISTRAR = PADRAO_URL + "/manterclassificacaomercadoria/administrar.xhtml";
-	private static final String URL_MODAL = PADRAO_URL + "/mantertipoproduto/modal/cadastroTipoProduto.xhtml";
+	private static final String URL_MODAL = PADRAO_URL + "/manterclassificacaomercadoria/modal/cadastroClassificacaoMercadoria.xhtml";
 	private static String id;
 
 	@Test
@@ -39,11 +39,12 @@ public class ClassificacaoMercadoriaTest extends TemplateTestUtil{
 	@Test
 	public void test02Salvar() {
 		try {
-			driver.get(URL_MODAL +"?pfdlgcid=47a4b85d-916d-4bd8-baff-dfe637ebb55f");
+			driver.get(URL_MODAL +"?pfdlgcid=684b798d-6cce-4749-b275-8cdf7a7cb777");
 			Thread.sleep(2000);
 			driver.findElement(By.id("formulario:nome")).sendKeys("Teste Selinium Inserção \"nome\"");
 			driver.findElement(By.id("formulario:descricao")).sendKeys("Teste Selinium Inserção \"descricao\"");
 			driver.findElement(By.id("formulario:ButaoSalvar")).click();
+			Thread.sleep(500);
 			driver.get(URL_ADMINISTRAR);
 			Thread.sleep(2000);
 			String dados = driver.findElement(By.id("formulario:listarRegistros_data")).getText().split("\n")[0];
@@ -62,7 +63,7 @@ public class ClassificacaoMercadoriaTest extends TemplateTestUtil{
 			driver.findElement(By.id("formulario:listarRegistros:0:j_idt56")).click();
 			Thread.sleep(2000);
 			String url = String.format
-					("%s?objetoId=%s&pfdlgcid=5d3c2b24-f5c4-43cf-bb61-36f2d6b0b655", 
+					("%s?objetoId=%s&pfdlgcid=2adbabd9-8049-45e8-9dcf-9ce26125b1c8", 
 							URL_MODAL, id);
 			driver.get(url);
 			Thread.sleep(2000);
@@ -89,6 +90,7 @@ public class ClassificacaoMercadoriaTest extends TemplateTestUtil{
 			driver.findElement(By.id("formulario:listarRegistros:0:j_idt57")).click();
 			Thread.sleep(1000);
 			driver.findElement(By.id("j_idt59")).click();
+			Thread.sleep(500);
 			driver.get(URL_ADMINISTRAR); 
 			Thread.sleep(2000);
 			String dados = driver.findElement(By.id("formulario:listarRegistros_data")).getText().split("\n")[0];
