@@ -154,7 +154,9 @@
 							message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
-				
+				<f:facet name="footer">
+					<p:outputLabel id="totalRegistrosID" value="#{msg.totalRegistros} #{controlador.totalDeRegistros}"/>
+    			</f:facet>
 			</p:dataTable>
 		</h:form>
 	</ui:define>
