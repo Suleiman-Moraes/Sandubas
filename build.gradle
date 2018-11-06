@@ -72,5 +72,5 @@ dependencies {
    //compile files('./src/main/webapp/WEB-INF/lib/arial.jar')
    //compile files('./src/main/webapp/WEB-INF/lib/times.jar')
    
-   testCompile 'junit:junit:4.10'
+   testCompile 'junit:junit:4.11'
 }
