@@ -14,6 +14,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public abstract class TemplateTestUtil {
 	
 	public static final String PORTA = "8080";
+	public static final String NAME_HOST = "http://localhost:" + PORTA;
+	public static final String PADRAO_URL = NAME_HOST + "/sandubas/pages";
+	public static final String PAGINA_PRINCIPAL_URL = NAME_HOST + "/sandubas/pages/principal.xhtml";
+	public static final String LOGIN_URL = NAME_HOST + "/sandubas/login.jsp";
 	protected static WebDriver driver;
 
 	@BeforeClass
@@ -25,7 +29,7 @@ public abstract class TemplateTestUtil {
 
 			driver = new ChromeDriver();
 
-			driver.get("http://localhost:" + PORTA + "/sandubas/login.jsp");
+			driver.get(LOGIN_URL);
 //			driver.manage().window().maximize();
 
 			WebElement element = driver.findElement(By.id("login-username"));
