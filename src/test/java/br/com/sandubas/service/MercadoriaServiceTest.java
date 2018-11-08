@@ -4,11 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import javax.inject.Inject;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import br.com.sandubas.util.TemplateTestUtil;
 
@@ -20,6 +23,9 @@ public class MercadoriaServiceTest extends TemplateTestUtil{
 	private static final String URL_ADMINISTRAR = PADRAO_URL + "/mantermercadoria/administrar.xhtml";
 	private static final String URL_MODAL = PADRAO_URL + "/mantermercadoria/modal/cadastroMercadoria.xhtml";
 	private static String id;
+	
+	@Inject
+	private TipoProdutoService tipoProdutoService;
 
 	@Test
 	@Override
@@ -41,8 +47,16 @@ public class MercadoriaServiceTest extends TemplateTestUtil{
 		try {
 			driver.get(URL_MODAL +"?pfdlgcid=47a4b85d-916d-4bd8-baff-dfe637ebb55f");
 			Thread.sleep(2000);
-			driver.findElement(By.id("formulario:nome")).sendKeys("Teste Selinium Inserção \"nome\"");
-			driver.findElement(By.id("formulario:descricao")).sendKeys("Teste Selinium Inserção \"descricao\"");
+			driver.findElement(By.id("formulario:precoPago_input")).sendKeys("1");
+			driver.findElement(By.id("formulario:porcentagemVenda_input")).sendKeys("2");
+			driver.findElement(By.id("formulario:quantidade_input")).sendKeys("3");
+			driver.findElement(By.id("formulario:valorAgrupamento_input")).sendKeys("4");
+			driver.findElement(By.id("formulario:marca")).sendKeys("Teste Selinium Inserção \"marca\"");
+			driver.findElement(By.id("formulario:valorMedida")).sendKeys("Teste valorMedida");
+			WebElement element = driver.findElement(By.id("formulario:valorMedida"));
+			Select select = new Select(driver.findElement(By.id("formulario:valorMedida")));
+			select.selectByIndex(1);
+			new Select(driver.findElement(By.id("formulario:classificacaoMercadoria"))).selectByIndex(1);
 			driver.findElement(By.id("formulario:ButaoSalvar")).click();
 			Thread.sleep(500);
 			driver.get(URL_ADMINISTRAR);
