@@ -33,7 +33,7 @@ public class ClassificacaoMercadoriaTest extends TemplateTestUtil{
 		
 		WebElement element = driver.findElement(By.id("formulario:listarRegistros:totalRegistrosID"));
 		String label = element.getText().replaceAll("Total de Registros", "").trim();
-		assertEquals(Integer.parseInt(label), 1);
+		assertEquals(Integer.parseInt(label), 2);
 	}
 
 	@Test
