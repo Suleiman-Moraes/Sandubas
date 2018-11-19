@@ -76,23 +76,6 @@
 
 		<p:panelGrid columns="2" id="dados"
 			style="width:100%; margin-top:20px;">
-			<h:panelGroup>
-				<p:focus context="dados" />
-				<p:outputLabel id="lblnome" for="nome" value="#{msg.nome}" />
-			</h:panelGroup>
-
-			<p:inputText id="nome" value="#{controlador.objeto.nome}"
-				maxlength="150" style="width: 420px;" autocomplete="off"
-				required="true" />
-			<p:column>
-				<p:outputLabel id="lblDescricao" value="#{msg.descricao}"
-					for="descricao" />
-			</p:column>
-			<p:column>
-				<p:inputText id="descricao" value="#{controlador.objeto.descricao}"
-					maxlength="150" style="width: 420px;" autocomplete="off"
-					required="true" />
-			</p:column>
 
 			<f:facet name="footer">
 				<p:toolbar>
