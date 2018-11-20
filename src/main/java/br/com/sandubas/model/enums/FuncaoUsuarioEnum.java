@@ -1,8 +1,11 @@
 package br.com.sandubas.model.enums;
 
+import lombok.Getter;
+
 /**
  * @author marcos.ribeiro
  */
+@Getter
 public enum FuncaoUsuarioEnum {
 	
 	ROOT("1","root"),
@@ -17,13 +20,5 @@ public enum FuncaoUsuarioEnum {
     private FuncaoUsuarioEnum(String id, String descricao) {
         this.id = id;
         this.descricao = descricao;
-    }
-
-    public String getId() {
-        return id;
-    }
-    
-    public String getDescricao() {
-        return descricao;
     }
 }

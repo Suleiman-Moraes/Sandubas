@@ -24,6 +24,7 @@
 	<h:form id="formulario" style="margin-right: 10px; margin-left:10px;">
 		<ui:param name="controlador" value="#{manterUsuarioBean}" />
 		<p:messages autoUpdate="true" />
+		<p:growl id="grow"/>
 		<h4 style="text-align: center">
 			<h:outputText id="title"
 				value="#{empty controlador.objeto.id ? msg.usuarioNovo : msg.usuarioEditar}" />
@@ -32,7 +33,7 @@
 		<p:wizard id="wizardID" widgetVar="wizardWV"
 			nextLabel="#{msg.proximo}" backLabel="#{msg.anterior}"
 			style="width: 100%">
-			<p:tab id="dadosPessoaisID" title="#{msg.dadosPessoais}">
+			<p:tab id="dadosPessoaisID" title="#{msg.dadosPessoais}" rendered="false">
 				<p:panelGrid columns="2" id="dados"
 					style="width:100%; margin-top:20px;">
 					<h:panelGroup>
@@ -72,9 +73,47 @@
 					</p:column>
 				</p:panelGrid>
 			</p:tab>
+			<p:tab id="dadosSecundariosID" title="#{msg.dadosSecundarios}">
+				<p:panelGrid columns="2" id="dadosSecundariosGrid"
+					style="width:100%; margin-top:20px;">
+					<p:column>
+						<p:outputLabel id="lblEmail" value="#{msg.email}"
+							for="email" />
+					</p:column>
+					<p:column>
+						<p:inputText id="email"
+							value="#{controlador.objeto.email.email}" maxlength="150"
+							style="width: 420px;" autocomplete="off" required="true" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="lblStatus" value="#{msg.status}"
+							for="status" />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="status"
+							value="#{controlador.objeto.statusUsuarioEnum}" required="true">
+							<f:selectItems value="#{controlador.listaStatusUsuarioEnum}" 
+								var="statusV" itemLabel="#{statusV.descricao}" itemValue="#{statusV}"/>
+						</p:selectOneRadio>
+					</p:column>
+					<p:column>
+						<p:outputLabel id="lblFuncao" value="#{msg.funcao}"
+							for="funcao" />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="funcao"
+							value="#{controlador.objeto.funcaoUsuarioEnum}" required="true">
+							<f:selectItems value="#{controlador.funcoes}" 
+								var="funcaoV" itemLabel="#{funcaosV.descricao}" itemValue="#{funcaoV}"/>
+						</p:selectOneRadio>
+					</p:column>
+				</p:panelGrid>
+			</p:tab>
+			<p:tab id="perfilID" title="#{msg.selecionePerfil}">
+			</p:tab>
 		</p:wizard>
 
-		<p:panelGrid columns="2" id="dados"
+		<p:panelGrid columns="2" id="dadosx"
 			style="width:100%; margin-top:20px;">
 
 			<f:facet name="footer">

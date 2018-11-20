@@ -39,9 +39,6 @@
 		<intercept-url pattern="/pages/erro/**"
 			access="hasRole('MANTER_CRUD_SIMPLES')" />
 
-		<intercept-url pattern="/pages/manifestacao/manifestante/**"
-			access="hasRole('MANTER_CRUD_SIMPLES')" />
-
 		<!-- Manifestacao - Usuario interno logado -->
 		
 		<!-- CADASTRAR -->

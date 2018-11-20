@@ -23,6 +23,7 @@ import br.com.sandubas.model.FiltroPesquisa;
 import br.com.sandubas.model.Perfil;
 import br.com.sandubas.model.Usuario;
 import br.com.sandubas.model.enums.FuncaoUsuarioEnum;
+import br.com.sandubas.model.enums.StatusUsuarioEnum;
 import br.com.sandubas.model.interfaces.ICRUDSimples;
 import br.com.sandubas.service.UsuarioService;
 import br.com.sandubas.util.TemplatePaginacao;
@@ -47,9 +48,12 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 
 	@Getter @Setter
 	private String limitOffset;
-
+	
 	@Setter
 	private FuncaoUsuarioEnum[] funcoes;
+
+	@Setter
+	private StatusUsuarioEnum[] listaStatusUsuarioEnum;
 
 	@PostConstruct
 	public void init() {
@@ -265,6 +269,14 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 		}
 		return objeto;
 	}
+	
+	@Override
+	public Usuario getObjeto() {
+		if (objeto == null) {
+			objeto = new Usuario();
+		}
+		return objeto;
+	}
 
 	public DualListModel<Perfil> getPerfisDualList() {
 		if (this.perfisDualList == null) {
@@ -275,8 +287,15 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 
 	public FuncaoUsuarioEnum[] getFuncoes() {
 		if (funcoes == null || funcoes.length == 0) {
-			this.carregarFuncoes();
+			funcoes = FuncaoUsuarioEnum.values();
 		}
 		return funcoes;
+	}
+	
+	public StatusUsuarioEnum[] getListaStatusUsuarioEnum() {
+		if(listaStatusUsuarioEnum == null) {
+			listaStatusUsuarioEnum = StatusUsuarioEnum.values();
+		}
+		return listaStatusUsuarioEnum;
 	}
 }

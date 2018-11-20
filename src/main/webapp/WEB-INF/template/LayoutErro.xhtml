@@ -52,10 +52,7 @@
 		<h:form>
 			<h:panelGrid columns="1" style="width: 100%">
         		<h:panelGroup style="margin-left: 10%;">
-		            <p:link outcome="#{url.linkManifestanteManifestacoes}" rendered="#{seguranca.usuario.funcaoUsuarioEnum eq 'MANIFESTANTE'}">
-		                <h:graphicImage library="images" name="logo-medianeira.jpg" height="180" />
-		            </p:link> 
-		            <p:link outcome="#{url.linkPrincipal}" rendered="#{seguranca.usuario.funcaoUsuarioEnum ne 'MANIFESTANTE'}">
+		            <p:link outcome="#{url.linkPrincipal}">
 		                <h:graphicImage library="images" name="logo-medianeira.jpg" height="180" />
 		            </p:link>  		              		                		
         		</h:panelGroup>

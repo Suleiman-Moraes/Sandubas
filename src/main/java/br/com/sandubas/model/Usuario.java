@@ -44,16 +44,7 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@ManyToOne
-	@JoinColumn(name = "id_email")
-	private Email email;
-
-	@NotNull
-	@NotBlank
-	@Column(length = 100, unique = true)
-	private String login;
-
+	
 	@Size(min = 6, message = "A confirmação da senha deve ter pelo menos 6 caracteres")
 	@Column(length = 32)
 	private String senha;
@@ -70,6 +61,15 @@ public class Usuario implements Serializable {
 	@NotBlank
 	@Column(length = 180)
 	private String nome;
+	
+	@NotNull
+	@NotBlank
+	@Column(length = 100, unique = true)
+	private String login;
+
+	@ManyToOne
+	@JoinColumn(name = "id_email")
+	private Email email;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
