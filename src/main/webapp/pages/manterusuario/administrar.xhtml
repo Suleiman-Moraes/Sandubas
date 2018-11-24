@@ -104,13 +104,15 @@
 					style="text-align: center;">
 					<p:commandButton icon="ui-icon-pencil" process="@this"
 						title="#{msg.editar}"
-						action="#{controlador.abrirModalCrud(registro)}">
+						action="#{controlador.abrirModalCrud(registro)}"
+						disabled="#{registro.id eq '2'}">
 						<p:ajax event="dialogReturn" update="listarRegistros"
 							listener="#{controlador.mostrarMensagemSucesso(true)}" />
 					</p:commandButton>
-					<p:commandButton icon="fa fa-remove" title="#{msg.excluir}"
+					<p:commandButton icon="fa fa-remove" title="#{msg.inativar}"
 						process="@this" update="@form"
-						action="#{controlador.deletarObjeto}">
+						action="#{controlador.deletarObjeto}"
+						disabled="#{registro.id eq '2'}">
 						<f:setPropertyActionListener value="#{registro}"
 							target="#{controlador.objeto}" />
 						<p:confirm header="#{msg.registroDeletar}"

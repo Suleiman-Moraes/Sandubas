@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.PrimeFaces;
-import org.primefaces.model.DualListModel;
+import org.primefaces.event.FlowEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -24,6 +24,7 @@ import br.com.sandubas.model.Perfil;
 import br.com.sandubas.model.Usuario;
 import br.com.sandubas.model.enums.FuncaoUsuarioEnum;
 import br.com.sandubas.model.enums.StatusUsuarioEnum;
+import br.com.sandubas.model.enums.TipoTelefoneEnum;
 import br.com.sandubas.model.interfaces.ICRUDSimples;
 import br.com.sandubas.service.UsuarioService;
 import br.com.sandubas.util.TemplatePaginacao;
@@ -40,20 +41,12 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 	@Inject
 	private UsuarioService service;
 
-	@Setter
-	private DualListModel<Perfil> perfisDualList;
-
-	@Setter
-	private List<Perfil> perfis;
-
 	@Getter @Setter
 	private String limitOffset;
 	
-	@Setter
 	private FuncaoUsuarioEnum[] funcoes;
-
-	@Setter
 	private StatusUsuarioEnum[] listaStatusUsuarioEnum;
+	private TipoTelefoneEnum[] listaTipoTelefoneEnum;
 
 	@PostConstruct
 	public void init() {
@@ -114,99 +107,6 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 	public void limpar() {
 		this.objeto = new Usuario();
 	}
-
-	public void atualizarDualList() {
-		if (this.objeto.getFuncaoUsuarioEnum() != null) {
-
-			// Declaração e inicialização de variaveis
-			@SuppressWarnings("unused")
-			List<Perfil> perfisDoUsuarioValidos = new ArrayList<>();
-
-			// busca os todos os perfis e os perfis do banco de dados
-			this.perfis = this.service.getPerfilService()
-					.obterPerfilPassandoFuncaoUsuario(this.objeto.getFuncaoUsuarioEnum());
-
-			// inicial o componete com as duas lista preparadas
-			this.perfisDualList = new DualListModel<Perfil>(this.perfis, new ArrayList<Perfil>(0));
-		} else {
-
-			// inicial uma lista do zero
-			this.perfisDualList = new DualListModel<Perfil>(new ArrayList<Perfil>(0), new ArrayList<Perfil>(0));
-		}
-	}
-
-	public void carregarDualList() {
-		if (this.objeto.getFuncaoUsuarioEnum() != null) {
-
-			// Declaração e inicialização de variaveis
-			List<Perfil> perfisDoUsuarioValidos = new ArrayList<>();
-
-			// busca os todos os perfis e os perfis do banco de dados
-			this.perfis = this.service.getPerfilService()
-					.obterPerfilPassandoFuncaoUsuario(this.objeto.getFuncaoUsuarioEnum());
-			this.objeto.setPerfis(this.service.getPerfilService().getPerfilDAO()
-					.buscarPerfisDoUsuarioPassandoUsuario(this.objeto));
-
-			// Testa se o perfil do banco e valido para atualizar dual list
-			for (Perfil perfil : this.objeto.getPerfis()) {
-				if (this.perfis.contains(perfil)) {
-					perfisDoUsuarioValidos.add(perfil);
-				}
-			}
-
-			// Seta os perfis validos do usuario na variavel this.usuario
-			this.objeto.setPerfis(perfisDoUsuarioValidos);
-
-			// remove os perfis que o usuario ja possui
-			this.perfis.removeAll(this.objeto.getPerfis());
-
-			// inicial o componete com as duas lista preparadas
-			this.perfisDualList = new DualListModel<Perfil>(this.perfis, this.objeto.getPerfis());
-		} else {
-
-			// inicial uma lista do zero
-			this.perfisDualList = new DualListModel<Perfil>(new ArrayList<Perfil>(0), new ArrayList<Perfil>(0));
-		}
-	}
-
-//	public void alteraTooltip() {
-//		if (usuario.getStatusUsuarioEnum() == StatusUsuarioEnum.ATIVO
-//				|| usuario.getStatusUsuarioEnum() == StatusUsuarioEnum.NOVA_SENHA) {
-//			unidadesParaCadastro = this.usuarioService.getUnidadeService().getUnidadeDAO().buscarUnidadesAtivas();
-//		}
-//		if (StatusUsuarioEnum.INATIVO.equals(getUsuario().getStatusUsuarioEnum())
-//				|| (StatusUsuarioEnum.NOVA_SENHA.equals(getUsuario().getStatusUsuarioEnum()))) {
-//			if (StatusUsuarioEnum.INATIVO.equals(getUsuario().getStatusUsuarioEnum())) {
-//				unidadesParaCadastro = this.usuarioService.getUnidadeService().getUnidadeDAO().findAllDistinctUnidade();
-//				getUsuario().setTooltipStatus(FacesUtil.propertiesLoader().getProperty("usuarioInativar"));
-//			} else {
-//				getUsuario().setTooltipStatus(FacesUtil.propertiesLoader().getProperty("usuarioCadastrarSenha"));
-//			}
-//		} else {
-//			getUsuario().setTooltipStatus("");
-//		}
-//	}
-
-//	public void configurarOpcaoDeAcordoComUnidadeOuvidoriaAGR() {
-//		unidadesParaCadastro = this.usuarioService.getUnidadeService().getUnidadeDAO().findAllDistinctUnidade();
-//		if (this.usuario.getUnidade() != null && this.usuario.getUnidade().getId() == 1) {
-//			this.funcoes = new FuncaoUsuarioEnum[1];
-//			this.funcoes[0] = FuncaoUsuarioEnum.OUVIDOR;
-//			this.usuario.setFuncaoUsuarioEnum(FuncaoUsuarioEnum.OUVIDOR);
-//		} else if (this.usuario.getFuncaoUsuarioEnum() != null
-//				&& this.usuario.getFuncaoUsuarioEnum() != FuncaoUsuarioEnum.OUVIDOR) {
-//			this.carregarFuncoes();
-//			Unidade uni = this.usuarioService.getUnidadeService().getUnidadeDAO().findById(Unidade.class, (long) 1);
-//			this.unidadesParaCadastro.remove(uni);
-//		} else {
-//			this.carregarFuncoes();
-//		}
-//		this.atualizarDualList();
-//	}
-
-	private void carregarFuncoes() {
-		funcoes = service.getFuncoes();
-	}
 	
 	@Override
 	public Object[] abrirModal(Usuario objeto) {
@@ -214,8 +114,8 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 		Map<String, Object> opcoes = new HashMap<>();
 		opcoes.put("modal", true);
 		opcoes.put("resizable", false);
-		opcoes.put("contentHeight", 700);
-		opcoes.put("contentWidth", 800);
+		opcoes.put("contentHeight", 400);
+		opcoes.put("contentWidth", 700);
 		opcoes.put("draggable", true);
 		
 		retorno[0] = opcoes;// configuração da modal
@@ -236,7 +136,11 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 	@Override
 	public void salvarObjeto() {
 		try {
-			this.objeto.setPerfis(this.perfisDualList.getTarget());
+			List<Perfil> listaPerfil = new ArrayList<>();
+			Perfil aux = service.getPerfilService().getPerfilDAO().findByIdEager
+					(Perfil.class, new Long(objeto.getFuncaoUsuarioEnum().getId()));
+			listaPerfil.add(aux);
+			this.objeto.setPerfis(listaPerfil);
 			this.service.salvarUsuario(objeto);
 			PrimeFaces.current().dialog().closeDynamic(objeto);
 		} catch (NegocioException e) {
@@ -262,6 +166,10 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 		
 		return componentes;
 	}
+	
+    public String onFlowProcess(FlowEvent event) {
+        return event.getNewStep();
+    }
 
 	public Usuario getUsuario() {
 		if (objeto == null) {
@@ -278,16 +186,13 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 		return objeto;
 	}
 
-	public DualListModel<Perfil> getPerfisDualList() {
-		if (this.perfisDualList == null) {
-			carregarDualList();
-		}
-		return perfisDualList;
-	}
-
 	public FuncaoUsuarioEnum[] getFuncoes() {
 		if (funcoes == null || funcoes.length == 0) {
-			funcoes = FuncaoUsuarioEnum.values();
+			FuncaoUsuarioEnum[] aux = FuncaoUsuarioEnum.values();
+			funcoes = new FuncaoUsuarioEnum[aux.length - 1];
+			for (int i = 1; i < aux.length; i++) {
+				funcoes[i - 1] = aux[i];
+			}
 		}
 		return funcoes;
 	}
@@ -297,5 +202,12 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 			listaStatusUsuarioEnum = StatusUsuarioEnum.values();
 		}
 		return listaStatusUsuarioEnum;
+	}
+	
+	public TipoTelefoneEnum[] getListaTipoTelefoneEnum() {
+		if(listaTipoTelefoneEnum == null) {
+			listaTipoTelefoneEnum = TipoTelefoneEnum.values();
+		}
+		return listaTipoTelefoneEnum;
 	}
 }

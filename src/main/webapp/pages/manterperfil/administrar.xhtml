@@ -22,7 +22,8 @@
                   icon="ui-icon-plus"
                   value="#{msg.perfilNovo}"
                   process="@form"
-                  action="#{manterPerfilBean.abrirModalPerfil(null)}">
+                  action="#{manterPerfilBean.abrirModalPerfil(null)}"
+                  disabled="true">
                   <p:ajax
                      event="dialogReturn"
                      update="listarPerfis"

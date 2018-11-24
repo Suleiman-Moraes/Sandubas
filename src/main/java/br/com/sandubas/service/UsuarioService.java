@@ -39,9 +39,12 @@ public class UsuarioService implements Serializable {
 
 	@Inject
 	private Seguranca seguranca;
-
+	
 	@Inject
 	private EmailService emailService;
+
+	@Inject
+	private TelefoneService telefoneService;
 
 	@Inject
 	private EnviadorEmailService enviadorEmailService;
@@ -183,7 +186,7 @@ public class UsuarioService implements Serializable {
 					usuario.setDataAtivacao(new Date());
 				} else {
 //					edicao = true;
-				}
+				} 
 				if (usuario.getId() == null) {
 					this.setMd5PasswordEncoder(usuario);
 				}
@@ -217,6 +220,7 @@ public class UsuarioService implements Serializable {
 		} else {
 			this.emailService.getEmailDAO().insert(usuario.getEmail());
 		}
+		this.telefoneService.getPersistencia().update(usuario.getTelefone());
 	}
 
 	public void salvarUsuarioExterno(Usuario usuario) throws NegocioException {

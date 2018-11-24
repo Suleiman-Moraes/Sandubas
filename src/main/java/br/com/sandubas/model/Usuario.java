@@ -30,7 +30,11 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.sandubas.model.enums.FuncaoUsuarioEnum;
 import br.com.sandubas.model.enums.StatusUsuarioEnum;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "usuario")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -66,10 +70,14 @@ public class Usuario implements Serializable {
 	@NotBlank
 	@Column(length = 100, unique = true)
 	private String login;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "id_email")
 	private Email email;
+
+	@ManyToOne
+	@JoinColumn(name = "id_telefone")
+	private Telefone telefone;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -145,100 +153,24 @@ public class Usuario implements Serializable {
 		this.dataDesativacao = dataDesativacao;
 		this.perfis = perfis;
 	}
-
-
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	public Email getEmail() {
 		if (email == null) {
 			email = new Email();
 		}
 		return email;
 	}
-	public void setEmail(Email email) {
-		this.email = email;
-	}
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	public String getNovaSenha() {
-		return novaSenha;
-	}
-	public void setNovaSenha(String novaSenha) {
-		this.novaSenha = novaSenha;
-	}
-	public String getConfirmacaoSenha() {
-		return confirmacaoSenha;
-	}
-	public void setConfirmacaoSenha(String confirmacaoSenha) {
-		this.confirmacaoSenha = confirmacaoSenha;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public StatusUsuarioEnum getStatusUsuarioEnum() {
-		return statusUsuarioEnum;
-	}
-	public void setStatusUsuarioEnum(StatusUsuarioEnum statusUsuarioEnum) {
-		this.statusUsuarioEnum = statusUsuarioEnum;
-	}
-	public FuncaoUsuarioEnum getFuncaoUsuarioEnum() {
-		return funcaoUsuarioEnum;
-	}
-	public void setFuncaoUsuarioEnum(FuncaoUsuarioEnum funcaoUsuarioEnum) {
-		this.funcaoUsuarioEnum = funcaoUsuarioEnum;
-	}
 
 	@Override
 	public String toString() {
-		return String.format("%s > %s", getEntidade(), getDescricao());
+		return String.format("%s > %s", getDescricao());
 	}
 
-	public Date getDataAtivacao() {
-		return dataAtivacao;
-	}
-	public void setDataAtivacao(Date dataAtivacao) {
-		this.dataAtivacao = dataAtivacao;
-	}
-	public Date getDataDesativacao() {
-		return dataDesativacao;
-	}
-	public void setDataDesativacao(Date dataDesativacao) {
-		this.dataDesativacao = dataDesativacao;
-	}
 	public List<Perfil> getPerfis() {
 		if (perfis == null) {
 			perfis = new ArrayList<Perfil>(0);
 		}
 		return perfis;
-	}
-	public void setPerfis(List<Perfil> perfis) {
-		this.perfis = perfis;
-	}
-	public String getTooltipStatus() {
-		return tooltipStatus;
-	}
-	public void setTooltipStatus(String tooltipStatus) {
-		this.tooltipStatus = tooltipStatus;
-	}
-	private String getEntidade() {
-		return "Usuário";
 	}
 	private String getDescricao() {
 		return nome + " " + email;
@@ -273,20 +205,12 @@ public class Usuario implements Serializable {
 		}
 		return perfilROOT;
 	}
-	public void setPerfilCliente(Boolean perfilCliente) {
-		this.perfilCliente = perfilCliente;
-	}
-	public void setPerfilFuncionario(Boolean perfilFuncionario) {
-		this.perfilFuncionario = perfilFuncionario;
-	}
-	public void setPerfilAdministrador(Boolean perfilAdministrador) {
-		this.perfilAdministrador = perfilAdministrador;
-	}
-	public void setPerfilOperador(Boolean perfilOperador) {
-		this.perfilOperador = perfilOperador;
-	}
-	public void setPerfilROOT(Boolean perfilROOT) {
-		this.perfilROOT = perfilROOT;
+	
+	public Telefone getTelefone(){
+		if(this.telefone == null) {
+			this.telefone = new Telefone();
+		}
+		return this.telefone;
 	}
 
 	@Override

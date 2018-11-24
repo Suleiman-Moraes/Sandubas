@@ -24,7 +24,7 @@
 	<h:form id="formulario" style="margin-right: 10px; margin-left:10px;">
 		<ui:param name="controlador" value="#{manterUsuarioBean}" />
 		<p:messages autoUpdate="true" />
-		<p:growl id="grow"/>
+		<p:growl id="grow" />
 		<h4 style="text-align: center">
 			<h:outputText id="title"
 				value="#{empty controlador.objeto.id ? msg.usuarioNovo : msg.usuarioEditar}" />
@@ -33,7 +33,7 @@
 		<p:wizard id="wizardID" widgetVar="wizardWV"
 			nextLabel="#{msg.proximo}" backLabel="#{msg.anterior}"
 			style="width: 100%">
-			<p:tab id="dadosPessoaisID" title="#{msg.dadosPessoais}" rendered="false">
+			<p:tab id="dadosPessoaisID" title="#{msg.dadosPessoais}">
 				<p:panelGrid columns="2" id="dados"
 					style="width:100%; margin-top:20px;">
 					<h:panelGroup>
@@ -45,22 +45,20 @@
 						maxlength="150" style="width: 420px;" autocomplete="off"
 						required="true" />
 					<p:column>
-						<p:outputLabel id="lblLogin" value="#{msg.login}"
-							for="login" />
+						<p:outputLabel id="lblLogin" value="#{msg.login}" for="login" />
 					</p:column>
 					<p:column>
-						<p:inputText id="login"
-							value="#{controlador.objeto.login}" maxlength="150"
-							style="width: 420px;" autocomplete="off" required="true" />
+						<p:inputText id="login" value="#{controlador.objeto.login}"
+							maxlength="150" style="width: 420px;" autocomplete="off"
+							required="true" />
 					</p:column>
 					<p:column>
-						<p:outputLabel id="lblSenha" value="#{msg.senha}"
-							for="senha" />
+						<p:outputLabel id="lblSenha" value="#{msg.senha}" for="senha" />
 					</p:column>
 					<p:column>
-						<p:password id="senha"
-							value="#{controlador.objeto.senha}" maxlength="150"
-							style="width: 420px;" autocomplete="off" required="true" />
+						<p:password id="senha" value="#{controlador.objeto.senha}"
+							maxlength="150" style="width: 420px;" autocomplete="off"
+							required="true" />
 					</p:column>
 					<p:column>
 						<p:outputLabel id="lblConfirmaSenha" value="#{msg.confirmaSenha}"
@@ -77,62 +75,73 @@
 				<p:panelGrid columns="2" id="dadosSecundariosGrid"
 					style="width:100%; margin-top:20px;">
 					<p:column>
-						<p:outputLabel id="lblEmail" value="#{msg.email}"
-							for="email" />
+						<p:outputLabel id="lblEmail" value="#{msg.email}" for="email" />
 					</p:column>
 					<p:column>
-						<p:inputText id="email"
-							value="#{controlador.objeto.email.email}" maxlength="150"
-							style="width: 420px;" autocomplete="off" required="true" />
+						<p:inputText id="email" value="#{controlador.objeto.email.email}"
+							maxlength="150" style="width: 420px;" autocomplete="off"
+							required="true" />
 					</p:column>
 					<p:column>
-						<p:outputLabel id="lblStatus" value="#{msg.status}"
-							for="status" />
+						<p:outputLabel id="lblStatus" value="#{msg.status}" for="status" />
 					</p:column>
 					<p:column>
 						<p:selectOneRadio id="status"
 							value="#{controlador.objeto.statusUsuarioEnum}" required="true">
-							<f:selectItems value="#{controlador.listaStatusUsuarioEnum}" 
-								var="statusV" itemLabel="#{statusV.descricao}" itemValue="#{statusV}"/>
+							<f:selectItems value="#{controlador.listaStatusUsuarioEnum}"
+								var="statusV" itemLabel="#{statusV.descricao}"
+								itemValue="#{statusV}" />
 						</p:selectOneRadio>
 					</p:column>
 					<p:column>
-						<p:outputLabel id="lblFuncao" value="#{msg.funcao}"
-							for="funcao" />
+						<p:outputLabel id="lblPerfil" value="#{msg.perfil}" for="perfil" />
 					</p:column>
 					<p:column>
-						<p:selectOneRadio id="funcao"
+						<p:selectOneRadio id="perfil"
 							value="#{controlador.objeto.funcaoUsuarioEnum}" required="true">
-							<f:selectItems value="#{controlador.funcoes}" 
-								var="funcaoV" itemLabel="#{funcaosV.descricao}" itemValue="#{funcaoV}"/>
+							<f:selectItems value="#{controlador.funcoes}" var="x"
+								itemLabel="#{x.descricao}" itemValue="#{x}" />
 						</p:selectOneRadio>
 					</p:column>
+					<p:column>
+						<p:outputLabel id="lblTelefone" value="#{msg.telefone}" for="telefone" />
+					</p:column>
+					<p:column>
+						<p:inputMask id="telefone" value="#{controlador.objeto.telefone.numero}"
+							maxlength="20" style="width: 420px;" autocomplete="off"
+							mask="(99)9?9999-9999"
+							required="true" />
+					</p:column>
+						<p:outputLabel id="lblTipoTelefone" value="#{msg.tipoTelefone}" for="tipoTelefone" />
+					<p:column>
+						<p:selectOneRadio id="tipoTelefone"
+							value="#{controlador.objeto.telefone.tipoTelefoneEnum}"
+							style="margin-left: 5px;"
+							required="true">
+							<f:selectItems value="#{controlador.listaTipoTelefoneEnum}"
+								var="y" itemValue="#{y}"
+								itemLabel="#{y.descricao}" />
+						</p:selectOneRadio>
+					</p:column>
+					<f:facet name="footer">
+						<p:toolbar>
+							<f:facet name="left">
+								<p:commandButton value="#{msg.btnLimpar}" process="@this"
+									icon="fa fa-eraser" update="@form" resetValues="true"
+									action="#{controlador.limpar}" />
+								<p:defaultCommand target="ButaoSalvar" />
+							</f:facet>
+							<f:facet name="right">
+								<p:commandButton id="ButaoSalvar" icon="ui-icon-disk"
+									value="#{msg.btnSalvar}" process="@form" update="@form"
+									action="#{controlador.salvarObjeto}" />
+								<p:defaultCommand target="ButaoSalvar" />
+							</f:facet>
+						</p:toolbar>
+					</f:facet>
 				</p:panelGrid>
 			</p:tab>
-			<p:tab id="perfilID" title="#{msg.selecionePerfil}">
-			</p:tab>
 		</p:wizard>
-
-		<p:panelGrid columns="2" id="dadosx"
-			style="width:100%; margin-top:20px;">
-
-			<f:facet name="footer">
-				<p:toolbar>
-					<f:facet name="left">
-						<p:commandButton value="#{msg.btnLimpar}" process="@this"
-							icon="fa fa-eraser" update="@form" resetValues="true"
-							action="#{controlador.limpar}" />
-						<p:defaultCommand target="ButaoSalvar" />
-					</f:facet>
-					<f:facet name="right">
-						<p:commandButton id="ButaoSalvar" icon="ui-icon-disk"
-							value="#{msg.btnSalvar}" process="@form" update="@form"
-							action="#{controlador.salvarObjeto}" />
-						<p:defaultCommand target="ButaoSalvar" />
-					</f:facet>
-				</p:toolbar>
-			</f:facet>
-		</p:panelGrid>
 	</h:form>
 </h:body>
 </html>
