@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -97,6 +98,7 @@ public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataMod
 			for(Field atributo : atribustos) {
 				if(atributo.getAnnotation(ManyToOne.class) != null 
 						|| atributo.getAnnotation(OneToOne.class) != null 
+						|| atributo.getAnnotation(ManyToMany.class) != null 
 						|| atributo.getAnnotation(OneToMany.class) != null) {
 					joins.append(" JOIN FETCH ").append(type.getSimpleName().toLowerCase());
 					joins.append(".").append(atributo.getName()).append(" ");
@@ -166,6 +168,13 @@ public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataMod
 
 	@Transactional
 	public void update(T entity) throws NegocioException {
+		this.entityManager.merge(entity);
+	}
+	
+	@Transactional
+	public void updateFatherAndSon(T entity) throws NegocioException {
+		CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createCriteriaUpdate(T);
 		this.entityManager.merge(entity);
 	}
 
