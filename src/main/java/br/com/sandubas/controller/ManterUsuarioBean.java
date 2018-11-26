@@ -82,8 +82,12 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 		getUsuario().setConfirmacaoSenha("");
 	}
 
-	public void mostrarMensagemSucesso() {
-		FacesUtil.addSuccessMessage(FacesUtil.propertiesLoader().getProperty("usuarioSucesso"));
+	public void mostrarMensagemSucesso(boolean edicao) {
+		if (edicao) {
+			FacesUtil.addSuccessMessage(FacesUtil.propertiesLoader().getProperty("usuarioSucessoEditado"));
+		} else {
+			FacesUtil.addSuccessMessage(FacesUtil.propertiesLoader().getProperty("usuarioSucessoNovo"));
+		}
 	}
 
 	public void mostrarMensagemSucessoRedefinirSenha() {

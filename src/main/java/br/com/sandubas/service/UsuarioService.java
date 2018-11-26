@@ -184,18 +184,17 @@ public class UsuarioService implements Serializable {
 			if (!this.usuarioExiste(usuario)) {
 				if (usuario.getId() == null) {
 					usuario.setDataAtivacao(new Date());
-				} else {
-//					edicao = true;
-				} 
-				if (usuario.getId() == null) {
-					this.setMd5PasswordEncoder(usuario);
 				}
+				if(!usuario.getSenha().equals(usuario.getConfirmacaoSenha())) {
+					throw new NegocioException(FacesUtil.propertiesLoader().getProperty("usuarioSenhasNaoConferem"),
+							Boolean.FALSE);
+				}
+				this.setMd5PasswordEncoder(usuario);
 				if (!StringUtil.valalidarEmail(usuario.getEmail().getEmail())) {
-					throw new NegocioException(FacesUtil.propertiesLoader().getProperty("manifestacaoEmailInvalido"),
+					throw new NegocioException(FacesUtil.propertiesLoader().getProperty("usuarioEmailInvalido"),
 							Boolean.FALSE);
 				}
 				usuario.getEmail().setPrincipalManifestacao(Boolean.FALSE);
-//				this.salvarContatosUsuario(usuario);
 				usuarioDAO.update(usuario);
 				// EmailNotificacao emailNotificacao = emailNotificacaoDAO
 				// .buscarEmailNotificacaoPorTipoEmailNotificacaoAtivoPassandoCodigoEmailNotificacao(27l);
