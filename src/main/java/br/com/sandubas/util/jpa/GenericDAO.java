@@ -171,13 +171,6 @@ public abstract class GenericDAO<T, PK extends Serializable> extends LazyDataMod
 		this.entityManager.merge(entity);
 	}
 	
-	@Transactional
-	public void updateFatherAndSon(T entity) throws NegocioException {
-		CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
-		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createCriteriaUpdate(T);
-		this.entityManager.merge(entity);
-	}
-
 	/**
 	 * Abstrai detalhes (iserção ou edição) da persistência de um objeto no banco de
 	 * dados. Método experimental.

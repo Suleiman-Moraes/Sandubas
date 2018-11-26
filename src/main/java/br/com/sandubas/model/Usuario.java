@@ -30,6 +30,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.sandubas.model.enums.FuncaoUsuarioEnum;
 import br.com.sandubas.model.enums.StatusUsuarioEnum;
+import br.com.sandubas.model.interfaces.IEntidadeRelacional;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,7 +39,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "usuario")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, IEntidadeRelacional{
 
 	/**
 	 * 
@@ -71,11 +72,11 @@ public class Usuario implements Serializable {
 	@Column(length = 100, unique = true)
 	private String login;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "id_email")
 	private Email email;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "id_telefone")
 	private Telefone telefone;
 
@@ -152,6 +153,15 @@ public class Usuario implements Serializable {
 		this.dataAtivacao = dataAtivacao;
 		this.dataDesativacao = dataDesativacao;
 		this.perfis = perfis;
+	}
+	
+	@Override
+	public Object getAtributoIndentificador() {
+		return this.getId();
+	}
+	@Override
+	public String getNomeTabela() {
+		return "usuario";
 	}
 	
 	public Email getEmail() {

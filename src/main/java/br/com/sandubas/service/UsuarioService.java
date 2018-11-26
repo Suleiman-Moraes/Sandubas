@@ -194,7 +194,8 @@ public class UsuarioService implements Serializable {
 					throw new NegocioException(FacesUtil.propertiesLoader().getProperty("manifestacaoEmailInvalido"),
 							Boolean.FALSE);
 				}
-				this.salvarContatosUsuario(usuario);
+				usuario.getEmail().setPrincipalManifestacao(Boolean.FALSE);
+//				this.salvarContatosUsuario(usuario);
 				usuarioDAO.update(usuario);
 				// EmailNotificacao emailNotificacao = emailNotificacaoDAO
 				// .buscarEmailNotificacaoPorTipoEmailNotificacaoAtivoPassandoCodigoEmailNotificacao(27l);
