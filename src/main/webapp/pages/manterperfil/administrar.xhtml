@@ -102,16 +102,16 @@
        			width="4%">
        			<h:outputText value="#{perfil.id}"/>
        		</p:column>
-       		<p:column headerText="#{msg.perfilNome}" width="7%">
+       		<p:column headerText="#{msg.nome}" width="7%">
        			<h:outputText value="#{perfil.nome}"/>
        		</p:column>
-       		<p:column headerText="#{msg.perfilDescricao}" width="10%">
+       		<p:column headerText="#{msg.descricao}" width="10%">
        			<h:outputText value="#{perfil.descricao}"/>
        		</p:column>
             <p:column
                  headerText="#{msg.acoes}"
                  style="text-align: center;"
-                 width="15%">
+                 width="5%">
 	               <p:commandButton
 	                  icon="ui-icon-pencil"
 	                  process="@this" title="#{msg.editar}"

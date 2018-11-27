@@ -52,9 +52,9 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 	public void init() {
 		filtrosPesquisa.add(new FiltroPesquisa("Pesquisar por Todos registros", ""));
 		filtrosPesquisa.add(new FiltroPesquisa("Pesquisar por Nome", "nome"));
-		filtrosPesquisa.add(new FiltroPesquisa("Pesquisar por Login", "login"));
-		filtrosPesquisa.add(new FiltroPesquisa("Pesquisar por Função", "funcaoUsuarioEnum"));
-		filtrosPesquisa.add(new FiltroPesquisa("Pesquisar por Situação", "statusUsuarioEnum"));
+//		filtrosPesquisa.add(new FiltroPesquisa("Pesquisar por Login", "login"));
+//		filtrosPesquisa.add(new FiltroPesquisa("Pesquisar por Função", "funcaoUsuarioEnum"));
+//		filtrosPesquisa.add(new FiltroPesquisa("Pesquisar por Situação", "statusUsuarioEnum"));
 	}
 
 	public ManterUsuarioBean() {
