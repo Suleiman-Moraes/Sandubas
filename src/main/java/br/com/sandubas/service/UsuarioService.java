@@ -262,15 +262,22 @@ public class UsuarioService implements Serializable {
 		usuario.setSenha(hashedPass);
 	}
 
-	public void excluirUsuario(Usuario usuario) throws NegocioException {
+	public void inativarOrAtivarUsuario(Usuario objeto) throws NegocioException{
+		if(objeto != null) {
+			switch (objeto.getStatusUsuarioEnum()) {
+			case INATIVO:
+				objeto.setStatusUsuarioEnum(StatusUsuarioEnum.ATIVO);
+				break;
+			default:
+				objeto.setStatusUsuarioEnum(StatusUsuarioEnum.INATIVO);
+				break;
+			}
+		}
 		try {
-			this.validarExclusao(usuario);
-			this.usuarioDAO.delete(Usuario.class, usuario.getId());
-			throw new NegocioException(FacesUtil.propertiesLoader().getProperty("usuarioExclusao"), Boolean.TRUE);
+			this.getUsuarioDAO().update(objeto);
 		} catch (NegocioException e) {
-			throw new NegocioException(e.getMessage(), e.isTypeException());
-		} catch (Exception e) {
-			throw new NegocioException(e.getMessage(), Boolean.FALSE);
+			e.printStackTrace();
+			throw e;
 		}
 	}
 

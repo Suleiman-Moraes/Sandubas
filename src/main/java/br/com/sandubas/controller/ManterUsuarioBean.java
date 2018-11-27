@@ -131,9 +131,11 @@ public class ManterUsuarioBean extends TemplatePaginacao<Usuario> implements Ser
 	@Override
 	public void deletarObjeto() {
 		try {
-			this.service.excluirUsuario(getUsuario());
+			this.service.inativarOrAtivarUsuario(getUsuario());
 		} catch (NegocioException e) {
 			FacesUtil.addDynamicMessage(e.getMessage(), e.isTypeException());
+		} catch (Exception e) {
+			FacesUtil.addDynamicMessage(e.getMessage(), Boolean.FALSE);
 		}
 	}
 

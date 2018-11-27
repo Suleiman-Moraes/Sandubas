@@ -112,6 +112,17 @@
 					<p:commandButton icon="fa fa-remove" title="#{msg.inativar}"
 						process="@this" update="@form"
 						action="#{controlador.deletarObjeto}"
+						rendered="#{registro.statusUsuarioEnum eq 'ATIVO'}"
+						disabled="#{registro.id eq '2'}">
+						<f:setPropertyActionListener value="#{registro}"
+							target="#{controlador.objeto}" />
+						<p:confirm header="#{msg.registroDeletar}"
+							message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />
+					</p:commandButton>
+					<p:commandButton icon="fa fa-fw fa-check" title="#{msg.ativar}"
+						process="@this" update="@form"
+						action="#{controlador.deletarObjeto}"
+						rendered="#{registro.statusUsuarioEnum eq 'INATIVO'}"
 						disabled="#{registro.id eq '2'}">
 						<f:setPropertyActionListener value="#{registro}"
 							target="#{controlador.objeto}" />

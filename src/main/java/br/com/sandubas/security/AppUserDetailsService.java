@@ -18,13 +18,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import br.com.sandubas.dao.UsuarioDAO;
+import br.com.sandubas.exception.UsuarioInativoException;
 import br.com.sandubas.exception.UsuarioSemPerfilException;
 import br.com.sandubas.helper.EnumHelper;
 import br.com.sandubas.model.Perfil;
 import br.com.sandubas.model.Usuario;
 import br.com.sandubas.model.enums.FuncaoUsuarioEnum;
 import br.com.sandubas.model.enums.FuncionalidadeEnum;
+import br.com.sandubas.model.enums.StatusUsuarioEnum;
 import br.com.sandubas.util.cdi.CDIServiceLocator;
+import br.com.sandubas.util.jsf.FacesUtil;
 
 public class AppUserDetailsService implements UserDetailsService {
 
@@ -34,6 +37,9 @@ public class AppUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UsuarioDAO usuarioDAO = CDIServiceLocator.getBean(UsuarioDAO.class);
 		Usuario usuario = usuarioDAO.login(username);
+		if(usuario.getStatusUsuarioEnum() == null || usuario.getStatusUsuarioEnum().equals(StatusUsuarioEnum.INATIVO)) {
+			throw new UsuarioInativoException(FacesUtil.propertiesLoader().getProperty("usuarioInativo"));
+		}
 		UsuarioSistema user = null;
 		profile = EnumHelper.getFuncaoUsuarioEnum(usuario.getFuncaoUsuarioEnum().getId(), usuario);
 		if (profile == null) {
