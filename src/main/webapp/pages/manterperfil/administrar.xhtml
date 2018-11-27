@@ -64,7 +64,8 @@
 
 						<h:selectOneMenu 
 							id="filtroSelecionado"
-							value="#{manterPerfilBean.filtroSelecionado}">
+							value="#{manterPerfilBean.filtroSelecionado}"
+							disabled="true">
 							<p:ajax 
 								event="change"
 								listener="#{manterPerfilBean.selecionarFiltroPesquisa}" />
@@ -115,7 +116,7 @@
 	                  icon="ui-icon-pencil"
 	                  process="@this" title="#{msg.editar}"
 	                  action="#{manterPerfilBean.abrirModalPerfil(perfil)}"
-	                  disabled="#{perfil.id eq '1'}">
+	                  disabled="#{perfil.id eq '1' or true}">
 	                  <p:ajax
 	                     event="dialogReturn"
 	                     update="listarPerfis"
@@ -124,7 +125,7 @@
 	               <p:commandButton
 	                  icon="fa fa-remove" title="#{msg.excluir}"
 	                  process="@this" update="@form" action="#{manterPerfilBean.excluirPerfil}"
-	                  disabled="#{perfil.id eq '1'}">
+	                  disabled="#{perfil.id eq '1' or true}">
 	                  	<f:setPropertyActionListener value="#{perfil}" target="#{manterPerfilBean.perfil}"/>
 	                    <p:confirm header="#{msg.perfilExcluir}" message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />                  	
 	               </p:commandButton> 

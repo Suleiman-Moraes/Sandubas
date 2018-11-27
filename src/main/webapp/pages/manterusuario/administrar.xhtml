@@ -116,7 +116,7 @@
 						disabled="#{registro.id eq '2'}">
 						<f:setPropertyActionListener value="#{registro}"
 							target="#{controlador.objeto}" />
-						<p:confirm header="#{msg.registroDeletar}"
+						<p:confirm header="#{msg.inativar}"
 							message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />
 					</p:commandButton>
 					<p:commandButton icon="fa fa-fw fa-check" title="#{msg.ativar}"
@@ -126,7 +126,7 @@
 						disabled="#{registro.id eq '2'}">
 						<f:setPropertyActionListener value="#{registro}"
 							target="#{controlador.objeto}" />
-						<p:confirm header="#{msg.registroDeletar}"
+						<p:confirm header="#{msg.ativar}"
 							message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
