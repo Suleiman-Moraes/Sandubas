@@ -29,7 +29,7 @@
 
 			<p:dataTable id="listarRegistros" value="#{controlador.registros}"
 				var="registro" paginator="true" rows="5"
-				paginatorAlwaysVisible="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
 				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				lazy="true" towsPerPageTemplate="5, 10" widgetVar="registroWV"
 				reflow="true" emptyMessage="#{msg.nenhumRegistro}">

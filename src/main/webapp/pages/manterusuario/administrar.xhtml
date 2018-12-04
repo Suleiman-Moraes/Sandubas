@@ -15,32 +15,30 @@
 		<h:form id="formulario">
 			<p:growl autoUpdate="true" />
 			<ui:param name="controlador" value="#{manterUsuarioBean}" />
-			
+
 			<p:toolbar>
 				<f:facet name="left">
-					<p:commandButton icon="ui-icon-plus"
-						value="#{msg.usuarioNovo}" process="@form"
-						action="#{controlador.abrirModalCrud(null)}">
+					<p:commandButton icon="ui-icon-plus" value="#{msg.usuarioNovo}"
+						process="@form" action="#{controlador.abrirModalCrud(null)}">
 						<p:ajax event="dialogReturn" update="listarRegistros"
 							listener="#{controlador.mostrarMensagemSucesso(false)}" />
 					</p:commandButton>
 				</f:facet>
 			</p:toolbar>
 			<p:spacer height="20" />
-			
-			<p:dataTable id="listarRegistros"
-				value="#{controlador.registros}" var="registro"
-				paginator="true" rows="5" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom"
+
+			<p:dataTable id="listarRegistros" value="#{controlador.registros}"
+				var="registro" paginator="true" rows="5"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
 				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				lazy="true" towsPerPageTemplate="5, 10" widgetVar="registroWV"
 				reflow="true" emptyMessage="#{msg.nenhumRegistro}">
 
 				<f:facet name="header">
-					
-					<p:outputPanel id="painelPesquisa"
-						style="text-align: right" autoUpdate="true" layout="block">
-						
+
+					<p:outputPanel id="painelPesquisa" style="text-align: right"
+						autoUpdate="true" layout="block">
+
 						<h:outputText id="aep" value="#{msg.usuarioPesquisa}:"
 							styleClass="fonteNormal" rendered="false" />
 
@@ -49,8 +47,8 @@
 							<p:ajax event="change"
 								listener="#{controlador.selecionarFiltroPesquisa}" />
 							<f:selectItem itemValue="#{null}"
-								itemLabel="#{msg.selecioneOCampo}"
-								noSelectionOption="true" itemDisabled="true" />
+								itemLabel="#{msg.selecioneOCampo}" noSelectionOption="true"
+								itemDisabled="true" />
 							<f:selectItems value="#{controlador.filtrosPesquisa}"
 								var="filtroPesquisa" itemLabel="#{filtroPesquisa.label}"
 								itemValue="#{filtroPesquisa.value}" />
@@ -61,28 +59,29 @@
 						<h:inputText id="id" value="#{controlador.filtroValor}"
 							onkeypress="return somenteNumero(event);" maxlength="200"
 							style="display: none" />
-						
-						<h:inputText id="nome"
-							value="#{controlador.filtroValor}" maxlength="200"
-							onkeypress="return naoAceitaEnter(event);"
+
+						<h:inputText id="nome" value="#{controlador.filtroValor}"
+							maxlength="200" onkeypress="return naoAceitaEnter(event);"
 							style="display: none" />
-							
-						<h:inputText id="statusUsuarioEnum" value="#{controlador.filtroValor}"
+
+						<h:inputText id="statusUsuarioEnum"
+							value="#{controlador.filtroValor}"
 							onkeypress="return naoAceitaEnter(event);" maxlength="200"
 							style="display: none" />
-							
-						<h:inputText id="funcaoUsuarioEnum" value="#{controlador.filtroValor}"
+
+						<h:inputText id="funcaoUsuarioEnum"
+							value="#{controlador.filtroValor}"
 							onkeypress="return naoAceitaEnter(event);" maxlength="200"
 							style="display: none" />
-							
+
 						<h:inputText id="login" value="#{controlador.filtroValor}"
 							onkeypress="return naoAceitaEnter(event);" maxlength="200"
 							style="display: none" />
-						
+
 						<h:inputHidden id="globalFilter" />
 					</p:outputPanel>
 				</f:facet>
-				
+
 				<p:column headerText="#{msg.codigo}" styleClass="tableCodigo"
 					width="5%">
 					<h:outputText value="#{registro.id}" />
@@ -99,7 +98,7 @@
 				<p:column style="text-align:center;" headerText="#{msg.funcao}">
 					<h:outputText value="#{registro.funcaoUsuarioEnum.descricao}" />
 				</p:column>
-				
+
 				<p:column headerText="#{msg.acoes}" width="10%"
 					style="text-align: center;">
 					<p:commandButton icon="ui-icon-pencil" process="@this"
@@ -130,7 +129,10 @@
 							message="#{msg.confirmaOperacao}" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
-				
+				<f:facet name="footer">
+					<p:outputLabel id="totalRegistrosID"
+						value="#{msg.totalRegistros} #{controlador.totalDeRegistros}" />
+				</f:facet>
 			</p:dataTable>
 		</h:form>
 	</ui:define>
