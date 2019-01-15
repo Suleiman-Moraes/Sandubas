@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
-apply plugin: 'war'
+apply plugin: 'jar'
 
 archivesBaseName = 'sandubas'
 version = 'v1.0.0'
