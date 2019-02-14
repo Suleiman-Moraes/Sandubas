@@ -15,6 +15,7 @@ import javax.inject.Named;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
+import org.springframework.data.domain.Page;
 
 import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.ClassificacaoMercadoria;
@@ -43,6 +44,7 @@ public class ManterClassificacaoMercadoriaBean extends TemplatePaginacao<Classif
 					Map<String, Object> filters) {
 				List<ClassificacaoMercadoria> registros = null;
 				filtroValor = filters.isEmpty() ? "" : filters.get("globalFilter").toString();
+				Page<ClassificacaoMercadoria> page = 
 				registros = service.paginarRegistro(first, pageSize, filtroSelecionado, filtroValor);
 				totalDeRegistros = service.contarRegistrosCadastrados(filtroSelecionado, filtroValor);
 				setRowCount(totalDeRegistros);
