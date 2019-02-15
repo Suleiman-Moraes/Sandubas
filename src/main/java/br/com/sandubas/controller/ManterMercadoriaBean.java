@@ -167,10 +167,18 @@ public class ManterMercadoriaBean extends TemplatePaginacao<Mercadoria>
 	}
 
 	public List<ClassificacaoMercadoria> getListaClassificacaoMercadoria() {
-		if (listaClassificacaoMercadoria == null) {
+		try {
+			if (listaClassificacaoMercadoria == null) {
+				listaClassificacaoMercadoria = service.getClassificacaoMercadoriaService().findAll();
+				if(listaClassificacaoMercadoria == null) {
+					listaClassificacaoMercadoria = new LinkedList<>();
+				}
+			}
+			return listaClassificacaoMercadoria;
+		} catch (Exception e) {
 			listaClassificacaoMercadoria = new LinkedList<>();
+			return listaClassificacaoMercadoria;
 		}
-		return listaClassificacaoMercadoria;
 	}
 
 	public List<TipoProduto> getListaTipoProduto() {

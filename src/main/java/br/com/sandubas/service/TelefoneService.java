@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import br.com.sandubas.dao.ClassificacaoMercadoriaDAO;
 import br.com.sandubas.dao.TelefoneDAO;
 import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.ClassificacaoMercadoria;

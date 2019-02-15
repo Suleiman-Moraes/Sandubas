@@ -2,8 +2,7 @@ package br.com.sandubas.service;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
-
-import javax.inject.Inject;
+import java.util.List;
 
 import org.springframework.http.HttpMethod;
 
@@ -13,7 +12,6 @@ import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.ClassificacaoMercadoria;
 import br.com.sandubas.model.Page;
 import br.com.sandubas.model.Response;
-import br.com.sandubas.model.X;
 import br.com.sandubas.model.interfaces.ICRUDService;
 import br.com.sandubas.util.ClientHelp;
 import br.com.sandubas.util.StringUtil;
@@ -101,6 +99,25 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 			ClassificacaoMercadoria objeto = null;
 			Response<ClassificacaoMercadoria> response = (Response<ClassificacaoMercadoria>) ClientHelp
 					.realizarRequisicao(String.format("%s/%s", URL_PRINCIPAL, id), HttpMethod.GET, getTypePadrao());
+			if (response != null) {
+				verificarObjetoResponse(response);
+				if (response.getData() != null) {
+					objeto = response.getData();
+				} 
+			}
+			return objeto;
+		} catch (NegocioException e) {
+			throw new NegocioException(e.getMessage(), e.isTypeException());
+		}
+	}
+	
+	public List<ClassificacaoMercadoria> findAll() throws NegocioException {
+		try {
+			List<ClassificacaoMercadoria> objeto = null;
+			Type type = new TypeToken<Response<List<ClassificacaoMercadoria>>>() {
+			}.getType();
+			Response<List<ClassificacaoMercadoria>> response = (Response<List<ClassificacaoMercadoria>>) ClientHelp
+					.realizarRequisicao(URL_PRINCIPAL, HttpMethod.GET, type);
 			if (response != null) {
 				verificarObjetoResponse(response);
 				if (response.getData() != null) {
