@@ -2,8 +2,6 @@ package br.com.sandubas.model;
 
 import java.util.List;
 
-import org.springframework.data.domain.Sort;
-
 import lombok.Getter;
 import lombok.Setter;
 

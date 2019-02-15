@@ -10,9 +10,11 @@ import javax.faces.event.AjaxBehaviorEvent;
 import org.primefaces.model.LazyDataModel;
 
 import br.com.sandubas.model.FiltroPesquisa;
+import br.com.sandubas.model.Page;
 
 
 public abstract class TemplatePaginacao<T> {
+	protected Page<T> pages;
 	protected String filtroSelecionado;
 	protected String filtroValor;
 	protected int totalDeRegistros;
@@ -70,6 +72,9 @@ public abstract class TemplatePaginacao<T> {
 	public String getCaminhoComponenteCompleto(String idComponente) {
 		return CAMINHO_COMPONENTE + idComponente;
 	}
+	public Page<T> getPages() {
+		return pages;
+	}
 	public T getObjeto() {
 		return objeto;
 	}
@@ -87,6 +92,9 @@ public abstract class TemplatePaginacao<T> {
 	}
 	public List<FiltroPesquisa> getFiltrosPesquisa() {
 		return filtrosPesquisa;
+	}
+	public void setPages(Page<T> pages) {
+		this.pages = pages;
 	}
 	public void setObjeto(T objeto) {
 		this.objeto = objeto;

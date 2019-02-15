@@ -2,6 +2,7 @@ package br.com.sandubas.controller;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -167,8 +168,7 @@ public class ManterMercadoriaBean extends TemplatePaginacao<Mercadoria>
 
 	public List<ClassificacaoMercadoria> getListaClassificacaoMercadoria() {
 		if (listaClassificacaoMercadoria == null) {
-			listaClassificacaoMercadoria = service.getClassificacaoMercadoriaService().getPersistencia()
-					.getOrderList(ClassificacaoMercadoria.class, "nome");
+			listaClassificacaoMercadoria = new LinkedList<>();
 		}
 		return listaClassificacaoMercadoria;
 	}

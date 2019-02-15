@@ -21,10 +21,11 @@ public class TelefoneService implements Serializable, ICRUDService<Telefone>{
 	private TelefoneDAO persistencia;
 
 	@Override
-	public void salvar(Telefone objeto) throws NegocioException {
+	public Telefone salvar(Telefone objeto) throws NegocioException {
 		try {
 			if (!this.registroExiste(objeto)) {
 				this.persistencia.update(objeto);
+				return objeto;
 			} else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("telefoneExistente"),
 						Boolean.FALSE);

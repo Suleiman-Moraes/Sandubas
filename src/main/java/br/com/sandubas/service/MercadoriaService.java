@@ -87,10 +87,11 @@ public class MercadoriaService implements Serializable, ICRUDService<Mercadoria>
 	}
 
 	@Override
-	public void salvar(Mercadoria objeto) throws NegocioException {
+	public Mercadoria salvar(Mercadoria objeto) throws NegocioException {
 		try {
 			if (!this.registroExiste(objeto)) {
 				this.persistencia.update(objeto);
+				return objeto;
 			} else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("mercadoriaExistente"),
 						Boolean.FALSE);

@@ -70,10 +70,11 @@ public class TipoProdutoService implements Serializable, ICRUDService<TipoProdut
 	}
 	
 	@Override
-	public void salvar(TipoProduto objeto) throws NegocioException {
+	public TipoProduto salvar(TipoProduto objeto) throws NegocioException {
 		try {
 			if (!this.registroExiste(objeto)) {
 				this.persistencia.update(objeto);
+				return objeto;
 			} else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("tipoProdutoExistente"),
 						Boolean.FALSE);

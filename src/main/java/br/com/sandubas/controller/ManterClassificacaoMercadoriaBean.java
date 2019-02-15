@@ -2,6 +2,7 @@ package br.com.sandubas.controller;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,6 @@ import javax.inject.Named;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
-import org.springframework.data.domain.Page;
 
 import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.ClassificacaoMercadoria;
@@ -42,14 +42,19 @@ public class ManterClassificacaoMercadoriaBean extends TemplatePaginacao<Classif
 			@Override
 			public List<ClassificacaoMercadoria> load(int first, int pageSize, String sortField, SortOrder sortOrder,
 					Map<String, Object> filters) {
-				List<ClassificacaoMercadoria> registros = null;
-				filtroValor = filters.isEmpty() ? "" : filters.get("globalFilter").toString();
-				Page<ClassificacaoMercadoria> page = 
-				registros = service.paginarRegistro(first, pageSize, filtroSelecionado, filtroValor);
-				totalDeRegistros = service.contarRegistrosCadastrados(filtroSelecionado, filtroValor);
-				setRowCount(totalDeRegistros);
-				filtroValor = "";
-				return registros;
+				try {
+					List<ClassificacaoMercadoria> registros = null;
+					filtroValor = filters.isEmpty() ? "" : filters.get("globalFilter").toString();
+					pages = service.paginar(first, pageSize, filtroSelecionado, filtroValor); 
+					registros = pages.getContent();
+					totalDeRegistros = pages.getTotalElements();
+					setRowCount(totalDeRegistros);
+					filtroValor = "";
+					return registros;
+				} catch (Exception e) {
+					FacesUtil.addErrorMessage(e.getMessage());
+					return new LinkedList<ClassificacaoMercadoria>();
+				}
 			}
 		};
 	}
