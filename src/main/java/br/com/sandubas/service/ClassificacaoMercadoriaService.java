@@ -31,7 +31,7 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 			Page<ClassificacaoMercadoria> pages = null;
 			campo = campo == null ? "" : campo;
 			valor = StringUtil.isNullOrEmpty(valor.trim()) ? StringUtil.UNINFORMED : valor;
-			
+
 			String nome = campo.equals("nome") ? valor : StringUtil.UNINFORMED;
 			String descricao = campo.equals("descricao") ? valor : StringUtil.UNINFORMED;
 			String id = campo.equals("id") ? valor : "0";
@@ -45,7 +45,7 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 				verificarObjetoResponse(response);
 				if (response.getData() != null) {
 					pages = response.getData();
-				} 
+				}
 			}
 			return pages;
 		} catch (NegocioException e) {
@@ -57,21 +57,20 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 	@Override
 	public ClassificacaoMercadoria salvar(ClassificacaoMercadoria objeto) throws NegocioException {
 		try {
-			if (!this.registroExiste(objeto)) {
-				HttpMethod method = objeto.getId() != null ? HttpMethod.PUT : HttpMethod.POST;
-				Response<ClassificacaoMercadoria> response = (Response<ClassificacaoMercadoria>) ClientHelp
-						.realizarRequisicao(URL_PRINCIPAL, method, getTypePadrao(), objeto);
-				if (response != null) {
-					verificarObjetoResponse(response);
-					if (response.getData() != null) {
-						objeto = response.getData();
-					} 
+			HttpMethod method = objeto.getId() != null ? HttpMethod.PUT : HttpMethod.POST;
+			Response<ClassificacaoMercadoria> response = (Response<ClassificacaoMercadoria>) ClientHelp
+					.realizarRequisicao(URL_PRINCIPAL, method, getTypePadrao(), objeto);
+			if (response != null) {
+				verificarObjetoResponse(response);
+				if (response.getData() != null) {
+					objeto = response.getData();
 				}
-				return objeto;
-			} else {
+			}
+			else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("classificacaoMercadoriaExistente"),
 						Boolean.FALSE);
 			}
+			return objeto;
 		} catch (NegocioException e) {
 			throw new NegocioException(e.getMessage(), e.isTypeException());
 		} catch (Exception e) {
@@ -83,7 +82,7 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 	public void excluir(ClassificacaoMercadoria objeto) throws NegocioException {
 		try {
 			Boolean exclusao = excluir(String.format("%s/%s", URL_PRINCIPAL, objeto.getId()));
-			if(exclusao) {
+			if (exclusao) {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("classificacaoMercadoriaExclusao"),
 						Boolean.TRUE);
 			}
@@ -93,7 +92,7 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 			throw new NegocioException(e.getMessage(), Boolean.FALSE);
 		}
 	}
-	
+
 	public ClassificacaoMercadoria findById(String id) throws NegocioException {
 		try {
 			ClassificacaoMercadoria objeto = null;
@@ -103,14 +102,14 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 				verificarObjetoResponse(response);
 				if (response.getData() != null) {
 					objeto = response.getData();
-				} 
+				}
 			}
 			return objeto;
 		} catch (NegocioException e) {
 			throw new NegocioException(e.getMessage(), e.isTypeException());
 		}
 	}
-	
+
 	public List<ClassificacaoMercadoria> findAll() throws NegocioException {
 		try {
 			List<ClassificacaoMercadoria> objeto = null;
@@ -122,7 +121,7 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 				verificarObjetoResponse(response);
 				if (response.getData() != null) {
 					objeto = response.getData();
-				} 
+				}
 			}
 			return objeto;
 		} catch (NegocioException e) {
@@ -130,10 +129,32 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 		}
 	}
 
-	@Override
-	public Boolean registroExiste(ClassificacaoMercadoria objeto) {
-		// TODO implementar
-		return Boolean.FALSE;
+	public Boolean registroExiste(ClassificacaoMercadoria objeto) throws NegocioException {
+		try {
+			Boolean exists = existsByField(
+					String.format("%s/exists/field=nome/value=%s", URL_PRINCIPAL, objeto.getNome()));
+			return exists;
+		} catch (NegocioException e) {
+			throw new NegocioException(e.getMessage(), e.isTypeException());
+		}
+	}
+
+	public ClassificacaoMercadoria findByField(String field, String value) throws NegocioException {
+		try {
+			ClassificacaoMercadoria objeto = null;
+			Response<ClassificacaoMercadoria> response = (Response<ClassificacaoMercadoria>) ClientHelp
+					.realizarRequisicao(String.format("%s/field=%s/value=%s", URL_PRINCIPAL, field, value),
+							HttpMethod.GET, getTypePadrao());
+			if (response != null) {
+				verificarObjetoResponse(response);
+				if (response.getData() != null) {
+					objeto = response.getData();
+				}
+			}
+			return objeto;
+		} catch (NegocioException e) {
+			throw new NegocioException(e.getMessage(), e.isTypeException());
+		}
 	}
 
 	private Type getTypePadrao() {

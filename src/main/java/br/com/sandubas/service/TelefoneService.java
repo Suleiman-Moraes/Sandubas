@@ -49,7 +49,6 @@ public class TelefoneService implements Serializable, ICRUDService<Telefone>{
 		}
 	}
 
-	@Override
 	public Boolean registroExiste(Telefone objeto) {
 		//TODO implementar
 		return Boolean.FALSE;

@@ -99,7 +99,6 @@ public class TipoProdutoService implements Serializable, ICRUDService<TipoProdut
 		}
 	}
 
-	@Override
 	public Boolean registroExiste(TipoProduto objeto) {
 		//TODO implementar
 		return Boolean.FALSE;

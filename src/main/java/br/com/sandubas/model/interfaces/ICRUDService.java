@@ -11,19 +11,25 @@ import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.Response;
 import br.com.sandubas.util.ClientHelp;
 
+@SuppressWarnings("unchecked")
 public interface ICRUDService<T extends Serializable> {
 	T salvar(T objeto) throws NegocioException;
 
 	void excluir(T objeto) throws NegocioException;
-
-	public Boolean registroExiste(T objeto);
-
-	@SuppressWarnings("unchecked")
+	
 	default Boolean excluir(String url) throws NegocioException {
+		return realizarRequisicaoDevolvendoBoolean(url, HttpMethod.DELETE);
+	}
+	
+	default Boolean existsByField(String url) throws NegocioException {
+		return realizarRequisicaoDevolvendoBoolean(url, HttpMethod.GET);
+	}
+	
+	default Boolean realizarRequisicaoDevolvendoBoolean(String url, HttpMethod method) throws NegocioException {
 		try {
 			Type type = new TypeToken<Response<Boolean>>() {
 			}.getType();
-			Response<Boolean> response = (Response<Boolean>) ClientHelp.realizarRequisicao(url, HttpMethod.DELETE, type);
+			Response<Boolean> response = (Response<Boolean>) ClientHelp.realizarRequisicao(url, method, type);
 			if (response != null) {
 				verificarObjetoResponse(response);
 				if (response.getData() != null) {

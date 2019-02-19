@@ -116,7 +116,6 @@ public class MercadoriaService implements Serializable, ICRUDService<Mercadoria>
 		}
 	}
 
-	@Override
 	public Boolean registroExiste(Mercadoria objeto) {
 		//TODO implementar
 		return Boolean.FALSE;
