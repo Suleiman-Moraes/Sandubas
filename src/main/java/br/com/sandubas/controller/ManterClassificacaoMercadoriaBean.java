@@ -31,7 +31,7 @@ public class ManterClassificacaoMercadoriaBean extends TemplatePaginacao<Classif
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private ClassificacaoMercadoriaService service;
+	private ClassificacaoMercadoriaService service; 
 	
 	public ManterClassificacaoMercadoriaBean() {
 		registros = new LazyDataModel<ClassificacaoMercadoria>() {
