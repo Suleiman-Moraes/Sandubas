@@ -64,8 +64,8 @@ public class Mercadoria implements IEntidadeRelacional, Serializable {
 	@JoinColumn(name = "id_tipo_produto")
 	private TipoProduto tipoProduto;
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "id_classificacao_mercadoria")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_classificacao_mercadoria")
 	private ClassificacaoMercadoria classificacaoMercadoria; 
 	
 	public Mercadoria() {}

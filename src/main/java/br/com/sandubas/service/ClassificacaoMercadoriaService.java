@@ -1,76 +1,81 @@
 package br.com.sandubas.service;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 
-import org.springframework.http.HttpMethod;
+import javax.inject.Inject;
 
-import com.google.gson.reflect.TypeToken;
-
+import br.com.sandubas.dao.ClassificacaoMercadoriaDAO;
 import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.ClassificacaoMercadoria;
-import br.com.sandubas.model.Page;
-import br.com.sandubas.model.Response;
 import br.com.sandubas.model.interfaces.ICRUDService;
-import br.com.sandubas.util.ClientHelp;
-import br.com.sandubas.util.StringUtil;
+import br.com.sandubas.model.interfaces.IPaginacaoService;
 import br.com.sandubas.util.jsf.FacesUtil;
 
 @SuppressWarnings("all")
-public class ClassificacaoMercadoriaService implements Serializable, ICRUDService<ClassificacaoMercadoria> {
+public class ClassificacaoMercadoriaService implements Serializable, ICRUDService<ClassificacaoMercadoria>, IPaginacaoService<ClassificacaoMercadoria>{
 
 	private static final long serialVersionUID = -8735358206076950412L;
+	 
+	@Inject
+	private ClassificacaoMercadoriaDAO persistencia;
 
-	private static final String URL_PRINCIPAL = FacesUtil.propertiesLoaderURL().getProperty("linkWebService")
-			+ "/classificacaomercadoria";
-
-	public Page<ClassificacaoMercadoria> paginar(Integer inicioDaPagina, Integer tamanhoDaPagina, String campo,
-			String valor) throws NegocioException {
-		try {
-			Page<ClassificacaoMercadoria> pages = null;
-			campo = campo == null ? "" : campo;
-			valor = StringUtil.isNullOrEmpty(valor.trim()) ? StringUtil.UNINFORMED : valor;
-
-			String nome = campo.equals("nome") ? valor : StringUtil.UNINFORMED;
-			String descricao = campo.equals("descricao") ? valor : StringUtil.UNINFORMED;
-			String id = campo.equals("id") ? valor : "0";
-			final String url = String.format("%s/%s/%s/%s/%s/%s", URL_PRINCIPAL, inicioDaPagina, tamanhoDaPagina, id,
-					nome, descricao);
-			Type type = new TypeToken<Response<Page<ClassificacaoMercadoria>>>() {
-			}.getType();
-			Response<Page<ClassificacaoMercadoria>> response = (Response<Page<ClassificacaoMercadoria>>) ClientHelp
-					.realizarRequisicao(url, HttpMethod.GET, type);
-			if (response != null) {
-				verificarObjetoResponse(response);
-				if (response.getData() != null) {
-					pages = response.getData();
-				}
-			}
-			return pages;
-		} catch (NegocioException e) {
-			e.printStackTrace();
-			throw e;
+	@Override
+	public List<ClassificacaoMercadoria> paginarRegistro(Integer inicioDaPagina, Integer tamanhoDaPagina, String campo,
+			String valor) {
+		List<ClassificacaoMercadoria> listaRegistro = null;
+		campo = campo == null ? "" : campo;
+		valor = valor == null ? "" : valor;
+		String condicao = "1 = 1";
+		if (!campo.isEmpty() && !valor.isEmpty()) {
+			condicao += devolverCondicaoParaPaginacao(campo, valor);
 		}
+		condicao += " ORDER BY classificacaomercadoria.id DESC";
+		
+		listaRegistro = persistencia.paginar(inicioDaPagina, tamanhoDaPagina, condicao);
+		
+		return listaRegistro;
 	}
 
 	@Override
-	public ClassificacaoMercadoria salvar(ClassificacaoMercadoria objeto) throws NegocioException {
+	public Integer contarRegistrosCadastrados(String campo, String valor) {
+		Integer total = 0;
+		campo = campo == null ? "" : campo;
+		valor = valor == null ? "" : valor;
+		String condicao = "1 = 1";
+		if (!campo.isEmpty() && !valor.isEmpty()) {
+			condicao += devolverCondicaoParaPaginacao(campo, valor);
+		}
+		total = persistencia.count(ClassificacaoMercadoria.class, condicao).intValue();
+		return total;
+	}
+	
+	@Override
+	public String devolverCondicaoParaPaginacao(String campo, String valor) {
+		String condicao = "";
+		switch (campo) {
+		case "nome":
+			condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(classificacaomercadoria." + campo + ")", valor.toUpperCase());
+			break;
+		case "id":
+			condicao += String.format(" AND %s = %s", campo, valor);
+			break;
+		case "descricao":
+			condicao += String.format(" AND %s LIKE '%%%s%%'", "UPPER(classificacaomercadoria." + campo + ")", valor.toUpperCase());
+			break;
+		}
+		return condicao;
+	}
+	
+	@Override
+	public void salvar(ClassificacaoMercadoria objeto) throws NegocioException {
 		try {
-			HttpMethod method = objeto.getId() != null ? HttpMethod.PUT : HttpMethod.POST;
-			Response<ClassificacaoMercadoria> response = (Response<ClassificacaoMercadoria>) ClientHelp
-					.realizarRequisicao(URL_PRINCIPAL, method, getTypePadrao(), objeto);
-			if (response != null) {
-				verificarObjetoResponse(response);
-				if (response.getData() != null) {
-					objeto = response.getData();
-				}
-			}
-			else {
+			if (!this.registroExiste(objeto)) {
+				this.persistencia.update(objeto);
+			} else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("classificacaoMercadoriaExistente"),
 						Boolean.FALSE);
 			}
-			return objeto;
 		} catch (NegocioException e) {
 			throw new NegocioException(e.getMessage(), e.isTypeException());
 		} catch (Exception e) {
@@ -81,11 +86,9 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 	@Override
 	public void excluir(ClassificacaoMercadoria objeto) throws NegocioException {
 		try {
-			Boolean exclusao = excluir(String.format("%s/%s", URL_PRINCIPAL, objeto.getId()));
-			if (exclusao) {
-				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("classificacaoMercadoriaExclusao"),
-						Boolean.TRUE);
-			}
+//			this.validarExclusao(objeto.getId(), "areaEntrada", Protocolo.class.getName(), "areaEntradaInvalidaExclusaoManifestacao");
+			this.persistencia.delete(ClassificacaoMercadoria.class, objeto.getId());
+			throw new NegocioException(FacesUtil.propertiesLoader().getProperty("classificacaoMercadoriaExclusao"), Boolean.TRUE);
 		} catch (NegocioException e) {
 			throw new NegocioException(e.getMessage(), e.isTypeException());
 		} catch (Exception e) {
@@ -93,72 +96,13 @@ public class ClassificacaoMercadoriaService implements Serializable, ICRUDServic
 		}
 	}
 
-	public ClassificacaoMercadoria findById(String id) throws NegocioException {
-		try {
-			ClassificacaoMercadoria objeto = null;
-			Response<ClassificacaoMercadoria> response = (Response<ClassificacaoMercadoria>) ClientHelp
-					.realizarRequisicao(String.format("%s/%s", URL_PRINCIPAL, id), HttpMethod.GET, getTypePadrao());
-			if (response != null) {
-				verificarObjetoResponse(response);
-				if (response.getData() != null) {
-					objeto = response.getData();
-				}
-			}
-			return objeto;
-		} catch (NegocioException e) {
-			throw new NegocioException(e.getMessage(), e.isTypeException());
-		}
+	@Override
+	public Boolean registroExiste(ClassificacaoMercadoria objeto) {
+		//TODO implementar
+		return Boolean.FALSE;
 	}
-
-	public List<ClassificacaoMercadoria> findAll() throws NegocioException {
-		try {
-			List<ClassificacaoMercadoria> objeto = null;
-			Type type = new TypeToken<Response<List<ClassificacaoMercadoria>>>() {
-			}.getType();
-			Response<List<ClassificacaoMercadoria>> response = (Response<List<ClassificacaoMercadoria>>) ClientHelp
-					.realizarRequisicao(URL_PRINCIPAL, HttpMethod.GET, type);
-			if (response != null) {
-				verificarObjetoResponse(response);
-				if (response.getData() != null) {
-					objeto = response.getData();
-				}
-			}
-			return objeto;
-		} catch (NegocioException e) {
-			throw new NegocioException(e.getMessage(), e.isTypeException());
-		}
-	}
-
-	public Boolean registroExiste(ClassificacaoMercadoria objeto) throws NegocioException {
-		try {
-			Boolean exists = existsByField(
-					String.format("%s/exists/field=nome/value=%s", URL_PRINCIPAL, objeto.getNome()));
-			return exists;
-		} catch (NegocioException e) {
-			throw new NegocioException(e.getMessage(), e.isTypeException());
-		}
-	}
-
-	public ClassificacaoMercadoria findByField(String field, String value) throws NegocioException {
-		try {
-			ClassificacaoMercadoria objeto = null;
-			Response<ClassificacaoMercadoria> response = (Response<ClassificacaoMercadoria>) ClientHelp
-					.realizarRequisicao(String.format("%s/field=%s/value=%s", URL_PRINCIPAL, field, value),
-							HttpMethod.GET, getTypePadrao());
-			if (response != null) {
-				verificarObjetoResponse(response);
-				if (response.getData() != null) {
-					objeto = response.getData();
-				}
-			}
-			return objeto;
-		} catch (NegocioException e) {
-			throw new NegocioException(e.getMessage(), e.isTypeException());
-		}
-	}
-
-	private Type getTypePadrao() {
-		return new TypeToken<Response<ClassificacaoMercadoria>>() {
-		}.getType();
+	
+	public ClassificacaoMercadoriaDAO getPersistencia() {
+		return persistencia;
 	}
 }

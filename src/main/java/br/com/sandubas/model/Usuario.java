@@ -41,6 +41,9 @@ import lombok.Setter;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Usuario implements Serializable, IEntidadeRelacional{
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -119,6 +122,38 @@ public class Usuario implements Serializable, IEntidadeRelacional{
 	private Boolean perfilROOT;
 
 	public Usuario() {}
+	/**
+	 * 
+	 * @param id
+	 * @param email
+	 * @param login
+	 * @param senha
+	 * @param novaSenha
+	 * @param confirmacaoSenha
+	 * @param nome
+	 * @param statusUsuarioEnum
+	 * @param funcaoUsuarioEnum
+	 * @param dataAtivacao
+	 * @param dataDesativacao
+	 * @param perfis
+	 */
+	public Usuario(Long id, Email email, String login, String senha, String novaSenha, String confirmacaoSenha,
+			String nome, StatusUsuarioEnum statusUsuarioEnum, FuncaoUsuarioEnum funcaoUsuarioEnum, Date dataAtivacao,
+			Date dataDesativacao, List<Perfil> perfis) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.login = login;
+		this.senha = senha;
+		this.novaSenha = novaSenha;
+		this.confirmacaoSenha = confirmacaoSenha;
+		this.nome = nome;
+		this.statusUsuarioEnum = statusUsuarioEnum;
+		this.funcaoUsuarioEnum = funcaoUsuarioEnum;
+		this.dataAtivacao = dataAtivacao;
+		this.dataDesativacao = dataDesativacao;
+		this.perfis = perfis;
+	}
 	
 	@Override
 	public Object getAtributoIndentificador() {

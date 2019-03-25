@@ -13,6 +13,9 @@ import javax.persistence.Table;
 @Table(name = "email")
 public class Email implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,7 +26,8 @@ public class Email implements Serializable {
 	@org.hibernate.validator.constraints.Email
 	private String email;
 
-	private Boolean principal;
+	@Column(name = "principal_manifestacao")
+	private Boolean principalManifestacao;
 
 	public Email() {
 
@@ -50,16 +54,16 @@ public class Email implements Serializable {
 	}
 
 	public Boolean getPrincipalManifestacao() {
-		return principal;
+		return principalManifestacao;
 	}
 
 	public void setPrincipalManifestacao(Boolean principalManifestacao) {
-		this.principal = principalManifestacao;
+		this.principalManifestacao = principalManifestacao;
 	}
 
 	@Override
 	public String toString() {
-		return "Email [id=" + id + ", email=" + email + ", principalManifestacao=" + principal + "]";
+		return "Email [id=" + id + ", email=" + email + ", principalManifestacao=" + principalManifestacao + "]";
 	}
 
 	@Override

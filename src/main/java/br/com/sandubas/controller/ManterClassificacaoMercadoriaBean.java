@@ -2,7 +2,6 @@ package br.com.sandubas.controller;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class ManterClassificacaoMercadoriaBean extends TemplatePaginacao<Classif
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private ClassificacaoMercadoriaService service;
+	private ClassificacaoMercadoriaService service; 
 	
 	public ManterClassificacaoMercadoriaBean() {
 		registros = new LazyDataModel<ClassificacaoMercadoria>() {
@@ -42,19 +41,13 @@ public class ManterClassificacaoMercadoriaBean extends TemplatePaginacao<Classif
 			@Override
 			public List<ClassificacaoMercadoria> load(int first, int pageSize, String sortField, SortOrder sortOrder,
 					Map<String, Object> filters) {
-				try {
-					List<ClassificacaoMercadoria> registros = null;
-					filtroValor = filters.isEmpty() ? "" : filters.get("globalFilter").toString();
-					pages = service.paginar(first, pageSize, filtroSelecionado, filtroValor); 
-					registros = pages.getContent();
-					totalDeRegistros = pages.getTotalElements();
-					setRowCount(totalDeRegistros);
-					filtroValor = "";
-					return registros;
-				} catch (Exception e) {
-					FacesUtil.addErrorMessage(e.getMessage());
-					return new LinkedList<ClassificacaoMercadoria>();
-				}
+				List<ClassificacaoMercadoria> registros = null;
+				filtroValor = filters.isEmpty() ? "" : filters.get("globalFilter").toString();
+				registros = service.paginarRegistro(first, pageSize, filtroSelecionado, filtroValor);
+				totalDeRegistros = service.contarRegistrosCadastrados(filtroSelecionado, filtroValor);
+				setRowCount(totalDeRegistros);
+				filtroValor = "";
+				return registros;
 			}
 		};
 	}

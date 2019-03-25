@@ -70,11 +70,10 @@ public class TipoProdutoService implements Serializable, ICRUDService<TipoProdut
 	}
 	
 	@Override
-	public TipoProduto salvar(TipoProduto objeto) throws NegocioException {
+	public void salvar(TipoProduto objeto) throws NegocioException {
 		try {
 			if (!this.registroExiste(objeto)) {
 				this.persistencia.update(objeto);
-				return objeto;
 			} else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("tipoProdutoExistente"),
 						Boolean.FALSE);
@@ -99,6 +98,7 @@ public class TipoProdutoService implements Serializable, ICRUDService<TipoProdut
 		}
 	}
 
+	@Override
 	public Boolean registroExiste(TipoProduto objeto) {
 		//TODO implementar
 		return Boolean.FALSE;
