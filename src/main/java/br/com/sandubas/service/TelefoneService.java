@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import br.com.sandubas.dao.ClassificacaoMercadoriaDAO;
 import br.com.sandubas.dao.TelefoneDAO;
 import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.ClassificacaoMercadoria;
@@ -21,10 +20,11 @@ public class TelefoneService implements Serializable, ICRUDService<Telefone>{
 	private TelefoneDAO persistencia;
 
 	@Override
-	public void salvar(Telefone objeto) throws NegocioException {
+	public Telefone salvar(Telefone objeto) throws NegocioException {
 		try {
 			if (!this.registroExiste(objeto)) {
 				this.persistencia.update(objeto);
+				return objeto;
 			} else {
 				throw new NegocioException(FacesUtil.propertiesLoader().getProperty("telefoneExistente"),
 						Boolean.FALSE);
@@ -49,7 +49,6 @@ public class TelefoneService implements Serializable, ICRUDService<Telefone>{
 		}
 	}
 
-	@Override
 	public Boolean registroExiste(Telefone objeto) {
 		//TODO implementar
 		return Boolean.FALSE;

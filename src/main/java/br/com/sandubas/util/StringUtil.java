@@ -12,6 +12,7 @@ public class StringUtil {
 	
 	public static final String CRESCENTE = "ASC";
 	public static final String DECRESCENTE = "DESC";
+	public static final String UNINFORMED = "uninformed";
     
    public static boolean isNull(String string) {
       return string == null ? true : false;
@@ -22,7 +23,7 @@ public class StringUtil {
    }
    
    public static boolean isNullOrEmpty(String string) {
-      string = string == null ? "" : string;
+      string = string == null ? "" : string.trim();
       return string.isEmpty();
    }
    

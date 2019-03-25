@@ -9,6 +9,7 @@ import javax.faces.convert.FacesConverter;
 
 import org.apache.commons.lang.StringUtils;
 
+import br.com.sandubas.exception.NegocioException;
 import br.com.sandubas.model.ClassificacaoMercadoria;
 import br.com.sandubas.service.ClassificacaoMercadoriaService;
 import br.com.sandubas.util.cdi.CDIServiceLocator;
@@ -28,7 +29,7 @@ public class ClassificacaoMercadoriaConverter implements Converter {
 		ClassificacaoMercadoria objeto = null;
 		try {
 			if (StringUtils.isNumeric(value) && value != null) {
-				objeto = this.service.getPersistencia().findById(ClassificacaoMercadoria.class, Long.valueOf(value));
+				objeto = this.service.findById(value);
 			} else {
 				throw new IOException();
 			}
@@ -38,6 +39,8 @@ public class ClassificacaoMercadoriaConverter implements Converter {
 			} catch (IOException e) {
 				FacesUtil.addErrorMessage(e.getMessage());
 			}
+		} catch (NegocioException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
 		}
 		return (ClassificacaoMercadoria) objeto;
 	}
