@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "email")
 public class Email implements Serializable {
@@ -26,8 +29,7 @@ public class Email implements Serializable {
 	@org.hibernate.validator.constraints.Email
 	private String email;
 
-	@Column(name = "principal_manifestacao")
-	private Boolean principalManifestacao;
+	private Boolean principal;
 
 	public Email() {
 
@@ -51,19 +53,6 @@ public class Email implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Boolean getPrincipalManifestacao() {
-		return principalManifestacao;
-	}
-
-	public void setPrincipalManifestacao(Boolean principalManifestacao) {
-		this.principalManifestacao = principalManifestacao;
-	}
-
-	@Override
-	public String toString() {
-		return "Email [id=" + id + ", email=" + email + ", principalManifestacao=" + principalManifestacao + "]";
 	}
 
 	@Override

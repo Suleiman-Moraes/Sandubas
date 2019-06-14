@@ -194,7 +194,7 @@ public class UsuarioService implements Serializable {
 					throw new NegocioException(FacesUtil.propertiesLoader().getProperty("usuarioEmailInvalido"),
 							Boolean.FALSE);
 				}
-				usuario.getEmail().setPrincipalManifestacao(Boolean.FALSE);
+				usuario.getEmail().setPrincipal(Boolean.FALSE);
 				usuarioDAO.update(usuario);
 				// EmailNotificacao emailNotificacao = emailNotificacaoDAO
 				// .buscarEmailNotificacaoPorTipoEmailNotificacaoAtivoPassandoCodigoEmailNotificacao(27l);
@@ -214,7 +214,7 @@ public class UsuarioService implements Serializable {
 	}
 
 	private void salvarContatosUsuario(Usuario usuario) throws NegocioException {
-		usuario.getEmail().setPrincipalManifestacao(Boolean.FALSE);
+		usuario.getEmail().setPrincipal(Boolean.FALSE);
 		if (usuario.getEmail().getId() != null) {
 			this.emailService.getEmailDAO().update(usuario.getEmail());
 		} else {
