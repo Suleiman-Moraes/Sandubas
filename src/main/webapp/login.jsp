@@ -21,6 +21,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="${context}/resources/images/favicon.ico" />	
 	<script src="${context}/resources/js/jquery.js" type="text/javascript"></script>
 	<script src="${context}/resources/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src='https://www.google.com/recaptcha/api.js?hl=es'></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$.get("/ouvidoria/aviso", function(data) {
@@ -41,7 +42,7 @@
 		})
 		function param(name) {
 		    return (location.search.split(name + '=')[1] || '').split('&')[0];
-		}		
+		}	
 	</script>
 </head>
 
@@ -119,6 +120,8 @@
 											</div>
 										</div>
 									</div>
+									<div class="g-recaptcha" data-sitekey="6LdAwKIUAAAAAGibCj-VazjONyz-PssSpjX6ackI" 
+										></div>
 								</form>
 							</div>
 						</div><!-- Panel end -->
@@ -129,10 +132,7 @@
 				<div class="col col-md-8 col-md-offset-4">
 					<div id="item:1" class="bg-orange padding-1">
 						<p class="h3 margin-0 position-relative">
-							<a class="link-black" href="${context}/pages/externo/cadastrarManifestacaoExterna.xhtml">
-								<img src="${context}/resources/images/addManifestacao.png" class="position-absolute top-0"/>
-								<strong class="margin-left-3">Botão 1</strong>
-							</a>
+							
 						</p>
 					</div><!-- item:1 -->
 					<div id="item:2" class="bg-orange padding-1 margin-top-2">

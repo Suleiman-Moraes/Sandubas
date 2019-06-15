@@ -44,11 +44,16 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 	/**
 	 * Builds the target URL according to the logic defined in the main class
 	 * Javadoc.
+	 * @throws Exception 
 	 */
-	protected String determineTargetUrl(Authentication authentication, HttpServletRequest request) {
+	protected String determineTargetUrl(Authentication authentication, HttpServletRequest request) throws IOException {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UsuarioSistema usuario = (UsuarioSistema) userDetails;
 		String id = request.getParameter("id");
+		String x = request.getParameter("g-recaptcha-response");
+		if(x == null || x.isEmpty()) {
+			throw new IOException("Resolva o Captcha");
+		}
 		if (id != null) {
 			if (usuario.getUsuario().getFuncaoUsuarioEnum().equals(FuncaoUsuarioEnum.USUARIO_EXTERNO)) {
 				return "/pages/manifestacao/manifestante/acompanharManifestacao.xhtml?manifestacaoId=" + id;
